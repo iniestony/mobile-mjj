@@ -6,6 +6,8 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
   });
 }])
 
-.controller("welcomeCtrl", ["$scope", function($scope){
-
+.controller("welcomeCtrl", ["$scope", "$state", function($scope, $state){
+  $scope.next = function(){
+    $state.go("login");
+  };
 }]);
