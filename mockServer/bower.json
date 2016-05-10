@@ -1,0 +1,27 @@
+{
+  "name": "mobile-mjj",
+  "description": "fe packages manager for mobile-mjj",
+  "main": "[]",
+  "authors": [
+    "iniestony"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "mobile-mjj"
+  ],
+  "homepage": "https://github.com/iniestony/mobile-mjj",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "bootstrap": "^3.3.6",
+    "angular-bootstrap": "^1.3.2",
+    "angular-ui-router": "^0.2.18",
+    "less": "^2.7.1"
+  }
+}
