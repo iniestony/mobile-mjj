@@ -17,7 +17,7 @@ var styleFilter = $.filter("**/*.{css,less}");
 
 
 
-gulp.task("release-publish", [
+gulp.task("mj-release-publish", [
   "release-clean",
   "release-vendor-js-publish",
   "release-vendor-css-publish",

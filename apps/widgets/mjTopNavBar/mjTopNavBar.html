@@ -1,0 +1,15 @@
+<div class="mj-top-nav-bar">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 col-xs-3 nav-prev">
+        <span ng-if="!!prevState" ng-click="prev()">{{prevText}}</span>
+      </div>
+      <div class="col-md-6 col-xs-6 nav-title">
+        <span>{{navTitle}}</span>
+      </div>
+      <div class="col-md-3 col-xs-3 nav-next">
+        <span ng-if="!!nextState" ng-click="next()">{{nextText}}</span>
+      </div>
+    </div>
+  </div>
+</div>
