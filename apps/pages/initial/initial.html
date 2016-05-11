@@ -1,1 +1,56 @@
 <mj-top-nav-bar nav-title="贷款意向" prev-state="dashboard" prev-text="返回"></mj-top-nav-bar>
+<div class="mj-page-initial">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-3 row-title">贷款人:</div>
+      <div class="col-xs-8 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">公司名称:</div>
+      <div class="col-xs-8 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">资金额度:</div>
+      <div class="col-xs-7 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+      <div class="col-xs-1 row-unit">万</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">借款期限:</div>
+      <div class="col-xs-8 row-input">
+        <select class="form-control"
+                ng-options="duration.value as duration.name for duration in durations"
+                ng-model="selectedDuration"
+                ng-selected="selectedDuration === duration.value"
+        ></select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">年销售额:</div>
+      <div class="col-xs-7 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+      <div class="col-xs-1 row-unit">万</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">存货仓库:</div>
+      <div class="col-xs-8 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 row-detail">
+        <input type="checkbox" ng-model="agree"/>
+        <span ng-click="showDetail()">已阅读协议,同意数据授权</span>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn btn-info" ng-disabled="!agree" ng-click="submit()">提交</button>
+    </div>
+  </div>
+</div>
