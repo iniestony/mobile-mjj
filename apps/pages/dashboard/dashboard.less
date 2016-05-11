@@ -3,44 +3,45 @@ div.mj-page-dashboard {
 
   .mj-dashboard-alert {
     width: 100%;
-    height: 8vh;
-    line-height: 8vh;
-    font-size: 3vw;
+    height: 5vh;
+    line-height: 5vh;
+    padding: 0 3vw;
+    margin-bottom: 0;
+
+    div span {
+      font-size: 3vw;
+      height: 5vh;
+      line-height: 5vh;
+    }
   }
 
-  div.container-fluid {
+  div.mj-dashboard-status {
 
+    div.mj-dashboard-status-image {
+      height: 20vh;
+      width: 60vw;
+      margin: 4vh 20vw 2vh 20vw;
+      border: 5px solid #dedede;
+      box-shadow: 0 0 5px 5px #dedede;
+    }
 
-    div.row {
-      margin: 4vh -15px;
+    div.mj-dashboard-status-text {
+      height: 7vh;
+      width: 100%;
+      margin: 2vh 0 4vh 0;
 
-      div.row-title {
-        height: 7vh;
-        line-height: 7vh;
-        text-align: right;
+      span {
+        display: inline-block;
+        width: 50vw;
         font-size: 4vw;
-      }
-
-      div.row-input {
-        height: 7vh;
-
-        input {
-          height: 7vh;
-          font-size: 4vw;
-        }
-      }
-
-      div.row-image {
-        height: 7vh;
-
-      }
-
-      button {
-        width: 80vw;
-        margin: 0 10vw;
-        height: 8vh;
-        font-size: 4vh;
+        text-align: center;
+        margin: 0 25vw;
+        line-height: 5vh;
+        height: 5vh;
+        border-radius: 2vw;
+        background-color: #79b1ee;
       }
     }
+
   }
 }
