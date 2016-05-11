@@ -22,5 +22,9 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
     $scope.status = ($scope.status + 1)%4;
     $scope.message = messageCollection[$scope.status];
   };
+  
+  $scope.navigate = function(state){
+    $state.go(state);
+  };
 
 }]);

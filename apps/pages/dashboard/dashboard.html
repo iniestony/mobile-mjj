@@ -22,4 +22,19 @@
 
     </div>
   </div>
+  <div class="mj-dashboard-actions">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">当前操作</h3>
+      </div>
+      <div class="panel-body">
+        <button class="btn btn-primary" ng-if="status === 0" ng-click="navigate('initial')">提交意向</button>
+        <button class="btn btn-primary" ng-if="status === 1">发起贷款</button>
+        <button class="btn btn-primary" ng-if="status === 3">出库申请</button>
+        <button class="btn btn-primary" ng-if="status === 3">入库提交</button>
+        <button class="btn btn-primary" ng-if="status === 3">用款申请</button>
+        <button class="btn btn-primary" ng-if="status === 3">还款申请</button>
+      </div>
+    </div>
+  </div>
 </div>
