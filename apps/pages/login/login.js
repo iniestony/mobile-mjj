@@ -8,7 +8,7 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
 
 .controller("loginCtrl", ["$scope", "$state", function($scope, $state){
   $scope.login = function(){
-
+    $state.go("dashboard");
   };
 
   $scope.toRegister = function(){
