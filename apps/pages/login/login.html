@@ -1,3 +1,23 @@
+<mj-top-nav-bar nav-title="登录"></mj-top-nav-bar>
 <div class="mj-page-login">
-  <mj-top-nav-bar nav-title="登录" prev-text="返回" prev-state="welcome" next-text="操作" next-state="welcome"></mj-top-nav-bar>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-3 row-title">手机号:</div>
+      <div class="col-xs-9 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">密码:</div>
+      <div class="col-xs-9 row-input">
+        <input type="password" class="form-control"/>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn btn-info" ng-click="login()">登录</button>
+    </div>
+    <div class="row">
+      <button class="btn btn-success" ng-click="toRegister()">注册</button>
+    </div>
+  </div>
 </div>
