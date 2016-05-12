@@ -41,7 +41,19 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
 
 }])
 .controller("uploadCtrl", ["$scope", "$uibModalInstance", "item", function($scope, $uibModalInstance, item){
-  $scope.title = item;
+  var map = {
+    "id": "身份证",
+    "license": "营业执照",
+    "marriage": "结婚证",
+    "org": "组织结构证"
+  };
+  $scope.title = "上传资料:" + map[item];
+
+  $scope.imageURI = false;
+
+  $scope.resetImage = function(){
+    $scope.imageURI = false;
+  };
 
   
 }]);

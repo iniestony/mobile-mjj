@@ -137,19 +137,54 @@ div.mj-page-application-upload-window {
 
         div.panel-body {
 
-          div.image-view {
-            height: 20vh;
-            width: 50vw;
-            margin: 2vh auto;
-            border: 5px solid #dedede;
-            box-shadow: 0 0 5px 5px #dedede;
+          div.image-create .ng-camera {
+
+            #ng-camera-feed {
+              width: 60vw!important;
+              height: 25vh!important;
+              margin: 0 auto;
+
+              video {
+                width: 60vw!important;
+                height: 25vh!important;
+                margin: 0 auto;
+              }
+            }
+
+            button {
+              width: 20vw;
+              height: 4vh;
+              font-size: 3vw;
+              margin: 1vh auto;
+              display: block;
+            }
           }
 
-          button {
-            width: 20vw;
-            height: 4vh;
-            font-size: 2vh;
+          div.image-view {
+            height: 25vh;
+            width: 60vw;
+            margin: 2vh auto;
+            border: 5px solid #6d4d23;
+            box-shadow: 0 0 5px 5px #6d4d23;
+            box-sizing: content-box;
+
+            img {
+              height: 25vh;
+              width: 60vw;
+            }
           }
+
+          div.image-actions {
+            width: 60vw;
+            margin: 0 auto;
+
+            button {
+              width: 20vw;
+              height: 4vh;
+              font-size: 3vw;
+            }
+          }
+
         }
       }
     }

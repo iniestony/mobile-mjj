@@ -4,8 +4,24 @@
       <h3 class="panel-title">{{title}}</h3>
     </div>
     <div class="panel-body">
-      <div class="image-view">
+      <div class="image-create">
+        <ng-camera
+          viewer-height="320"
+          viewer-width="450"
+          image-format="jpeg"
+          jpeg-quality="100"
+          action-message="拍照获取"
+          snapshot="imageURI"
+        ></ng-camera>
+      </div>
 
+      <div class="image-view">
+        <img ng-if="imageURI" ng-src="{{imageURI}}">
+      </div>
+
+      <div class="image-actions">
+        <button class="btn btn-primary">上传图片</button>
+        <button class="btn btn-danger" ng-click="resetImage()">重置</button>
       </div>
     </div>
   </div>
