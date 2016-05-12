@@ -31,12 +31,16 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
       templateUrl: "/pages/application/upload.html",
       controller: "uploadCtrl",
       windowClass: "mj-page-application-upload-window",
+      backdrop: "static",
+      keyboard: false,
       resolve: {
         item: function(){
           return item;
         }
       }
-    });
+    }).result.then(function(dataURI){
+      $scope.pictures[item + "Src"] = dataURI;
+    },function(){});
   };
 
 }])
@@ -53,6 +57,14 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
 
   $scope.resetImage = function(){
     $scope.imageURI = false;
+  };
+
+  $scope.submit = function(){
+    $uibModalInstance.close($scope.imageURI);
+  };
+  
+  $scope.cancel = function(){
+    $uibModalInstance.dismiss();
   };
 
   
