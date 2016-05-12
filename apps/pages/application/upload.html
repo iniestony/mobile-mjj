@@ -20,8 +20,9 @@
       </div>
 
       <div class="image-actions">
-        <button class="btn btn-primary">上传图片</button>
+        <button class="btn btn-primary" ng-click="uploadImage()">上传图片</button>
         <button class="btn btn-danger" ng-click="resetImage()">重置</button>
+        <input class="origin-input" type="file" custom-on-change/>
       </div>
     </div>
   </div>

@@ -44,7 +44,7 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
   };
 
 }])
-.controller("uploadCtrl", ["$scope", "$uibModalInstance", "item", function($scope, $uibModalInstance, item){
+.controller("uploadCtrl", ["$scope", "$uibModalInstance", "item", "imageReader", function($scope, $uibModalInstance, item, imageReader){
   var map = {
     "id": "身份证",
     "license": "营业执照",
@@ -58,6 +58,16 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
   $scope.resetImage = function(){
     $scope.imageURI = false;
   };
+  
+  $scope.uploadImage = function(){
+    $("input.origin-input").click();
+  };
+
+  $scope.getImage = function(){
+    imageReader.readImage($scope.imageFile, this).then(function(result){
+      $scope.imageURI = result;
+    });
+  };
 
   $scope.submit = function(){
     $uibModalInstance.close($scope.imageURI);
@@ -68,4 +78,46 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
   };
 
   
+}])
+.directive("customOnChange", [function(){
+  return {
+    restrict: "A",
+    link: function(scope, element, attrs){
+      element.bind("change", function(e){
+        scope.imageFile = (event.srcElement || event.target).files[0];
+        scope.getImage();
+      });
+    }
+  };
+}])
+.factory("imageReader", ["$q", function($q){
+  var onLoad = function(reader, deferred, scope) {
+    return function (){
+      scope.$apply(function () {
+        deferred.resolve(reader.result);
+      });
+    };
+  };
+  var onError = function (reader, deferred, scope) {
+    return function (){
+      scope.$apply(function () {
+        deferred.reject(reader.result);
+      });
+    };
+  };
+  var getReader = function(deferred, scope) {
+    var reader = new FileReader();
+    reader.onload = onLoad(reader, deferred, scope);
+    reader.onerror = onError(reader, deferred, scope);
+    return reader;
+  };
+  var readImage = function(file, scope) {
+    var deferred = $q.defer();
+    var reader = getReader(deferred, scope);
+    reader.readAsDataURL(file);
+    return deferred.promise;
+  };
+  return {
+    readImage: readImage
+  };
 }]);
