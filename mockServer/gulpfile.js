@@ -38,7 +38,8 @@ gulp.task("release-vendor-js-publish", function(){
       path.resolve(INCLUDE_BASE_PATH, "lib/angular-ui-router/release/angular-ui-router.js"),
       path.resolve(INCLUDE_BASE_PATH, "lib/jquery/dist/jquery.js"),
       path.resolve(INCLUDE_BASE_PATH, "lib/less/dist/less.js"),
-      path.resolve(INCLUDE_BASE_PATH, "lib/bootstrap/dist/js/bootstrap.js")
+      path.resolve(INCLUDE_BASE_PATH, "lib/bootstrap/dist/js/bootstrap.js"),
+      path.resolve(INCLUDE_BASE_PATH, "lib/angular-ui-select/dist/select.js")
     ], { base: INCLUDE_BASE_PATH })
     .pipe($.concat("vendor.js"))
     .pipe($.uglify({"mangle": false}))
@@ -48,7 +49,8 @@ gulp.task("release-vendor-js-publish", function(){
 // merge all less/css file into vendor.css
 gulp.task("release-vendor-css-publish", function(){
   return gulp.src([
-      path.resolve(INCLUDE_BASE_PATH, "lib/bootstrap/less/bootstrap.less")
+      path.resolve(INCLUDE_BASE_PATH, "lib/bootstrap/less/bootstrap.less"),
+      path.resolve(INCLUDE_BASE_PATH, "lib/angular-ui-select/dist/select.css")
     ], { base: INCLUDE_BASE_PATH })
     .pipe($.less())
     .pipe($.concat("vendor.css"))

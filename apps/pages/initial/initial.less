@@ -20,11 +20,46 @@ div.mj-page-initial {
           height: 7vh;
           font-size: 4vw;
         }
+      }
 
-        select {
+      div.row-select {
+        height: 7vh;
+
+        div.ui-select-match {
+
+          span {
+            display: inline-block;
+            height: 7vh;
+            font-size: 4vw;
+            line-height: 7vh;
+            padding: 0 1vw;
+
+            &.ui-select-toggle i.caret {
+              border-top: 1vh dashed;
+              border-right: 1vh solid transparent;
+              border-left: 1vh solid transparent;
+            }
+
+          }
+        }
+
+        input.ui-select-search {
           height: 7vh;
           font-size: 4vw;
+          line-height: 7vh;
+          padding: 0 2vw;
         }
+
+        ul.ui-select-choices {
+
+          div.ui-select-choices-row a.ui-select-choices-row-inner span {
+            display: inline-block;
+            height: 3vh;
+            line-height: 3vh;
+            font-size: 3vw;
+          }
+        }
+
       }
 
       div.row-unit {

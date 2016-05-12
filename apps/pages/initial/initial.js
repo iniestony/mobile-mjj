@@ -13,9 +13,9 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
 
   $scope.agree = false;
 
-  $scope.durations = [{"value": "一个月", "name": "一个月"},{"value": "二个月", "name": "二个月"},{"value": "三个月", "name": "三个月"}];
+  $scope.durations = [{"value": 1, "name": "一个月"},{"value": 2, "name": "二个月"},{"value": 3, "name": "三个月"}];
 
-  $scope.selectedDuration = $scope.durations[0].value;
+  $scope.selectedDuration = $scope.durations[1].value;
 
   $scope.showDetail = function(){
     $uibModal.open({

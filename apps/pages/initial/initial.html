@@ -22,12 +22,15 @@
     </div>
     <div class="row">
       <div class="col-xs-3 row-title">借款期限:</div>
-      <div class="col-xs-8 row-input">
-        <select class="form-control"
-                ng-options="duration.value as duration.name for duration in durations"
-                ng-model="selectedDuration"
-                ng-selected="selectedDuration === duration.value"
-        ></select>
+      <div class="col-xs-8 row-select">
+        <ui-select ng-model="selectedDuration">
+          <ui-select-match placeholder="选择借款期限">
+            <span>{{$select.selected.name}}</span>
+          </ui-select-match>
+          <ui-select-choices repeat="duration.value as duration in durations track by $index">
+            <span>{{duration.name}}</span>
+          </ui-select-choices>
+        </ui-select>
       </div>
     </div>
     <div class="row">
@@ -50,7 +53,7 @@
       </div>
     </div>
     <div class="row">
-      <button class="btn btn-info" ng-disabled="!agree" ng-click="submit()">提交</button>
+      <button class="btn btn-info" ng-disabled="!agree" ng-click="submit()">提交申请</button>
     </div>
   </div>
 </div>
