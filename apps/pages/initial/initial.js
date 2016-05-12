@@ -20,7 +20,8 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
   $scope.showDetail = function(){
     $uibModal.open({
       templateUrl: "/pages/initial/agreement.html",
-      controller: "agreementCtrl"
+      controller: "agreementCtrl",
+      windowClass: "mj-page-initial-agreement-window"
     });
   };
   

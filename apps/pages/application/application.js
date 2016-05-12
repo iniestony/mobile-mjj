@@ -26,11 +26,22 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
     "orgSrc": false
   };
 
-  $scope.showDetail = function(){
+  $scope.upload = function(item){
     $uibModal.open({
-      templateUrl: "/pages/initial/agreement.html",
-      controller: "agreementCtrl"
+      templateUrl: "/pages/application/upload.html",
+      controller: "uploadCtrl",
+      windowClass: "mj-page-application-upload-window",
+      resolve: {
+        item: function(){
+          return item;
+        }
+      }
     });
   };
 
+}])
+.controller("uploadCtrl", ["$scope", "$uibModalInstance", "item", function($scope, $uibModalInstance, item){
+  $scope.title = item;
+
+  
 }]);

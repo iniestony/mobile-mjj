@@ -62,13 +62,13 @@
     <div class="row">
       <div class="col-xs-3 row-title">上传资料:</div>
       <div class="col-xs-8 row-buttons">
-        <button class="btn" ng-click=""
+        <button class="btn" ng-click="upload('id')"
                 ng-class="{'btn-primary': !pictures.idSrc, 'btn-success': pictures.idSrc}">身份证</button>
-        <button class="btn" ng-click=""
+        <button class="btn" ng-click="upload('license')"
                 ng-class="{'btn-primary': !pictures.licenseSrc, 'btn-success': pictures.licenseSrc}">营业执照</button>
-        <button class="btn btn-primary" ng-click=""
+        <button class="btn btn-primary" ng-click="upload('marriage')"
                 ng-class="{'btn-primary': !pictures.marriageSrc, 'btn-success': pictures.marriageSrc}">结婚证</button>
-        <button class="btn btn-primary" ng-click=""
+        <button class="btn btn-primary" ng-click="upload('org')"
                 ng-class="{'btn-primary': !pictures.orgSrc, 'btn-success': pictures.orgSrc}">组织结构证</button>
       </div>
     </div>
