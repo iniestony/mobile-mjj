@@ -1,0 +1,79 @@
+<mj-top-nav-bar nav-title="贷款申请" prev-state="dashboard" prev-text="返回"></mj-top-nav-bar>
+<div class="mj-page-application">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-3 row-title">贷款人:</div>
+      <div class="col-xs-8 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">公司名称:</div>
+      <div class="col-xs-8 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">资金额度:</div>
+      <div class="col-xs-7 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+      <div class="col-xs-1 row-unit">万</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">借款期限:</div>
+      <div class="col-xs-8 row-select">
+        <ui-select ng-model="selectedDuration">
+          <ui-select-match placeholder="选择借款期限">
+            <span>{{$select.selected.name}}</span>
+          </ui-select-match>
+          <ui-select-choices repeat="duration.value as duration in durations track by $index">
+            <span>{{duration.name}}</span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">借款用途:</div>
+      <div class="col-xs-8 row-select">
+        <ui-select ng-model="selectedUsage">
+          <ui-select-match placeholder="选择借款用途">
+            <span>{{$select.selected.name}}</span>
+          </ui-select-match>
+          <ui-select-choices repeat="usage.value as usage in usages track by $index">
+            <span>{{usage.name}}</span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">婚姻状况:</div>
+      <div class="col-xs-8 row-select">
+        <ui-select ng-model="selectedMarriage">
+          <ui-select-match placeholder="选择婚姻状况">
+            <span>{{$select.selected.name}}</span>
+          </ui-select-match>
+          <ui-select-choices repeat="marriage.value as marriage in marriages track by $index">
+            <span>{{marriage.name}}</span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 row-title">上传资料:</div>
+      <div class="col-xs-8 row-buttons">
+        <button class="btn" ng-click=""
+                ng-class="{'btn-primary': !pictures.idSrc, 'btn-success': pictures.idSrc}">身份证</button>
+        <button class="btn" ng-click=""
+                ng-class="{'btn-primary': !pictures.licenseSrc, 'btn-success': pictures.licenseSrc}">营业执照</button>
+        <button class="btn btn-primary" ng-click=""
+                ng-class="{'btn-primary': !pictures.marriageSrc, 'btn-success': pictures.marriageSrc}">结婚证</button>
+        <button class="btn btn-primary" ng-click=""
+                ng-class="{'btn-primary': !pictures.orgSrc, 'btn-success': pictures.orgSrc}">组织结构证</button>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn btn-info mj-page-submit" ng-click="submit()">提交申请</button>
+    </div>
+  </div>
+</div>

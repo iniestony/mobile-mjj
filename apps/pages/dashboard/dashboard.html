@@ -29,7 +29,7 @@
       </div>
       <div class="panel-body">
         <button class="btn btn-primary" ng-if="status === 0" ng-click="navigate('initial')">提交意向</button>
-        <button class="btn btn-primary" ng-if="status === 1">发起贷款</button>
+        <button class="btn btn-primary" ng-if="status === 1" ng-click="navigate('application')">发起贷款</button>
         <button class="btn btn-primary" ng-if="status === 3">出库申请</button>
         <button class="btn btn-primary" ng-if="status === 3">入库提交</button>
         <button class="btn btn-primary" ng-if="status === 3">用款申请</button>
