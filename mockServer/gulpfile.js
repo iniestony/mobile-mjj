@@ -19,6 +19,7 @@ var styleFilter = $.filter("**/*.{css,less}");
 
 gulp.task("mj-release-publish", [
   "release-clean",
+  "release-fonts-publish",
   "release-vendor-js-publish",
   "release-vendor-css-publish",
   "release-js-publish",
@@ -28,6 +29,17 @@ gulp.task("mj-release-publish", [
 // clean up release folder
 gulp.task("release-clean", function(){
   return del.sync(path.resolve(INCLUDE_BASE_PATH, "release"), {force: true});
+});
+
+gulp.task("release-fonts-publish", function() {
+  return gulp.src([
+    path.resolve(INCLUDE_BASE_PATH, "**/*.eot"),
+    path.resolve(INCLUDE_BASE_PATH, "**/*.svg"),
+    path.resolve(INCLUDE_BASE_PATH, "**/*.ttf"),
+    path.resolve(INCLUDE_BASE_PATH, "**/*.woff"),
+    path.resolve(INCLUDE_BASE_PATH, "**/*.woff2"),
+  ]).pipe($.rename({dirname: ''}))
+    .pipe(gulp.dest(path.resolve(RELEASE_BASE_PATH, "fonts/")));
 });
 
 // merge all lib js into vendor.js
