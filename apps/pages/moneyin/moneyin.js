@@ -11,7 +11,19 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
     $state.go("dashboard");
   };
   
-  
+  $scope.date = new Date();
+  $scope.opened = false;
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 27),
+    minDate: new Date(),
+    startingDay: 1
+  };
+
+  $scope.toggleDatePicker = function(){
+    $scope.opened = !$scope.opened;
+  };
   
   // $scope.addGoods = function(){
   //   $uibModal.open({

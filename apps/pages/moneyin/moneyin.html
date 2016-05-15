@@ -50,9 +50,17 @@
       <div class="col-xs-3 row-title">还款时间:</div>
       <div class="col-xs-8 row-form">
         <div class="input-group">
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control"
+                 uib-datepicker-popup
+                 ng-model="date"
+                 is-open="opened"
+                 datepicker-options="dateOptions"
+                 ng-required="true"
+                 close-text="关闭"
+                 clear-text="重置"
+                 current-text="今天"/>
           <span class="input-group-btn">
-            <button class="btn btn-primary" ng-click="">
+            <button class="btn btn-primary" ng-click="toggleDatePicker()">
               <span class="glyphicon glyphicon-calendar"></span>
             </button>
           </span>
