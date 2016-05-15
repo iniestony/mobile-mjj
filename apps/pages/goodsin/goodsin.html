@@ -1,0 +1,47 @@
+<mj-top-nav-bar nav-title="入库提交" prev-state="dashboard" prev-text="返回"></mj-top-nav-bar>
+<div class="mj-page-goodsin">
+  <div class="mj-goodsin-content">
+    <div class="row mj-goodsin-content-2">入库信息:</div>
+    <div class="row mj-goodsin-content-3">
+      <div class="col-xs-3 row-title">联系人:</div>
+      <div class="col-xs-8 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="row mj-goodsin-content-3">
+      <div class="col-xs-3 row-title">联系方式:</div>
+      <div class="col-xs-8 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="row mj-goodsin-content-3">
+      <div class="col-xs-3 row-title">入库仓储:</div>
+      <div class="col-xs-8 row-input">
+        <input type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="row mj-goodsin-content-5">
+      <span class="title-5">入库明细:</span>
+      <span class="sign-5 glyphicon glyphicon-plus" ng-click="addGoods()"></span>
+    </div>
+    <div class="row mj-goodsin-content-4">
+      <table class="table table-responsive table-striped table-bordered table-condensed">
+        <thead>
+        <tr>
+          <th>名称</th>
+          <th>数量</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>手机</td>
+          <td>2</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="mj-goodsin-submit">
+    <button class="btn btn-info" ng-click="submit()">提交</button>
+  </div>
+</div>
