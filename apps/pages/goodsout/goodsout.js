@@ -10,5 +10,31 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
   $scope.submit = function(){
     $state.go("dashboard");
   };
+
+  $scope.addGoods = function(){
+    $uibModal.open({
+      templateUrl: "/pages/goodsout/add.html",
+      controller: "goodsoutAddCtrl",
+      windowClass: "mj-page-goodsout-add-window",
+      backdrop: "static",
+      keyboard: false
+    }).result.then(function(data){
+      //todo
+    },function(){});
+  };
   
+}])
+
+.controller("goodsoutAddCtrl", ["$scope", "$uibModalInstance", function($scope, $uibModalInstance){
+  
+
+  $scope.submit = function(){
+    $uibModalInstance.close($scope.imageURI);
+  };
+
+  $scope.cancel = function(){
+    $uibModalInstance.dismiss();
+  };
+
+
 }]);

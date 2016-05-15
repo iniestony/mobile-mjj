@@ -97,3 +97,95 @@ div.mj-page-goodsout {
     }
   }
 }
+
+div.mj-page-goodsout-add-window {
+
+  div.modal-dialog {
+    width: 90vw;
+    padding: 1vh 2vw;
+    background-color: #FFFFFF;
+    border-radius: 2vw;
+
+    div.mj-page-goodsout-add {
+
+      div.panel {
+
+        div.panel-heading {
+          height: 7vh;
+          padding: 0;
+
+          h3.panel-title {
+            height: 7vh;
+            line-height: 7vh;
+            font-size: 3vh;
+            text-align: center;
+          }
+        }
+
+        div.panel-body {
+
+          form.search-form div.input-group {
+
+            input {
+              height: 5vh;
+              line-height: 5vh;
+              font-size: 2vh;
+            }
+
+            span.input-group-btn {
+
+              button {
+                height: 5vh;
+                width: 10vw;
+
+                span {
+                  font-size: 3vh;
+                }
+              }
+            }
+          }
+
+          div.goods-list {
+            max-height: 60vh;
+            overflow: auto;
+
+            table tbody tr {
+
+              td {
+                font-size: 2vh;
+                height: 3vh;
+                line-height: 3vh;
+
+                &:first-child {
+                  text-align: center;
+                  width: 5vw;
+                  height: 3vh;
+                  vertical-align: middle;
+
+                  input {
+                    height: 1.5vh;
+                    width: 1.5vh;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      div.row.actions {
+        margin: 2vh 0;
+
+        div button {
+          height: 6vh;
+          width: 100%;
+          line-height: 6vh;
+          font-size: 3vh;
+          border-radius: 3vw;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+}
