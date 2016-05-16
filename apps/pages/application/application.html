@@ -15,10 +15,9 @@
     </div>
     <div class="row">
       <div class="col-xs-3 row-title">资金额度:</div>
-      <div class="col-xs-7 row-input">
+      <div class="col-xs-8 row-input">
         <input type="text" class="form-control"/>
       </div>
-      <div class="col-xs-1 row-unit">万</div>
     </div>
     <div class="row">
       <div class="col-xs-3 row-title">借款期限:</div>
@@ -60,8 +59,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-3 row-title">上传资料:</div>
-      <div class="col-xs-8 row-buttons">
+      <div class="section-title">上传资料</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1 row-buttons">
         <button class="btn" ng-click="upload('id')"
                 ng-class="{'btn-primary': pictures.idSrc.length === 0, 'btn-success': pictures.idSrc.length > 0}">身份证</button>
         <button class="btn" ng-click="upload('license')"

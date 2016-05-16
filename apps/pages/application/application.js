@@ -6,10 +6,14 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
 
-.controller("applicationCtrl", ["$scope", "$state", "$uibModal", function($scope, $state, $uibModal){
+.controller("applicationCtrl", ["$scope", "$state", "$uibModal", "$http", function($scope, $state, $uibModal, $http){
   $scope.submit = function(){
     $state.go("dashboard");
   };
+
+  $http.get("http://test.sjdbank.com:8787/loanapplication/app/form/getform.do?customerprojectid=147").success(function(data){
+    console.log(data);
+  });
 
   $scope.durations = [{"value": 1, "name": "一个月"},{"value": 2, "name": "二个月"},{"value": 3, "name": "三个月"}];
   $scope.usages = [{"value": "normal", "name": "一般资金周转"}];
