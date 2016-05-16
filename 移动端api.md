@@ -64,3 +64,50 @@
 ### --- 获得申请表 ---
 
 
+* url: /app/form/getform.do
+
+* request params：
+
+> customerprojectid: int, 必填
+
+* return example
+
+> http://test.sjdbank.com:8787/loanapplication/app/form/getform.do?customerprojectid=147
+
+
+### --- 获得证件列表 ---
+* url: /loanapplicationdoc//app/loandocs/show.do
+
+* request params：
+
+> customerprojectid: int, 必填
+
+* return: json
+
+key为docid，即主键；<br>
+“reason”为拒绝原因；<br>
+
+* return example
+
+>{"610":{"files":{},"reason":null,"name":"经营合同、经营场所租赁协议（房屋租赁合同）","isPass":false},"612":{"files":{},"reason":null,"name":"户口本","isPass":false},"611":{"files":{},"reason":null,"name":"配偶身份证","isPass":false},"614":{"files":{},"reason":null,"name":"结婚证复印件","isPass":false},"613":{"files":{},"reason":null,"name":"身份证","isPass":false},"563":{"files":{},"reason":null,"name":"营业执照正副本","isPass":false}}
+
+>http://test.sjdbank.com:8787/loanapplicationdoc//app/loandocs/show.do?customerprojectid=147
+
+### --- 上传证件 ---
+* ur: /app/applydoc/upload.do
+
+* request params：
+
+> customerprojectid: int, 必填
+
+> idchecklist:int，主键，必填
+
+> files: 提交的文件，必填
+
+* return: String
+
+> "Success": 提交成功，response-code=200
+
+> response_code=802：提交失败，并有显示错误原因。
+
+
