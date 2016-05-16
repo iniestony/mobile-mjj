@@ -161,27 +161,36 @@ div.sjd-page-application-upload-window {
           }
 
           div.image-view {
-            height: 25vh;
-            width: 60vw;
+            height: 50vh;
+            width: 80vw;
             margin: 2vh auto;
             border: 5px solid #6d4d23;
             box-shadow: 0 0 5px 5px #6d4d23;
             box-sizing: content-box;
+            overflow: auto;
 
-            img {
-              height: 25vh;
-              width: 60vw;
+            div.single-image {
+              height: 20vh;
+              width: 35vw;
+              margin: 0 5vw 2vh 0;
+              display: inline-block;
+
+              img {
+                height: 20vh;
+                width: 35vw;
+              }
             }
+
           }
 
           div.image-actions {
-            width: 60vw;
+            width: 30vw;
             margin: 0 auto;
 
             button {
-              width: 20vw;
-              height: 4vh;
-              font-size: 3vw;
+              width: 30vw;
+              height: 6vh;
+              font-size: 4vw;
             }
 
             input.origin-input {

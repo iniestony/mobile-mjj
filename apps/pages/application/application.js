@@ -20,10 +20,10 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   $scope.selectedMarriage = $scope.marriages[0].value;
   
   $scope.pictures = {
-    "idSrc": false,
-    "licenseSrc": false,
-    "marriageSrc": false,
-    "orgSrc": false
+    "idSrc": [],
+    "licenseSrc": [],
+    "marriageSrc": [],
+    "orgSrc": []
   };
 
   $scope.upload = function(item){
@@ -36,15 +36,18 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
       resolve: {
         item: function(){
           return item;
+        },
+        images: function(){
+          return angular.copy($scope.pictures[item + "Src"]);
         }
       }
-    }).result.then(function(dataURI){
-      $scope.pictures[item + "Src"] = dataURI;
+    }).result.then(function(dataURIs){
+      $scope.pictures[item + "Src"] = dataURIs;
     },function(){});
   };
 
 }])
-.controller("uploadCtrl", ["$scope", "$uibModalInstance", "item", "imageReader", function($scope, $uibModalInstance, item, imageReader){
+.controller("uploadCtrl", ["$scope", "$uibModalInstance", "item", "images", "imageReader", function($scope, $uibModalInstance, item, images, imageReader){
   var map = {
     "id": "身份证",
     "license": "营业执照",
@@ -53,11 +56,11 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   };
   $scope.title = "上传资料:" + map[item];
 
-  $scope.imageURI = false;
+  $scope.imageURIs = images;
 
-  $scope.resetImage = function(){
-    $scope.imageURI = false;
-  };
+  // $scope.resetImage = function(){
+  //   $scope.imageURI = false;
+  // };
   
   $scope.uploadImage = function(){
     $("input.origin-input").click();
@@ -65,12 +68,12 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
 
   $scope.getImage = function(){
     imageReader.readImage($scope.imageFile, this).then(function(result){
-      $scope.imageURI = result;
+      $scope.imageURIs.push(result);
     });
   };
 
   $scope.submit = function(){
-    $uibModalInstance.close($scope.imageURI);
+    $uibModalInstance.close($scope.imageURIs);
   };
   
   $scope.cancel = function(){
