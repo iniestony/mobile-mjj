@@ -17,7 +17,7 @@ var styleFilter = $.filter("**/*.{css,less}");
 
 
 
-gulp.task("mj-release-publish", [
+gulp.task("sjd-release-publish", [
   "release-clean",
   "release-fonts-publish",
   "release-vendor-js-publish",
@@ -71,7 +71,7 @@ gulp.task("release-vendor-css-publish", function(){
     .pipe(gulp.dest(path.resolve(RELEASE_BASE_PATH, "css")));
 });
 
-// merge all own js into mjj.js
+// merge all own js into sjd.js
 gulp.task("release-js-publish", function() {
   return gulp.src([
       path.resolve(INCLUDE_BASE_PATH, "js/app.js"),
@@ -80,12 +80,12 @@ gulp.task("release-js-publish", function() {
       path.resolve(INCLUDE_BASE_PATH, "widgets/**/*.js"),
       path.resolve(INCLUDE_BASE_PATH, "filters/**/*.js")
     ], { base: INCLUDE_BASE_PATH })
-    .pipe($.concat("mjj.js"))
+    .pipe($.concat("sjd.js"))
     .pipe($.uglify({"mangle": false}))
     .pipe(gulp.dest(path.resolve(RELEASE_BASE_PATH, "js")));
 });
 
-// merge all own css/less into mjj.css
+// merge all own css/less into sjd.css
 gulp.task("release-css-publish", function() {
   return gulp.src([
       path.resolve(INCLUDE_BASE_PATH, "css/*.css"),
@@ -100,7 +100,7 @@ gulp.task("release-css-publish", function() {
       path.resolve(INCLUDE_BASE_PATH, "filters/**/*.css")
     ], { base: INCLUDE_BASE_PATH })
     .pipe($.less())
-    .pipe($.concat("mjj.css"))
+    .pipe($.concat("sjd.css"))
     .pipe(minifyCSS())
     .pipe(gulp.dest(path.resolve(RELEASE_BASE_PATH, "css")));
 });

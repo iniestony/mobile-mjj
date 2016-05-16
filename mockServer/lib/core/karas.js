@@ -14,7 +14,7 @@ var DEFAULT_CONFIG = {
   "apps_path" : "apps",
   "modules_path" : "modules",
 
-  "webserver_port" : 8080,
+  "webserver_port" : 3000,
   "webserver_static_path" : "../apps"
 };
 
@@ -92,7 +92,7 @@ Karas.prototype.loadApps = function() {
 };
 
 Karas.prototype.init = function() {
-  this.webServer = W.newServer(8080);
+  this.webServer = W.newServer(3000);
   this.webServer.init();
 };
 

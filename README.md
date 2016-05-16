@@ -1,5 +1,5 @@
 # mobile-mjj
-This is the mobile version system for mjj
+This is the mobile version system for sjd
 
 steps to run:
 

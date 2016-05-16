@@ -1,5 +1,5 @@
 {
-  "name": "mobile-mjj",
+  "name": "mobile-sjd",
   "version": "1.0.0",
   "description": "mockServer framework based on node.js",
   "main": "lib/core/karas.js",
@@ -45,7 +45,7 @@
   },
   "repository": {},
   "keywords": [
-    "mobile-mjj"
+    "mobile-sjd"
   ],
   "author": "iniestony",
   "license": "ISC"
