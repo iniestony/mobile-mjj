@@ -1,4 +1,4 @@
-mobileMJ.directive("mjTopNavBar", [function(){
+mobileSJD.directive("sjdTopNavBar", [function(){
   return {
     restrict: "E",
     scope: {
@@ -20,6 +20,6 @@ mobileMJ.directive("mjTopNavBar", [function(){
         $state.go($scope.prevState);
       };
     }],
-    templateUrl: "/widgets/mjTopNavBar/mjTopNavBar.html"
+    templateUrl: "/widgets/sjdTopNavBar/sjdTopNavBar.html"
   };
 }]);

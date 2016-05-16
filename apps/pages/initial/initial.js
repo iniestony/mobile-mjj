@@ -1,4 +1,4 @@
-mobileMJ.config(["$stateProvider", function($stateProvider){
+mobileSJD.config(["$stateProvider", function($stateProvider){
   $stateProvider.state("initial", {
     url: "/initial",
     templateUrl: "/pages/initial/initial.html",
@@ -21,7 +21,7 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
     $uibModal.open({
       templateUrl: "/pages/initial/agreement.html",
       controller: "agreementCtrl",
-      windowClass: "mj-page-initial-agreement-window"
+      windowClass: "sjd-page-initial-agreement-window"
     });
   };
   

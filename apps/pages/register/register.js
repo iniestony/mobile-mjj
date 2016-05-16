@@ -1,4 +1,4 @@
-mobileMJ.config(["$stateProvider", function($stateProvider){
+mobileSJD.config(["$stateProvider", function($stateProvider){
   $stateProvider.state("register", {
     url: "/register",
     templateUrl: "/pages/register/register.html",

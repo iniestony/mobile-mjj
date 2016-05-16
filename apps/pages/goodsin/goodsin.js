@@ -1,4 +1,4 @@
-mobileMJ.config(["$stateProvider", function($stateProvider){
+mobileSJD.config(["$stateProvider", function($stateProvider){
   $stateProvider.state("goodsin", {
     url: "/goodsin",
     templateUrl: "/pages/goodsin/goodsin.html",
@@ -15,7 +15,7 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
     $uibModal.open({
       templateUrl: "/pages/goodsin/add.html",
       controller: "goodsinAddCtrl",
-      windowClass: "mj-page-goodsin-add-window",
+      windowClass: "sjd-page-goodsin-add-window",
       backdrop: "static",
       keyboard: false
     }).result.then(function(data){

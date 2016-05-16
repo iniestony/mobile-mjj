@@ -1,4 +1,4 @@
-mobileMJ.config(["$stateProvider", function($stateProvider){
+mobileSJD.config(["$stateProvider", function($stateProvider){
   $stateProvider.state("moneyout", {
     url: "/moneyout",
     templateUrl: "/pages/moneyout/moneyout.html",
@@ -18,7 +18,7 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
   //   $uibModal.open({
   //     templateUrl: "/pages/moneyout/add.html",
   //     controller: "goodsoutAddCtrl",
-  //     windowClass: "mj-page-goodsout-add-window",
+  //     windowClass: "sjd-page-goodsout-add-window",
   //     backdrop: "static",
   //     keyboard: false
   //   }).result.then(function(data){

@@ -1,4 +1,4 @@
-mobileMJ.config(["$stateProvider", function($stateProvider){
+mobileSJD.config(["$stateProvider", function($stateProvider){
   $stateProvider.state("application", {
     url: "/application",
     templateUrl: "/pages/application/application.html",
@@ -30,7 +30,7 @@ mobileMJ.config(["$stateProvider", function($stateProvider){
     $uibModal.open({
       templateUrl: "/pages/application/upload.html",
       controller: "uploadCtrl",
-      windowClass: "mj-page-application-upload-window",
+      windowClass: "sjd-page-application-upload-window",
       backdrop: "static",
       keyboard: false,
       resolve: {
