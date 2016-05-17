@@ -166,9 +166,14 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
 
   $scope.imageURIs = images;
 
-  // $scope.resetImage = function(){
-  //   $scope.imageURI = false;
-  // };
+  $scope.removeImage = function(image){
+    $scope.imageURIs = $scope.imageURIs.reduce(function(prev, next){
+      if(image !== next){
+        prev.push(next);
+      }
+      return prev;
+    }, []);
+  };
   
   $scope.uploadImage = function(){
     $("input.origin-input").click();

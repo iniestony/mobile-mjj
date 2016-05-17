@@ -19,6 +19,7 @@
       <div class="image-view">
         <div class="single-image" ng-repeat="imageURI in imageURIs">
           <img ng-src="{{imageURI}}">
+          <span class="glyphicon glyphicon-remove" ng-click="removeImage(imageURI)"></span>
         </div>
 
       </div>
