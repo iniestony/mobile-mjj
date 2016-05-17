@@ -186,10 +186,19 @@ http://test.sjdbank.com:8787/bankvisit//loan/stockValue.do?loanid=238
 * exp:
 > http://test.sjdbank.com:8787/stockproducts/customerproducts/list.do?enterpriseid=240&productname=z
 
+* 名称解释：
+> dealprice - 核价价值<br>
+> totalquantity - 库存总数<br>
+> mortgaged - 是否抵押中<br>
+> erpid - 需要该id作为货品识别
 
 * 备注
 
-返回的"value"为 String格式，需要转换为json
+> 1. 返回的"value"为 String格式，需要转换为json
+
+> 2. 入库请求时，如添加新商品，则自动生成erpid，规则为：MMDDHHmm+2位随机。
+> 可参考test.sjdbank.com:8787  登陆：15267015541 密码：1234567890
+
 
 
 
