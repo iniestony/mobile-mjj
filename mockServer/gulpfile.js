@@ -6,6 +6,7 @@ var del = require("del");
 // load all gulp plugins
 var $ = require("gulp-load-plugins")();
 var minifyCSS = require('gulp-minify-css');
+var stripDebug = require('gulp-strip-debug');
 
 var mainBowerFiles = require('main-bower-files');
 

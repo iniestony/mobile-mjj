@@ -1,67 +1,87 @@
 <sjd-top-nav-bar nav-title="贷款申请" prev-state="dashboard" prev-text="返回"></sjd-top-nav-bar>
 <div class="sjd-page-application">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-3 row-title">贷款人:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control"/>
-      </div>
+    <div class="row" ng-if="showTitle(personItems)">
+      <div class="section-title">个人信息</div>
     </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">公司名称:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control"/>
+    <div class="row" ng-repeat="item in personItems" ng-if="item.show">
+      <div class="col-xs-3 row-title">{{item.name}}:</div>
+      <div class="col-xs-8 row-input" ng-if="item.options.length === 0">
+        <input type="text" class="form-control" ng-model="item.value"/>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">资金额度:</div>
-      <div class="col-xs-7 row-input">
-        <input type="text" class="form-control"/>
-      </div>
-      <div class="col-xs-1 row-unit">万</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">借款期限:</div>
-      <div class="col-xs-8 row-select">
-        <ui-select ng-model="selectedDuration">
-          <ui-select-match placeholder="选择借款期限">
+      <div class="col-xs-8 row-select" ng-if="item.options.length > 0">
+        <ui-select ng-model="item.value" on-select="parsePerson(item)">
+          <ui-select-match>
             <span>{{$select.selected.name}}</span>
           </ui-select-match>
-          <ui-select-choices repeat="duration.value as duration in durations track by $index">
-            <span>{{duration.name}}</span>
+          <ui-select-choices repeat="option.value as option in item.options track by $index">
+            <span>{{option.name}}</span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+    <div class="row" ng-if="showTitle(enterpriseItems)">
+      <div class="section-title">企业信息</div>
+    </div>
+    <div class="row" ng-repeat="item in enterpriseItems" ng-if="item.show">
+      <div class="col-xs-3 row-title">{{item.name}}:</div>
+      <div class="col-xs-8 row-input" ng-if="item.options.length === 0">
+        <input type="text" class="form-control" ng-model="item.value"/>
+      </div>
+      <div class="col-xs-8 row-select" ng-if="item.options.length > 0">
+        <ui-select ng-model="item.value">
+          <ui-select-match>
+            <span>{{$select.selected.name}}</span>
+          </ui-select-match>
+          <ui-select-choices repeat="option.value as option in item.options track by $index">
+            <span>{{option.name}}</span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+    <div class="row" ng-if="showTitle(loanItems)">
+      <div class="section-title">贷款信息</div>
+    </div>
+    <div class="row" ng-repeat="item in loanItems" ng-if="item.show">
+      <div class="col-xs-3 row-title">{{item.name}}:</div>
+      <div class="col-xs-8 row-input" ng-if="item.options.length === 0">
+        <input type="text" class="form-control" ng-model="item.value"/>
+      </div>
+      <div class="col-xs-8 row-select" ng-if="item.options.length > 0">
+        <ui-select ng-model="item.value">
+          <ui-select-match>
+            <span>{{$select.selected.name}}</span>
+          </ui-select-match>
+          <ui-select-choices repeat="option.value as option in item.options track by $index">
+            <span>{{option.name}}</span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+    <div class="row" ng-if="showTitle(extraItems)">
+      <div class="section-title">附加信息</div>
+    </div>
+    <div class="row" ng-repeat="item in extraItems" ng-if="item.show">
+      <div class="col-xs-3 row-title">{{item.name}}:</div>
+      <div class="col-xs-8 row-input" ng-if="item.options.length === 0">
+        <input type="text" class="form-control" ng-model="item.value"/>
+      </div>
+      <div class="col-xs-8 row-select" ng-if="item.options.length > 0">
+        <ui-select ng-model="item.value">
+          <ui-select-match>
+            <span>{{$select.selected.name}}</span>
+          </ui-select-match>
+          <ui-select-choices repeat="option.value as option in item.options track by $index">
+            <span>{{option.name}}</span>
           </ui-select-choices>
         </ui-select>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-3 row-title">借款用途:</div>
-      <div class="col-xs-8 row-select">
-        <ui-select ng-model="selectedUsage">
-          <ui-select-match placeholder="选择借款用途">
-            <span>{{$select.selected.name}}</span>
-          </ui-select-match>
-          <ui-select-choices repeat="usage.value as usage in usages track by $index">
-            <span>{{usage.name}}</span>
-          </ui-select-choices>
-        </ui-select>
-      </div>
+      <div class="section-title">上传资料</div>
     </div>
     <div class="row">
-      <div class="col-xs-3 row-title">婚姻状况:</div>
-      <div class="col-xs-8 row-select">
-        <ui-select ng-model="selectedMarriage">
-          <ui-select-match placeholder="选择婚姻状况">
-            <span>{{$select.selected.name}}</span>
-          </ui-select-match>
-          <ui-select-choices repeat="marriage.value as marriage in marriages track by $index">
-            <span>{{marriage.name}}</span>
-          </ui-select-choices>
-        </ui-select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">上传资料:</div>
-      <div class="col-xs-8 row-buttons">
+      <div class="col-xs-10 col-xs-offset-1 row-buttons">
         <button class="btn" ng-click="upload('id')"
                 ng-class="{'btn-primary': pictures.idSrc.length === 0, 'btn-success': pictures.idSrc.length > 0}">身份证</button>
         <button class="btn" ng-click="upload('license')"
