@@ -110,4 +110,88 @@ key为docid，即主键；<br>
 
 > response_code=802：提交失败，并有显示错误原因。
 
+### ---获取当前项目---
+* url: /customerproject/isactive.do
+
+* request params：
+
+> enterpriseid: int, 必填
+
+* return: 
+
+> *json对象*：当前项目 <br>
+ 	重要字段：idcustomerprojectid - 主键<br>
+ 	status - 当前状态<br>
+ 	loanid - 贷款申请id<br>
+
+> *null*: 当前无项目
+
+* exp:
+> http://test.sjdbank.com:8787/project//customerproject/isactive.do?enterpriseid=118
+
+
+### --- 获取贷款信息 ---
+* url: api/loanstatement/data.do
+
+* request params:
+
+> action: action=loan
+
+> loanid: int, 贷款申请id
+
+* return exp:
+
+> http://test.sjdbank.com:8787/api//loanstatement/data.do?loanid=152&action=loan
+
+* return 元素解释
+amount - 授信额度 <br>
+usedamount - 用款总额 <br>
+idloanstatement - 主键 <br>
+deposit - 保证金<br>
+loantime - 开始时间 <br>
+expireddate - 截止时间 <br>
+interest -  利率 <br>
+ratio - 质押率<br>
+最低值 = ratio/usedamount
+可出值 = 核价值-最低值
+### --- 获取当前核价价值---
+* url: bankvisit/loan/stockValue.do
+
+* request params:
+
+> loanid: int, 贷款申请id
+
+* return 
+> {"result":"Success","totalvalue":553333.3333333334}
+
+* return exp:
+http://test.sjdbank.com:8787/bankvisit//loan/stockValue.do?loanid=238
+
+### --- 选择出库（入库）商品 ---
+* url: stockproducts/customerproducts/list.do
+
+* params：
+> enterpriseid: 必填,int
+
+> productname:商品名称，选填，不填返回所有
+
+> startrow: 开始行数，选填，from 1 
+
+> count: 返回的行数，选填 
+
+
+* return exp:
+>{"result": "Success","value": "[{\"alias\":\"\",\"dealprice\":\"0.0\",\"isNew\":true,\"marketprice\":\"\",\"pid\":\"263\",\"dealpriceEst\":\"0.00\",\"cost\":\"0.0\",\"totalValue\":\"0.0\",\"stockValue\":\"0.0\",\"totalquantity\":\"2\",\"id\":\"196408\",\"category\":\"一体机\",\"price\":\"0.0\",\"mortgaged\":false,\"name\":\"TCL洗衣机XQB70-150JSZ亮灰色（JD)\",\"brand\":\"联想/ThinkCentre\",\"quantity\":\"0\",\"erpid\":\"35274\"}]"}
+
+* exp:
+> http://test.sjdbank.com:8787/stockproducts/customerproducts/list.do?enterpriseid=240&productname=z
+
+
+* 备注
+
+返回的"value"为 String格式，需要转换为json
+
+
+
+
 
