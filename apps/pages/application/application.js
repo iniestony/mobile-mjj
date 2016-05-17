@@ -69,23 +69,48 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   $scope.extraItems = [
     {"key": "paymentSource", "value": "", "name": "还款来源", "show": false, "options": []}
   ];
+
+  $scope.showTitle = function(array){
+    var show = false;
+    for(var i=0;i<array.length;i++){
+      if(array[i].show){
+        show = true;
+        break;
+      }
+    }
+    return show;
+  };
   
 
   $http.get("http://test.sjdbank.com:8787/loanapplication/app/form/getform.do?customerprojectid=147").success(function(data){
     console.log(data);
+    var beanKeys = ["personalinfo", "enterpriseinfo", "loaninfo", "extrainfo"];
+    var scopeKeys = ["personItems", "enterpriseItems", "loanItems", "extraItems"];
+    for(var i=0;i<beanKeys.length;i++){
+      if(data.bean[beanKeys[i]] && typeof data.bean[beanKeys[i]] === "object"){
+        $scope[scopeKeys[i]].forEach(function(item){
+          item.show = data.bean[beanKeys[i]].hasOwnProperty(item.key);
+          item.value = data.bean[beanKeys[i]][item.key];
+          if(data.selections && typeof data.selections === "object" &&
+            data.selections.hasOwnProperty(item.key) &&
+            Object.keys(data.selections[item.key]).length > 0
+          ){
+            item.options = [];
+            for(var k in data.selections[item.key]){
+              item.options.push({"name": k, "value": data.selections[item.key][k]});
+              if(!item.value){
+                item.value = data.selections[item.key][k];
+              }
+            }
+          }
+          else {
+            item.options = [];
+          }
+        });
+      }
+    }
   });
 
-  $scope.durations = [{"value": 1, "name": "一个月"},{"value": 2, "name": "二个月"},{"value": 3, "name": "三个月"}];
-  $scope.usages = [{"value": "normal", "name": "一般资金周转"}];
-  $scope.marriages = [{"value": "yes", "name": "已婚"},{"value": "no", "name": "未婚"}];
-
-  $scope.selectedDuration = $scope.durations[1].value;
-  $scope.selectedUsage = $scope.usages[0].value;
-  $scope.selectedMarriage = $scope.marriages[0].value;
-
-
-
-  
   $scope.pictures = {
     "idSrc": [],
     "licenseSrc": [],
