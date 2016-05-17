@@ -10,7 +10,7 @@
         <input type="text" class="form-control" ng-model="item.value"/>
       </div>
       <div class="col-xs-8 row-select" ng-if="item.options.length > 0">
-        <ui-select ng-model="item.value">
+        <ui-select ng-model="item.value" on-select="parsePerson(item)">
           <ui-select-match>
             <span>{{$select.selected.name}}</span>
           </ui-select-match>

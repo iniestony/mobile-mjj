@@ -80,16 +80,24 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
     }
     return show;
   };
+
+  $scope.parsePerson = function(item){
+    if(item.key === "marriage"){
+      $scope.personItems[11].show = $scope.personItems[11].preservedShow && item.value === "已婚";
+      $scope.personItems[13].show = $scope.personItems[13].preservedShow && item.value === "已婚";
+      $scope.personItems[14].show = $scope.personItems[14].preservedShow && item.value === "已婚";
+    }
+  };
   
 
   $http.get("http://test.sjdbank.com:8787/loanapplication/app/form/getform.do?customerprojectid=147").success(function(data){
-    console.log(data);
     var beanKeys = ["personalinfo", "enterpriseinfo", "loaninfo", "extrainfo"];
     var scopeKeys = ["personItems", "enterpriseItems", "loanItems", "extraItems"];
     for(var i=0;i<beanKeys.length;i++){
       if(data.bean[beanKeys[i]] && typeof data.bean[beanKeys[i]] === "object"){
         $scope[scopeKeys[i]].forEach(function(item){
           item.show = data.bean[beanKeys[i]].hasOwnProperty(item.key);
+          item.preservedShow = data.bean[beanKeys[i]].hasOwnProperty(item.key);//为了联动
           item.value = data.bean[beanKeys[i]][item.key];
           if(data.selections && typeof data.selections === "object" &&
             data.selections.hasOwnProperty(item.key) &&
@@ -98,15 +106,19 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
             item.options = [];
             for(var k in data.selections[item.key]){
               item.options.push({"name": k, "value": data.selections[item.key][k]});
-              if(!item.value){
-                item.value = data.selections[item.key][k];
-              }
             }
+            item.value = item.options[0].value;
           }
           else {
             item.options = [];
           }
         });
+        //init marriage options
+        if(scopeKeys[i] === "personItems"){
+          $scope.personItems[11].show = $scope.personItems[11].preservedShow && $scope.personItems[10].value === "已婚";
+          $scope.personItems[13].show = $scope.personItems[13].preservedShow && $scope.personItems[10].value === "已婚";
+          $scope.personItems[14].show = $scope.personItems[14].preservedShow && $scope.personItems[10].value === "已婚";
+        }
       }
     }
   });
