@@ -14,6 +14,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   $http.get(xhrRequestOrigin + "/api/loandetails/data.do?action=list_loan&loanid=238").success(function(data){
     for(var i=0;i<data.value.length;i++){
       var obj = {
+        "idloandetail": data.value[i].idloandetail,
         "amount": parseFloat(parseFloat(data.value[i].amount).toFixed(2)),
         "repaid": parseFloat(parseFloat(data.value[i].repaid).toFixed(2)),
         "remain": parseFloat(parseFloat(data.value[i].amount).toFixed(2)) - parseFloat(parseFloat(data.value[i].repaid).toFixed(2)),
@@ -22,9 +23,9 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
         "interest": parseFloat(data.value[i].interest),
         "repaying": parseFloat(parseFloat(data.value[i].repaying).toFixed(2))
       };
-      obj.current = obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date) + 1) / 360);
+      obj.current = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date) + 1) / 360)).toFixed(2));
+      obj.expire = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date(obj.repaymentdate)) + 1) / 360)).toFixed(2));
       $scope.details.push(obj);
-      console.log(obj, daysInterval(new Date(obj.usedate), new Date));
     }
   });
   

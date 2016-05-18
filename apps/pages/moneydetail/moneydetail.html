@@ -1,30 +1,30 @@
 <sjd-top-nav-bar nav-title="用款详情" prev-state="dashboard" prev-text="返回"></sjd-top-nav-bar>
 <div class="sjd-page-moneydetail">
   <div class="detail-list">
-    <div class="panel panel-primary">
+    <div class="panel panel-primary" ng-repeat="detail in details">
       <div class="panel-heading">
-        <h3 class="panel-title">编号: 00001</h3>
+        <h3 class="panel-title">编号: {{detail.idloandetail}}</h3>
       </div>
       <div class="panel-body">
         <div class="row">
           <div class="col-xs-6">
-            <span class="info">用款额度: 100000</span>
+            <span class="info">用款额度: {{detail.amount}}</span>
           </div>
           <div class="col-xs-6">
-            <span class="info">用款时间: 2016-01-01</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-6">
-            <span class="info">还款时间: 2016-01-01</span>
-          </div>
-          <div class="col-xs-6">
-            <span class="info">年化利息: 15%</span>
+            <span class="info">用款时间: {{detail.usedate}}</span>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-6">
-            <span class="info">已还金额: 12345</span>
+            <span class="info">还款时间: {{detail.repaymentdate}}</span>
+          </div>
+          <div class="col-xs-6">
+            <span class="info">年化利息: {{(detail.interest * 100).toFixed(0)}}%</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <span class="info">已还金额: {{detail.repaid}}</span>
           </div>
           <div class="col-xs-6">
             <span class="info">还款中: {{detail.repaying}}</span>
@@ -32,7 +32,7 @@
         </div>
         <div class="row">
           <div class="col-xs-6">
-            <span class="info">待还金额: 543212</span>
+            <span class="info">待还金额: {{detail.remain}}</span>
           </div>
           <div class="col-xs-6">
             <span class="action">还款</span>
@@ -40,10 +40,10 @@
         </div>
         <div class="row">
           <div class="col-xs-6">
-            <span class="info">当前本息: 1234.12</span>
+            <span class="info">当前本息: {{detail.current}}</span>
           </div>
           <div class="col-xs-6">
-            <span class="info">到期本息: 1234.12</span>
+            <span class="info">到期本息: {{detail.expire}}</span>
           </div>
         </div>
       </div>
