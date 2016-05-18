@@ -6,7 +6,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
 
-.controller("dashboardCtrl", ["$scope", "$state", "$stateParams", function($scope, $state, $stateParams){
+.controller("dashboardCtrl", ["$scope", "$state", "$stateParams", "$uibModal", function($scope, $state, $stateParams, $uibModal){
   $scope.status = 0; //none created applied validated
   $scope.message = "当前没有进行中的贷款申请,您可以提交一份贷款意向进行申请.";
 
@@ -22,9 +22,34 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
     $scope.status = ($scope.status + 1)%4;
     $scope.message = messageCollection[$scope.status];
   };
+
+  $scope.showDetail = function(){
+    $uibModal.open({
+      templateUrl: "/pages/dashboard/detail.html",
+      controller: "detailCtrl",
+      windowClass: "sjd-page-dashboard-detail-window",
+      backdrop: "static",
+      keyboard: false
+    }).result.then(function(){
+      $state.go("moneyout");
+    },function(){});
+  };
   
   $scope.navigate = function(state){
     $state.go(state);
   };
+
+}])
+
+.controller("detailCtrl", ["$scope", "$uibModalInstance", function($scope, $uibModalInstance){
+
+  $scope.ok = function(){
+    $uibModalInstance.close();
+  };
+
+  $scope.cancel = function(){
+    $uibModalInstance.dismiss();
+  };
+
 
 }]);
