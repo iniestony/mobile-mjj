@@ -223,6 +223,7 @@ http://test.sjdbank.com:8787/bankvisit//loan/stockValue.do?loanid=238
 > totalquantity - 库存总数<br>
 > mortgaged - 是否抵押中<br>
 > erpid - 需要该id作为货品识别
+> name - 货品名称
 
 * 备注
 
@@ -230,6 +231,64 @@ http://test.sjdbank.com:8787/bankvisit//loan/stockValue.do?loanid=238
 
 > 2. 入库请求时，如添加新商品，则自动生成erpid，规则为：MMDDHHmm+2位随机。
 > 可参考test.sjdbank.com:8787  登陆：15267015541 密码：1234567890
+
+
+
+### ---提交出库申请---
+
+* POST
+
+* stockpost/sjd/deliveryPush.do
+
+* request params:
+> hasMorgaged: 0/1。当出库明细中有一个抵押物，则hasMorgaged=1<br>
+> enterpriseid<br>
+> data:出库单对象
+
+* data example:
+>data={"header":{"contact":"联XXX","receivingcompany":"","phone":"ddd","stockname":"颐高仓","receivingaddress":"","memo":"","creator":"15267015541"},"details":[{"erpid":"36659","name":"华硕5寸膜","count":"0","mortgaged":"是","dealprice":"1000.0 "}]}<br>
+
+>"header"中为出库单基本信息:<br>
+>contact:联系人 <br>
+>receivingcompany:收款方<br>
+>phone:联系电话<br>
+>stockname:出库仓库<br>
+>receivingaddress:收货地址<br>
+>memo:备注信息<br>
+>creator: =username<br>
+>"details"中为出库明细，为jsonarray：<br>
+>erpid: 所选商品的erpid<br>
+>name:商品名称<br>
+>count:出库数量，由客户填写<br>
+>mortgaged<br>
+>dealprice<br>
+>details中的每条明细除了count都是来自所选的商品
+
+
+### ---提交入库申请---
+
+* POST
+
+* stockpost/sjd/entryPush.do
+
+* request params:
+> enterpriseid<br>
+> data:入库单对象
+
+* data example:
+>data={"header":{"contact":"联XXX","stockname":"颐高仓","phone":"ddd","memo":"ddd","creator":"15267015541"},"details":[{"erpid":"0518223070","name":"2","count":"2"}]}<br>
+
+>"header"中为出库单基本信息:<br>
+>contact:联系人 <br>
+>phone:联系电话<br>
+>stockname:入库仓库<br>
+>memo:备注信息<br>
+>creator: =username<br>
+>"details"中为出库明细，为jsonarray：<br>
+>erpid: 所选商品的erpid<br>
+>name:商品名称<br>
+>count:出库数量，由客户填写<br>
+
 
 ### --- 申请用款 ---
 
@@ -276,7 +335,7 @@ http://test.sjdbank.com:8787/bankvisit//loan/stockValue.do?loanid=238
 > repaid - 已还款 <br>
 > repaymentdate - 截止还款时间 <br>
 > repaying - 申请中的还款金额 <br>
-
+> usedate - 用款时间 <br>
 
 
 
