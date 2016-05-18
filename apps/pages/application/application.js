@@ -70,6 +70,10 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
     {"key": "paymentSource", "value": "", "name": "还款来源", "show": false, "options": []}
   ];
 
+  var preservedBean = {};
+  var beanKeys = ["personalinfo", "enterpriseinfo", "loaninfo", "extrainfo"];
+  var scopeKeys = ["personItems", "enterpriseItems", "loanItems", "extraItems"];
+
   $scope.showTitle = function(array){
     var show = false;
     for(var i=0;i<array.length;i++){
@@ -91,8 +95,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   
 
   $http.get("http://test.sjdbank.com:8787/loanapplication/app/form/getform.do?customerprojectid=147").success(function(data){
-    var beanKeys = ["personalinfo", "enterpriseinfo", "loaninfo", "extrainfo"];
-    var scopeKeys = ["personItems", "enterpriseItems", "loanItems", "extraItems"];
+    preservedBean = angular.copy(data.bean);
     for(var i=0;i<beanKeys.length;i++){
       if(data.bean[beanKeys[i]] && typeof data.bean[beanKeys[i]] === "object"){
         $scope[scopeKeys[i]].forEach(function(item){
@@ -151,7 +154,16 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   };
 
   $scope.submit = function(){
-    $state.go("dashboard");
+    for(var i=0;i<beanKeys.length;i++){
+      if(preservedBean[beanKeys[i]] && typeof preservedBean[beanKeys[i]] === "object"){
+        $scope[scopeKeys[i]].forEach(function(item){
+          preservedBean[beanKeys[i]][item.key] = item.value;
+        });
+      }
+    }
+    $http.post("http://test.sjdbank.com:8787/loanapplication/loan/saveform.do?customerprojectid=147", preservedBean).success(function(){
+      $state.go("dashboard");
+    });
   };
 
 }])
