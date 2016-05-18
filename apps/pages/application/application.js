@@ -6,7 +6,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
 
-.controller("applicationCtrl", ["$scope", "$state", "$uibModal", "$http", function($scope, $state, $uibModal, $http){
+.controller("applicationCtrl", ["$scope", "$state", "$uibModal", "$http", "xhrRequestOrigin", function($scope, $state, $uibModal, $http, xhrRequestOrigin){
   $scope.personItems = [
     {"key": "fullname", "value": "", "name": "姓名", "show": false, "options": []},
     {"key": "gender", "value": "", "name": "性别", "show": false, "options": []},
@@ -94,7 +94,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   };
   
 
-  $http.get("http://test.sjdbank.com:8787/loanapplication/app/form/getform.do?customerprojectid=147").success(function(data){
+  $http.get(xhrRequestOrigin + "/loanapplication/app/form/getform.do?customerprojectid=147").success(function(data){
     preservedBean = angular.copy(data.bean);
     for(var i=0;i<beanKeys.length;i++){
       if(data.bean[beanKeys[i]] && typeof data.bean[beanKeys[i]] === "object"){
@@ -163,7 +163,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
     }
     $http({
       "method": "POST",
-      "url": "http://test.sjdbank.com:8787/loanapplication/loanmobile/saveform.do?customerprojectid=147",
+      "url": xhrRequestOrigin + "/loanapplication/loanmobile/saveform.do?customerprojectid=147",
       "data": preservedBean
     }).success(function(){
       $state.go("dashboard");
