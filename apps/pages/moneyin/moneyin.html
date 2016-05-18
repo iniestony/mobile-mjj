@@ -15,7 +15,8 @@
         </thead>
         <tbody>
           <tr ng-repeat="detail in details"
-              ng-click="selectDetail(detail)">
+              ng-click="selectDetail(detail)"
+              ng-class="{'active': detail.idloandetail === $parent.current.idloandetail}">
             <td>{{detail.idloandetail}}</td>
             <td>{{detail.usedate}}</td>
             <td>{{detail.amount}}</td>
