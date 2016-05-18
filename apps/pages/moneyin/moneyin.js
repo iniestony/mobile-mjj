@@ -64,7 +64,23 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   
   
   $scope.submit = function(){
-    $state.go("dashboard");
+    if(($scope.repayAmount > 0) && $scope.date){
+      var fullDate = $scope.date.getFullYear() + "-" + ($scope.date.getMonth() + 1) + "-" + $scope.date.getDate() + "  00:00:00";
+      // $http.post(xhrRequestOrigin + "/actionon/loan/repayapply.do?enterpriseid=118&loanid=238", {
+      //   "ref": $scope.current.idloandetail,
+      //   "repaying": $scope.repayAmount,
+      //   "usedate": fullDate
+      // }).success(function(){
+      //   $state.go("dashboard");
+      // });
+      $http.post(xhrRequestOrigin + "/actionon/loan/repayapply.do?enterpriseid=118&loanid=238" +
+        "&ref=" + $scope.current.idloandetail +
+        "&repaying=" + $scope.repayAmount +
+        "&usedate=" + fullDate, {}
+      ).success(function(){
+        $state.go("dashboard");
+      });
+    }
   };
   
 }]);
