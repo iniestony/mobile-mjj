@@ -110,7 +110,9 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
             for(var k in data.selections[item.key]){
               item.options.push({"name": k, "value": data.selections[item.key][k]});
             }
-            item.value = item.options[0].value;
+            if(!item.value){
+              item.value = item.options[0].value;
+            }
           }
           else {
             item.options = [];
