@@ -29,6 +29,12 @@
 
 > *null*：登陆失败，
 
+* 元素解释
+> typeid,用户类型，typeid=9表示企业客户<br>
+> typeref, 用户类型所对应的角色id，当typeid=9时。。typeref即enterpriseid
+
+* 备注
+登陆后记录enterpriseid，并同时查询当前是否有运行中的项目
 
 
 
