@@ -28,7 +28,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
         $scope.usedamount = data.value.usedamount;
         $scope.ratio = data.value.ratio;
         $scope.amount = parseFloat((data.value.amount /10000).toFixed(2));
-        $scope.expireddate = data.value.expireddate;
+        var d = new Date(data.value.expireddate);
+        $scope.expireddate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
         $scope.minimum = parseFloat((parseFloat($scope.usedamount) / parseFloat($scope.ratio)).toFixed(0));
 
         $http.get(xhrRequestOrigin + "/bankvisit//loan/stockValue.do?loanid=238").success(function(data1){
