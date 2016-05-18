@@ -74,7 +74,7 @@
 ### --- 获得申请表 ---
 
 
-* url: /app/form/getform.do
+* url: loanapplication/app/form/getform.do
 
 * request params：
 
@@ -88,7 +88,7 @@
 
 * post
 
-* loanapplication/loan/saveform.do
+* loanapplication/loanmoblie/saveform.do
 
 * query string params:
 > customerprojectid
