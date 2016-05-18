@@ -161,7 +161,11 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
         });
       }
     }
-    $http.post("http://test.sjdbank.com:8787/loanapplication/loan/saveform.do?customerprojectid=147", preservedBean).success(function(){
+    $http({
+      "method": "POST",
+      "url": "http://test.sjdbank.com:8787/loanapplication/loan/saveform.do?customerprojectid=147",
+      "data": preservedBean
+    }).success(function(){
       $state.go("dashboard");
     });
   };
