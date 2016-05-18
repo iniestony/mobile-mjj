@@ -54,12 +54,25 @@ div.sjd-page-dashboard {
       }
 
       div.sjd-dashboard-status-content-2 {
-        margin: 0 auto 3vh;
-        font-size: 7vh;
-        height: 9vh;
-        line-height: 9vh;
-        text-align: center;
-        width: 80vw;
+        margin: 0 0 3vh;
+        position: relative;
+
+        span.title {
+          font-size: 7vh;
+          height: 9vh;
+          line-height: 9vh;
+          text-align: center;
+          display: inline-block;
+          width: 100%;
+        }
+
+        span.detail {
+          position: absolute;
+          bottom: 1vh;
+          right: 7vw;
+          font-size: 2vh;
+        }
+
       }
 
       div.row.sjd-dashboard-status-content-3 {
