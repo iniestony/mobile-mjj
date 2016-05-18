@@ -23,33 +23,10 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
     $scope.message = messageCollection[$scope.status];
   };
 
-  $scope.showDetail = function(){
-    $uibModal.open({
-      templateUrl: "/pages/dashboard/detail.html",
-      controller: "detailCtrl",
-      windowClass: "sjd-page-dashboard-detail-window",
-      backdrop: "static",
-      keyboard: false
-    }).result.then(function(){
-      $state.go("moneyout");
-    },function(){});
-  };
+  
   
   $scope.navigate = function(state){
     $state.go(state);
   };
-
-}])
-
-.controller("detailCtrl", ["$scope", "$uibModalInstance", function($scope, $uibModalInstance){
-
-  $scope.ok = function(){
-    $uibModalInstance.close();
-  };
-
-  $scope.cancel = function(){
-    $uibModalInstance.dismiss();
-  };
-
 
 }]);
