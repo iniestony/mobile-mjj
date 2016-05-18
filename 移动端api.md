@@ -74,6 +74,21 @@
 
 > http://test.sjdbank.com:8787/loanapplication/app/form/getform.do?customerprojectid=147
 
+### ---申请表保存---
+
+* post
+
+* loanapplication/loan/saveform.do
+
+* query string params:
+> customerprojectid
+
+* form data:
+> memo:<br>
+> personalinfo:<br>
+> enterpriseinfo:<br>
+> extrainfo:<br>
+
 
 ### --- 获得证件列表 ---
 * url: /loanapplicationdoc//app/loandocs/show.do
@@ -198,6 +213,60 @@ http://test.sjdbank.com:8787/bankvisit//loan/stockValue.do?loanid=238
 
 > 2. 入库请求时，如添加新商品，则自动生成erpid，规则为：MMDDHHmm+2位随机。
 > 可参考test.sjdbank.com:8787  登陆：15267015541 密码：1234567890
+
+### --- 申请用款 ---
+
+* POST
+
+* url: actionafter/applyuse/loandetails.do
+
+* request params:
+> customerprojectid,必填<br>
+> amount:申请的金额（元为单位）<br>
+> periodtime: 用款期限 <br>
+> remark:备注<br>
+
+
+### --- 申请还款 ---
+* POST
+
+* url:actionon/loan/repayapply.do
+
+* request params:
+> enterpriseid<br>
+> loanid <br>
+> ref - 所选择的那个需要还款的条目的主键（idloandetail）
+> repaying - 申请还款的金额
+> usedate - 还款日期
+
+### --- 获得用款详情列表 ---
+* get
+
+* url:api/loandetails/data.do
+
+* request params:
+> action - action=list_loan <br>
+> loanid
+
+* exp:
+> http://test.sjdbank.com:8787/api/loandetails/data.do?action=list_loan&loanid=238
+
+* 元素解释：
+> loanstatementid - 贷款详情主键（外键） <br>
+> idloandetail - 用款条目主键 <br>
+> interest - 利息 <br>
+> amount -  用款金额 <br>
+> repaid - 已还款 <br>
+> repaymentdate - 截止还款时间 <br>
+> repaying - 申请中的还款金额 <br>
+
+
+
+
+
+
+
+
 
 
 
