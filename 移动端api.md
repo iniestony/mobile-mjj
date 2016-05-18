@@ -14,7 +14,7 @@
 
 ### --- 登陆 ---
 
-* url: default/logincheck.do
+* url: default/mobilelogin.do
 
 * POST
 
@@ -25,15 +25,15 @@
 
 * return 
 
-> "Success": 成功
+> User对象: 成功
 
-> ***其他信息为错误信息***：登陆失败，
+> *null*：登陆失败，
 
 
 
 
 ### --- 注册 ---
-* url: default/register.do
+* url: default/mobileregister.do
 
 * POST
 
@@ -45,11 +45,15 @@
 
 * 表单提交内容：<br>
 
-> mobile,
+> username, 即手机号
 > password,
-> title
+> title, 称呼（添加选择：先生/女士）
 
-* return： 6位验证码
+* return：
+
+* 备注
+注册后自动登录
+
 
 
 ### --- 获得短信验证码 ---
@@ -88,6 +92,13 @@
 > personalinfo:<br>
 > enterpriseinfo:<br>
 > extrainfo:<br>
+
+### --- 提交申请表 ---
+* post
+
+* loanapplication/form/saveform.do
+
+
 
 
 ### --- 获得证件列表 ---
