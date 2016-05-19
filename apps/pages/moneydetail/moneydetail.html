@@ -16,7 +16,7 @@
         </div>
         <div class="row">
           <div class="col-xs-6">
-            <span class="info">还款时间: {{detail.repaymentdate}}</span>
+            <span class="info">还款截止: {{detail.repaymentdate}}</span>
           </div>
           <div class="col-xs-6">
             <span class="info">年化利息: {{(detail.interest * 100).toFixed(0)}}%</span>
@@ -35,7 +35,7 @@
             <span class="info">待还金额: {{detail.remain}}</span>
           </div>
           <div class="col-xs-6">
-            <span class="action">还款</span>
+            <span class="action" ng-click="repay(detail)">还款</span>
           </div>
         </div>
         <div class="row">

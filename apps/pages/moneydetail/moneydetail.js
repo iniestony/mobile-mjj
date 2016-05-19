@@ -6,8 +6,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
   
-.controller("moneydetailCtrl", ["$scope", "$http", "$state", "xhrRequestOrigin",
-  function($scope, $http, $state, xhrRequestOrigin){
+.controller("moneydetailCtrl", ["$scope", "$http", "$state", "xhrRequestOrigin", "$uibModal",
+  function($scope, $http, $state, xhrRequestOrigin, $uibModal){
 
   $scope.details = [];
 
@@ -28,6 +28,21 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
       $scope.details.push(obj);
     }
   });
+
+  $scope.repay = function(detail){
+    $uibModal.open({
+      templateUrl: "/pages/moneydetail/repay.html",
+      controller: "repayCtrl",
+      windowClass: "sjd-page-moneydetail-repay-window",
+      backdrop: "static",
+      keyboard: false,
+      resolve: {
+        detail: function(){
+          return angular.copy(detail);
+        }
+      }
+    }).result.then(function(){},function(){});
+  };
   
   $scope.apply = function(){
     $state.go("moneyout");
@@ -42,4 +57,18 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
     return parseInt((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
   }
   
+}])
+
+.controller("repayCtrl", ["$scope", "$uibModalInstance", "$http", "detail", function($scope, $uibModalInstance, $http, detail){
+  $scope.detail = detail;
+
+  $scope.submit = function(){
+    $uibModalInstance.close();
+  };
+
+  $scope.cancel = function(){
+    $uibModalInstance.dismiss();
+  };
+
+
 }]);
