@@ -28,7 +28,36 @@
           <span class="info">还款中: {{detail.repaying}}</span>
         </div>
       </div>
-
+      <div class="row">
+        <div class="col-xs-3 row-title">还款金额:</div>
+        <div class="col-xs-8 row-input">
+          <input type="number" class="form-control" ng-model="repayAmount" ng-change="updateEstimate()"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 row-title">还款时间:</div>
+        <div class="col-xs-8 row-form">
+          <div class="input-group">
+            <input type="text" class="form-control"
+                   uib-datepicker-popup
+                   ng-model="date"
+                   is-open="opened"
+                   datepicker-options="dateOptions"
+                   ng-required="true"
+                   close-text="关闭"
+                   clear-text="重置"
+                   current-text="今天"
+                   ng-change="updateEstimate()"/>
+          <span class="input-group-btn">
+            <button class="btn btn-primary" ng-click="toggleDatePicker()">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </button>
+          </span>
+          </div>
+        </div>
+      </div>
+      <div class="estimate-title">预计本息:</div>
+      <div class="estimate-amount">{{estimate}}</div>
     </div>
   </div>
   <div class="result-actions">

@@ -62,6 +62,33 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
 .controller("repayCtrl", ["$scope", "$uibModalInstance", "$http", "detail", function($scope, $uibModalInstance, $http, detail){
   $scope.detail = detail;
 
+  $scope.date = new Date($scope.detail.usedate);
+  $scope.opened = false;
+  $scope.repayAmount = 0;
+  $scope.estimate = 0;
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    maxDate: new Date($scope.detail.repaymentdate),
+    minDate: new Date($scope.detail.usedate),
+    startingDay: 1
+  };
+
+  function daysInterval(d1, d2){
+    return parseInt((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+  }
+
+  $scope.toggleDatePicker = function(){
+    $scope.opened = !$scope.opened;
+  };
+
+  $scope.updateEstimate = function(){
+    $scope.estimate = 0;
+    if(($scope.repayAmount > 0) && $scope.date){
+      $scope.estimate = parseFloat(($scope.repayAmount + ($scope.repayAmount * $scope.detail.interest * (daysInterval(new Date($scope.detail.usedate), $scope.date) + 1) / 360)).toFixed(2));
+    }
+  };
+
   $scope.submit = function(){
     $uibModalInstance.close();
   };
