@@ -66,8 +66,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   
 }])
 
-.controller("repayCtrl", ["$scope", "$uibModalInstance", "$http", "detail", "xhrRequestOrigin",
-  function($scope, $uibModalInstance, $http, detail, xhrRequestOrigin){
+.controller("repayCtrl", ["$scope", "$uibModalInstance", "$http", "detail", "xhrRequestOrigin", "sjdDialog",
+  function($scope, $uibModalInstance, $http, detail, xhrRequestOrigin, sjdDialog){
 
   $scope.detail = detail;
 
@@ -107,7 +107,12 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
         "&usedate=" + fullDate, {}, {"transformResponse": function(v){ return v; }}
       ).success(function(){
         $uibModalInstance.close();
+      }).error(function(msg){
+        sjdDialog.open("Error", msg);
       });
+    }
+    else{
+      sjdDialog.open("Info", "请为还款金额以及还款时间输入有效值");
     }
   };
 

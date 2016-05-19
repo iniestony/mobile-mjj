@@ -82,7 +82,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
         $state.go("dashboard");
       }).error(function(msg){
         sjdDialog.open("Error", msg);
-      });;
+      });
     }
     else{
       sjdDialog.open("Info", "请为还款金额以及还款时间输入有效值");
