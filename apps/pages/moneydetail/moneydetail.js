@@ -23,7 +23,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
         "interest": parseFloat(data.value[i].interest),
         "repaying": parseFloat(parseFloat(data.value[i].repaying).toFixed(2))
       };
-      obj.current = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date) + 1) / 360)).toFixed(2));
+      obj.current = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date()) + 1) / 360)).toFixed(2));
       obj.expire = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date(obj.repaymentdate)) + 1) / 360)).toFixed(2));
       $scope.details.push(obj);
     }

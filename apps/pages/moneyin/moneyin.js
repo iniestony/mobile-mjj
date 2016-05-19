@@ -12,6 +12,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   $scope.date = new Date();
   $scope.opened = false;
   $scope.repayAmount = 0;
+  $scope.estimate = 0;
   
   $scope.dateOptions = {
     formatYear: 'yy',
@@ -19,6 +20,15 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
     minDate: new Date(),
     startingDay: 1
   };
+
+  function getDate(str){
+    var d = new Date(str);
+    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+  }
+
+  function daysInterval(d1, d2){
+    return parseInt((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+  }
 
   $http.get(xhrRequestOrigin + "/api/loandetails/data.do?action=list_loan&loanid=238").success(function(data){
     for(var i=0;i<data.value.length;i++){
@@ -32,7 +42,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
         "interest": parseFloat(data.value[i].interest),
         "repaying": parseFloat(parseFloat(data.value[i].repaying).toFixed(2))
       };
-      obj.current = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date) + 1) / 360)).toFixed(2));
+      obj.current = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date()) + 1) / 360)).toFixed(2));
       obj.expire = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date(obj.repaymentdate)) + 1) / 360)).toFixed(2));
       $scope.details.push(obj);
     }
@@ -41,15 +51,6 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
     $scope.dateOptions.maxDate = new Date($scope.details[0].repaymentdate);
     $scope.current = angular.copy($scope.details[0]);
   });
-
-  function getDate(str){
-    var d = new Date(str);
-    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-  }
-
-  function daysInterval(d1, d2){
-    return parseInt((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
-  }
 
   $scope.toggleDatePicker = function(){
     $scope.opened = !$scope.opened;
@@ -61,22 +62,21 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
     $scope.dateOptions.maxDate = new Date(detail.repaymentdate);
     $scope.current = angular.copy(detail);
   };
-  
+
+  $scope.updateEstimate = function(){
+    $scope.estimate = 0;
+    if(($scope.repayAmount > 0) && $scope.date){
+      $scope.estimate = parseFloat(($scope.repayAmount + ($scope.repayAmount * $scope.current.interest * (daysInterval(new Date($scope.current.usedate), $scope.date) + 1) / 360)).toFixed(2));
+    }
+  };
   
   $scope.submit = function(){
     if(($scope.repayAmount > 0) && $scope.date){
-      var fullDate = $scope.date.getFullYear() + "-" + ($scope.date.getMonth() + 1) + "-" + $scope.date.getDate() + "  00:00:00";
-      // $http.post(xhrRequestOrigin + "/actionon/loan/repayapply.do?enterpriseid=118&loanid=238", {
-      //   "ref": $scope.current.idloandetail,
-      //   "repaying": $scope.repayAmount,
-      //   "usedate": fullDate
-      // }).success(function(){
-      //   $state.go("dashboard");
-      // });
-      $http.post(xhrRequestOrigin + "/actionon/loan/repayapply.do?enterpriseid=118&loanid=238" +
+      var fullDate = $scope.date.getFullYear() + "/" + ($scope.date.getMonth() + 1) + "/" + $scope.date.getDate();
+      $http.post(xhrRequestOrigin + "/actionon/loan/repayapply.do?enterpriseid=240&loanid=238" +
         "&ref=" + $scope.current.idloandetail +
         "&repaying=" + $scope.repayAmount +
-        "&usedate=" + fullDate, {}
+        "&usedate=" + fullDate, {}, {"transformResponse": function(v){ return v; }}
       ).success(function(){
         $state.go("dashboard");
       });

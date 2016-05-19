@@ -55,7 +55,7 @@
     <div class="row sjd-moneyin-content-4">
       <div class="col-xs-3 row-title">还款金额:</div>
       <div class="col-xs-8 row-input">
-        <input type="number" class="form-control" ng-model="repayAmount"/>
+        <input type="number" class="form-control" ng-model="repayAmount" ng-change="updateEstimate()"/>
       </div>
     </div>
     <div class="row sjd-moneyin-content-4">
@@ -70,7 +70,8 @@
                  ng-required="true"
                  close-text="关闭"
                  clear-text="重置"
-                 current-text="今天"/>
+                 current-text="今天"
+                 ng-change="updateEstimate()"/>
           <span class="input-group-btn">
             <button class="btn btn-primary" ng-click="toggleDatePicker()">
               <span class="glyphicon glyphicon-calendar"></span>
@@ -80,7 +81,7 @@
       </div>
     </div>
     <div class="sjd-moneyin-content-1">预计本息:</div>
-    <div class="sjd-moneyin-content-2-sm">15000</div>
+    <div class="sjd-moneyin-content-2-sm">{{estimate}}</div>
   </div>
   <div class="sjd-moneyin-submit">
     <button class="btn btn-info" ng-click="submit()">提交还款申请</button>
