@@ -6,8 +6,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
   
-.controller("moneyoutCtrl", ["$scope", "$state", "$http", "xhrRequestOrigin", 
-  function($scope, $state, $http, xhrRequestOrigin){
+.controller("moneyoutCtrl", ["$scope", "$state", "$http", "xhrRequestOrigin", "sjdDialog",
+  function($scope, $state, $http, xhrRequestOrigin, sjdDialog){
   
   $http.get(xhrRequestOrigin + "/api//loanstatement/data.do?loanid=152&action=loan").success(function(data){
     $scope.usedamount = parseFloat(data.value.usedamount.toFixed(2));
@@ -36,7 +36,12 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
       $http.post(url, {}, {"transformResponse": function(v){ return v; }}
       ).success(function(){
         $state.go("dashboard");
+      }).error(function(msg){
+        sjdDialog.open("Error", msg);
       });
+    }
+    else {
+      sjdDialog.open("Info", "使用额度必须大于0");
     }
   };
   
