@@ -61,7 +61,7 @@
     </div>
   </div>
   <div class="result-actions">
-    <button class="btn btn-info" ng-click="submit()">提交</button>
+    <button class="btn btn-info" ng-disabled="detail.repaying > 0" ng-click="submit()">提交</button>
   </div>
   <div class="result-actions">
     <button class="btn btn-default" ng-click="cancel()">取消</button>

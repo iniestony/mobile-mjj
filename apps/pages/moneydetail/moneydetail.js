@@ -59,7 +59,9 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   
 }])
 
-.controller("repayCtrl", ["$scope", "$uibModalInstance", "$http", "detail", function($scope, $uibModalInstance, $http, detail){
+.controller("repayCtrl", ["$scope", "$uibModalInstance", "$http", "detail", "xhrRequestOrigin",
+  function($scope, $uibModalInstance, $http, detail, xhrRequestOrigin){
+
   $scope.detail = detail;
 
   $scope.date = new Date($scope.detail.usedate);
@@ -90,7 +92,16 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   };
 
   $scope.submit = function(){
-    $uibModalInstance.close();
+    if(($scope.repayAmount > 0) && $scope.date){
+      var fullDate = $scope.date.getFullYear() + "/" + ($scope.date.getMonth() + 1) + "/" + $scope.date.getDate();
+      $http.post(xhrRequestOrigin + "/actionon/loan/repayapply.do?enterpriseid=240&loanid=238" +
+        "&ref=" + $scope.detail.idloandetail +
+        "&repaying=" + $scope.repayAmount +
+        "&usedate=" + fullDate, {}, {"transformResponse": function(v){ return v; }}
+      ).success(function(){
+        $uibModalInstance.close();
+      });
+    }
   };
 
   $scope.cancel = function(){
