@@ -25,7 +25,7 @@
     <div class="row sjd-moneyout-content-4">
       <div class="col-xs-3 row-title">使用额度:</div>
       <div class="col-xs-8 row-input">
-        <input type="text" class="form-control"/>
+        <input type="number" class="form-control" ng-model="applyAmount"/>
       </div>
     </div>
     <div class="row sjd-moneyout-content-4">
@@ -39,6 +39,12 @@
             <span>{{duration.name}}</span>
           </ui-select-choices>
         </ui-select>
+      </div>
+    </div>
+    <div class="row sjd-moneyout-content-4">
+      <div class="col-xs-3 row-title">借款用途:</div>
+      <div class="col-xs-8 row-input">
+        <input type="text" maxlength="20" class="form-control" ng-model="remark"/>
       </div>
     </div>
   </div>

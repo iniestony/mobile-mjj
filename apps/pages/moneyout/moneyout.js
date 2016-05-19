@@ -18,13 +18,26 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
     var d = new Date(data.value.expireddate);
     $scope.expireddate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
   });
-  
-  $scope.submit = function(){
-    $state.go("dashboard");
-  };
-  
-  $scope.durations = [{"value": 1, "name": "一个月"},{"value": 2, "name": "二个月"},{"value": 3, "name": "三个月"}];
-  $scope.selectedDuration = $scope.durations[1].value;
+    
+  $scope.applyAmount = 0;
+  $scope.remark = "";
 
+  $scope.durations = [{"value": "3个月", "name": "3个月"},{"value": "6个月", "name": "6个月"},{"value": "12个月", "name": "12个月"}];
+  $scope.selectedDuration = $scope.durations[0].value;
+
+  $scope.submit = function(){
+    if($scope.applyAmount > 0){
+      var url = xhrRequestOrigin + "/actionafter/applyuse/loandetails.do?customerprojectid=121" +
+        "&amount=" + $scope.applyAmount +
+        "&reriodtime=" + $scope.selectedDuration;
+      if($scope.remark !== ""){
+        url = url + "&remark=" + $scope.remark;
+      }
+      $http.post(url, {}, {"transformResponse": function(v){ return v; }}
+      ).success(function(){
+        $state.go("dashboard");
+      });
+    }
+  };
   
 }]);
