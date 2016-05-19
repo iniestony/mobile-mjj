@@ -6,7 +6,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
   
-.controller("moneyinCtrl", ["$scope", "$state", "$http", "xhrRequestOrigin", function($scope, $state, $http, xhrRequestOrigin){
+.controller("moneyinCtrl", ["$scope", "$state", "$http", "xhrRequestOrigin", "sjdDialog",
+  function($scope, $state, $http, xhrRequestOrigin, sjdDialog){
 
   $scope.details = [];
   $scope.date = new Date();
@@ -79,7 +80,12 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
         "&usedate=" + fullDate, {}, {"transformResponse": function(v){ return v; }}
       ).success(function(){
         $state.go("dashboard");
-      });
+      }).error(function(msg){
+        sjdDialog.open("Error", msg);
+      });;
+    }
+    else{
+      sjdDialog.open("Info", "请为还款金额以及还款时间输入有效值");
     }
   };
   
