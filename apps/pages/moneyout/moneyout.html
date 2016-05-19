@@ -2,24 +2,24 @@
 <div class="sjd-page-moneyout">
   <div class="sjd-moneyout-content">
     <div class="sjd-moneyout-content-1">剩余额度:</div>
-    <div class="sjd-moneyout-content-2">105000</div>
+    <div class="sjd-moneyout-content-2">{{remain}}</div>
     <div class="sjd-moneyout-content-1">当前用款:</div>
-    <div class="sjd-moneyout-content-2-sm">15000</div>
+    <div class="sjd-moneyout-content-2-sm">{{usedamount}}</div>
     <div class="row sjd-moneyout-content-3">
       <div class="col-xs-6 sjd-moneyout-content-3-title">授信额度</div>
       <div class="col-xs-6 sjd-moneyout-content-3-title">结束时间</div>
     </div>
     <div class="row sjd-moneyout-content-3">
-      <div class="col-xs-6">32145</div>
-      <div class="col-xs-6">2016-01-01</div>
+      <div class="col-xs-6">{{(amount/10000).toFixed(0)}}万元</div>
+      <div class="col-xs-6">{{expireddate}}</div>
     </div>
     <div class="row sjd-moneyout-content-3">
       <div class="col-xs-6 sjd-moneyout-content-3-title">质押率</div>
       <div class="col-xs-6 sjd-moneyout-content-3-title">年利率</div>
     </div>
     <div class="row sjd-moneyout-content-3">
-      <div class="col-xs-6">0.5</div>
-      <div class="col-xs-6">15%</div>
+      <div class="col-xs-6">{{ratio}}</div>
+      <div class="col-xs-6">{{(interest*100).toFixed(0)}}%</div>
     </div>
     <div class="sjd-moneyout-content-1">用款申请:</div>
     <div class="row sjd-moneyout-content-4">

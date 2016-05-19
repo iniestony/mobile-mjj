@@ -6,24 +6,25 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
   
-.controller("moneyoutCtrl", ["$scope", "$state", "$uibModal", function($scope, $state, $uibModal){
+.controller("moneyoutCtrl", ["$scope", "$state", "$http", "xhrRequestOrigin", 
+  function($scope, $state, $http, xhrRequestOrigin){
+  
+  $http.get(xhrRequestOrigin + "/api//loanstatement/data.do?loanid=152&action=loan").success(function(data){
+    $scope.usedamount = parseFloat(data.value.usedamount.toFixed(2));
+    $scope.ratio = data.value.ratio;
+    $scope.interest = data.value.interest;
+    $scope.amount = parseFloat(data.value.amount.toFixed(2));
+    $scope.remain = $scope.amount - $scope.usedamount;
+    var d = new Date(data.value.expireddate);
+    $scope.expireddate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+  });
+  
   $scope.submit = function(){
     $state.go("dashboard");
   };
   
   $scope.durations = [{"value": 1, "name": "一个月"},{"value": 2, "name": "二个月"},{"value": 3, "name": "三个月"}];
   $scope.selectedDuration = $scope.durations[1].value;
-  
-  // $scope.addGoods = function(){
-  //   $uibModal.open({
-  //     templateUrl: "/pages/moneyout/add.html",
-  //     controller: "goodsoutAddCtrl",
-  //     windowClass: "sjd-page-goodsout-add-window",
-  //     backdrop: "static",
-  //     keyboard: false
-  //   }).result.then(function(data){
-  //     //todo
-  //   },function(){});
-  // };
+
   
 }]);
