@@ -59,7 +59,7 @@
         <tbody>
           <tr ng-repeat="product in products">
             <td>{{product.name}}</td>
-            <td>{{product.count}}</td>
+            <td><input type="number" ng-model="product.count"/></td>
             <td>{{product.mortgaged}}</td>
             <td>{{product.dealprice}}</td>
             <td>{{product.count * product.dealprice}}</td>
