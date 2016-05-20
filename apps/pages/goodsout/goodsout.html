@@ -57,13 +57,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>手机</td>
-            <td>2</td>
-            <td>是</td>
-            <td>10000</td>
-            <td>20000</td>
-            <td>100</td>
+          <tr ng-repeat="product in products">
+            <td>{{product.name}}</td>
+            <td>{{product.count}}</td>
+            <td>{{product.mortgaged}}</td>
+            <td>{{product.dealprice}}</td>
+            <td>{{product.count * product.dealprice}}</td>
+            <td>{{product.totalquantity}}</td>
           </tr>
         </tbody>
       </table>
