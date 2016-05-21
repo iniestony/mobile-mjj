@@ -71,6 +71,66 @@
 
 * return： 6位验证码
 
+
+### ---获得基本调查(原贷款意向)---
+* url: /project/qulificationcheck/form.do
+
+* get
+
+* request params:
+> key:quiz<br>
+> customerprojectid <br>
+
+* example:
+> http://test.sjdbank.com:8787/project/qulificationcheck/form.do?key=quiz&customerprojectid=126
+
+* return example:
+>{"idquestionaire":33,"note":null,"enterpriseid":282,"parkid":null,"hascommit":true,"createtime":1463733637000,"content":"{\"quiz\":\"{\\\"avgstockvalue\\\":\\\"100万\\\",\\\"stockaddr\\\":\\\"杭州\\\",\\\"turnovers\\\":\\\"100万\\\",\\\"mainBusiness\\\":\\\"电子产品、联想\\\",\\\"regaddr\\\":\\\"杭州\\\"}\"}","customerprojectid":170,"type":null,"committime":null}
+
+"content"的"quiz"中为有用信息：
+
+|内容|key|
+|-|-|
+|企业注册地址|regaddr|
+|平均营业额|turnovers|
+|主要商品的种类、品牌|mainBusiness|
+|货品存放地址|stockaddr|
+|平均库存价值|avgstockvalue|
+
+
+### ---保存基本调查--- 
+* post
+
+* /project/qulificationcheck/formsave.do
+
+* request params:
+
+> customerprojectid <br>
+> questionaire ：string,即调查内容
+
+* Content-Type:application/x-www-form-urlencoded; charset=UTF-8
+
+* parsed example:
+
+> customerprojectid=170&questionaire=%7B%22key%22%3A%22quiz%22%2C%22value%22%3A%7B%22turnovers%22%3A%22100%E4%B8%87%22%2C%22regaddr%22%3A%22%E6%9D%AD%E5%B7%9E%22%2C%22mainBusiness%22%3A%22%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81%E3%80%81%E8%81%94%E6%83%B3%22%2C%22stockaddr%22%3A%22%E6%9D%AD%E5%B7%9E%22%2C%22avgstockvalue%22%3A%22100%E4%B8%87%22%7D%7D <br>
+
+>customerprojectid:170<br>
+>questionaire:{"key":"quiz","value":{"turnovers":"100万","regaddr":"杭州","mainBusiness":"电子产品、联想","stockaddr":"杭州","avgstockvalue":"100万"}}
+
+### ---提交基本调查---
+
+* post
+
+* /project/completeAuthorization.do
+
+* request parms:
+
+>customerprojectid<br>
+>enterpriseid
+
+* example:
+> http://test.sjdbank.com:8787/project/completeAuthorization.do?customerprojectid=170&enterpriseid=282
+
 ### --- 获得申请表 ---
 
 
@@ -302,7 +362,6 @@ http://test.sjdbank.com:8787/bankvisit//loan/stockValue.do?loanid=238
 > periodtime: 用款期限 <br>
 > remark:备注<br>
 
-
 ### --- 申请还款 ---
 * POST
 
@@ -338,12 +397,23 @@ http://test.sjdbank.com:8787/bankvisit//loan/stockValue.do?loanid=238
 > usedate - 用款时间 <br>
 
 
+### ---各状态名称及显示内容---
 
+“当前贷款”页面根据当前customerproject的status显示不同内容与操作
 
-
-
-
-
+|状态码|显示名称|显示详情|当前操作|
+|-|-|
+|1|初步调查|请填写初步调查问卷并提交|【初步调查】|
+|2、18、12、19、16|资质审核|您的基本情况已提交，请等待工作人员的核实||
+|181|资质审核未通过|很抱歉，我们暂时无法为您提供服务。||
+|20|资质审核通过|恭喜您！您的贷款意向已通过数据贷评估，请发起正式申请！|【贷款申请】|
+|21|贷款填写中|您正在进行贷款申请，请填写完整的申请表并提交|【贷款填写】|
+|22|资料补充|您的贷款资料审核不通过，请补充、修改贷款资料！|【申请表修改】【申请资料修改】|
+|262、8|申请失败|非常抱歉, 您的贷款申请被拒绝||
+|23、260、26|贷款审核|您的贷款申请已提交资金方审批，请耐心等候|【申请表查看】【申请资料查看】|
+|27|贷款成功|恭喜您！您的贷款已通过资金方审批||
+|5|{贷款详情}|{贷款详情}|【出库申请】【入库申请】【用款申请】【还款申请】|
+|35、79|项目结束|||
 
 
 
