@@ -5,19 +5,25 @@
     <div class="row sjd-goodsin-content-3">
       <div class="col-xs-3 row-title">联系人:</div>
       <div class="col-xs-8 row-input">
-        <input type="text" class="form-control"/>
+        <input type="text" class="form-control" ng-model="contact"/>
       </div>
     </div>
     <div class="row sjd-goodsin-content-3">
       <div class="col-xs-3 row-title">联系方式:</div>
       <div class="col-xs-8 row-input">
-        <input type="text" class="form-control"/>
+        <input type="text" class="form-control" ng-model="phone"/>
       </div>
     </div>
     <div class="row sjd-goodsin-content-3">
-      <div class="col-xs-3 row-title">入库仓储:</div>
+      <div class="col-xs-3 row-title">入库仓库:</div>
       <div class="col-xs-8 row-input">
-        <input type="text" class="form-control"/>
+        <input type="text" class="form-control" ng-model="stockname"/>
+      </div>
+    </div>
+    <div class="row sjd-goodsin-content-3">
+      <div class="col-xs-3 row-title">备注信息:</div>
+      <div class="col-xs-8 row-input">
+        <input type="text" class="form-control" ng-model="memo"/>
       </div>
     </div>
     <div class="row sjd-goodsin-content-5">
@@ -27,21 +33,23 @@
     <div class="row sjd-goodsin-content-4">
       <table class="table table-responsive table-striped table-bordered table-condensed">
         <thead>
-        <tr>
-          <th>名称</th>
-          <th>数量</th>
-        </tr>
+          <tr>
+            <th>名称</th>
+            <th>数量</th>
+            <th ng-if="products.length > 0"></th>
+          </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>手机</td>
-          <td>2</td>
-        </tr>
+          <tr ng-repeat="product in products">
+            <td>{{product.name}}</td>
+            <td><input type="number" ng-model="product.count"/></td>
+            <td><span ng-click="deleteProduct($index)">删除</span></td>
+          </tr>
         </tbody>
       </table>
     </div>
   </div>
   <div class="sjd-goodsin-submit">
-    <button class="btn btn-info" ng-click="submit()">提交</button>
+    <button class="btn btn-info" ng-disabled="products.length === 0" ng-click="submit()">提交</button>
   </div>
 </div>
