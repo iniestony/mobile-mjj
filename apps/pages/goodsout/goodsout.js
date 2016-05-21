@@ -13,6 +13,16 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
 
   $scope.products = [];
 
+  $scope.estimate = 0;
+  $scope.estimateTotal = 0;
+
+  $scope.stockname = "";
+  $scope.contact = "";
+  $scope.phone = "";
+  $scope.receivingcompany = "";
+  $scope.receivingaddress = "";
+  $scope.memo = "";
+
   $scope.addGoods = function(){
     $uibModal.open({
       templateUrl: "/pages/goodsout/add.html",
@@ -36,8 +46,29 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
           });
         }
       }
+      getEstimateTotal();
     },function(){});
   };
+
+  $scope.deleteProduct = function(index){
+    $scope.products.splice(index, 1);
+    getEstimateTotal();
+  };
+
+  $scope.getEstimate = function(){
+    $scope.estimate = 0;
+    $scope.products.forEach(function(item){
+      var c = isNaN(parseInt(item.count))?0:parseInt(item.count);
+      $scope.estimate = $scope.estimate + parseFloat(item.dealprice) * c;
+    });
+  };
+
+  function getEstimateTotal(){
+    $scope.estimateTotal = 0;
+    $scope.products.forEach(function(item){
+      $scope.estimateTotal = $scope.estimateTotal + parseFloat(item.dealprice) * parseInt(item.totalquantity);
+    });
+  }
   
 }])
 
