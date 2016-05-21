@@ -4,11 +4,11 @@
       <h3 class="panel-title">入库商品</h3>
     </div>
     <div class="panel-body">
-      <form class="search-form" ng-submit="search()">
+      <form class="search-form">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="输入入库商品名" />
+          <input type="text" class="form-control" placeholder="输入入库商品名" ng-model="productName"/>
             <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btn btn-primary" ng-click="search()">
                 <span class="glyphicon glyphicon-search"></span>
               </button>
             </span>
@@ -18,21 +18,21 @@
       <div class="goods-list">
         <table class="table table-responsive table-striped table-bordered table-condensed">
           <tbody>
-          <tr ng-repeat="a in [1, 2, 3, 4, 5, 6]">
-            <td>
-              <input type="checkbox" />
-            </td>
-            <td>iphone {{a}}</td>
-          </tr>
+            <tr ng-repeat="product in products">
+              <td>
+                <input type="checkbox" ng-model="product.selected"/>
+              </td>
+              <td>{{product.name}}</td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <form class="add-form" ng-submit="addNew()">
+      <form class="add-form">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="输入新品名称" />
+          <input type="text" class="form-control" placeholder="输入新品名称" ng-model="newProduct"/>
             <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btn btn-primary" ng-disabled="newProduct === ''" ng-click="addNew()">
                 <span>添加新品</span>
               </button>
             </span>

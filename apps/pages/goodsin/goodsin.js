@@ -25,13 +25,64 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   
 }])
 
-.controller("goodsinAddCtrl", ["$scope", "$uibModalInstance", function($scope, $uibModalInstance){
+.controller("goodsinAddCtrl", ["$scope", "$uibModalInstance", "$http", "xhrRequestOrigin", "sjdDialog",
+  function($scope, $uibModalInstance, $http, xhrRequestOrigin, sjdDialog){
   
   
-  $scope.submit = function(){
-    $uibModalInstance.close($scope.imageURI);
+  $scope.productName = "";
+  $scope.newProduct = "";
+  $scope.products = [];
+
+  $scope.addNew = function(){
+    var newID;
+    var ids = $scope.products.map(function(p){
+      return p.erpid;
+    });
+
+    do {
+      var r1, r2;
+      r1 = Math.ceil(Math.random()*9);
+      r2 = Math.ceil(Math.random()*9);
+      var d = new Date();
+      newID = (d.getMonth() + 1) + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + r1 + r2;
+    } while(ids.indexOf(newID) >= 0);
+
+    $scope.products.push({
+      "erpid": newID,
+      "name": $scope.newProduct,
+      "selected": true
+    });
   };
-  
+
+  $scope.search = function(){
+    var url = xhrRequestOrigin + "/stockproducts/customerproducts/list.do?enterpriseid=240";
+    if($scope.productName !== ""){
+      url = url + "&productname=" + $scope.productName;
+    }
+
+    $http.get(url).success(function(data){
+      $scope.products = JSON.parse(data.value);
+      for(var i=0;i<$scope.products.length;i++){
+        $scope.products[i].selected = false;
+      }
+    }).error(function(msg){
+      sjdDialog.open("Error", msg);
+    });
+  };
+
+
+  $scope.submit = function(){
+    var result = $scope.products.filter(function(item){
+      return item.selected;
+    }).map(function(n_item){
+      return {
+        "erpid": n_item.erpid,
+        "name": n_item.name
+      };
+    });
+    $uibModalInstance.close(result);
+  };
+
   $scope.cancel = function(){
     $uibModalInstance.dismiss();
   };
