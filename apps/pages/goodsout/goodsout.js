@@ -6,10 +6,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
   
-.controller("goodsoutCtrl", ["$scope", "$state", "$uibModal", function($scope, $state, $uibModal){
-  $scope.submit = function(){
-    $state.go("dashboard");
-  };
+.controller("goodsoutCtrl", ["$scope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "sjdDialog",
+  function($scope, $state, $uibModal, $http, xhrRequestOrigin, sjdDialog){
 
   $scope.products = [];
 
@@ -69,6 +67,43 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
       $scope.estimateTotal = $scope.estimateTotal + parseFloat(item.dealprice) * parseInt(item.totalquantity);
     });
   }
+
+  $scope.submit = function(){
+    var hasMorgaged = 0;
+    var requestData = {
+      "header": {
+        "contact": $scope.contact,
+        "receivingcompany": $scope.receivingcompany,
+        "phone": $scope.phone,
+        "stockname": $scope.stockname,
+        "receivingaddress": $scope.receivingaddress,
+        "memo": $scope.memo,
+        "creator": "15267015541"
+      },
+      "details":[]
+    };
+    for(var i=0;i<$scope.products.length;i++){
+      if($scope.products[i].mortgaged){
+        hasMorgaged = 1;
+      }
+      requestData.details.push({
+        "erpid": $scope.products[i].erpid,
+        "name": $scope.products[i].name,
+        "count": $scope.products[i].count,
+        "mortgaged": ($scope.products[i].mortgaged)?"是":"否",
+        "dealprice": $scope.products[i].dealprice
+      });
+    }
+    var url = xhrRequestOrigin + "/stockpost/sjd/deliveryPush.do?enterpriseid=240&hasMorgaged=" + hasMorgaged;
+    url = url + "&data=" + JSON.stringify(requestData);
+
+    $http.post(url).success(function(){
+      $state.go("dashboard");
+    }).error(function(msg){
+      sjdDialog.open("Error", msg);
+    });
+
+  };
   
 }])
 
@@ -85,7 +120,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
     }
 
     $http.get(url).success(function(data){
-      $scope.products = eval("(" + data.value + ")");
+      $scope.products = JSON.parse(data.value);
       for(var i=0;i<$scope.products.length;i++){
         $scope.products[i].selected = false;
       }

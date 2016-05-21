@@ -78,6 +78,6 @@
     </div>
   </div>
   <div class="sjd-goodsout-submit">
-    <button class="btn btn-info" ng-click="submit()">提交</button>
+    <button class="btn btn-info" ng-disabled="products.length === 0" ng-click="submit()">提交</button>
   </div>
 </div>
