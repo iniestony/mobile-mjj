@@ -6,9 +6,42 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
   
-.controller("goodsinCtrl", ["$scope", "$state", "$uibModal", function($scope, $state, $uibModal){
+.controller("goodsinCtrl", ["$scope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "sjdDialog",
+  function($scope, $state, $uibModal, $http, xhrRequestOrigin, sjdDialog){
+
+  $scope.products = [];
+
+  $scope.stockname = "";
+  $scope.contact = "";
+  $scope.phone = "";
+  $scope.memo = "";
+
   $scope.submit = function(){
-    $state.go("dashboard");
+    var requestData = {
+      "header": {
+        "contact": $scope.contact,
+        "phone": $scope.phone,
+        "stockname": $scope.stockname,
+        "memo": $scope.memo,
+        "creator": "15267015541"
+      },
+      "details":[]
+    };
+    for(var i=0;i<$scope.products.length;i++){
+      requestData.details.push({
+        "erpid": $scope.products[i].erpid,
+        "name": $scope.products[i].name,
+        "count": $scope.products[i].count
+      });
+    }
+    var url = xhrRequestOrigin + "/stockpost/sjd/entryPush.do?enterpriseid=240";
+    url = url + "&data=" + JSON.stringify(requestData);
+
+    $http.post(url).success(function(){
+      $state.go("dashboard");
+    }).error(function(msg){
+      sjdDialog.open("Error", msg);
+    });
   };
   
   $scope.addGoods = function(){
@@ -19,9 +52,26 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
       backdrop: "static",
       keyboard: false
     }).result.then(function(data){
-      //todo
+      var existingIDs = $scope.products.map(function(p){
+        return p.erpid;
+      });
+      for(var i=0;i<data.length;i++){
+        if(existingIDs.indexOf(data[i].erpid) < 0){
+          $scope.products.push({
+            "erpid": data[i].erpid,
+            "name": data[i].name,
+            "count": 0
+          });
+        }
+      }
     },function(){});
   };
+
+  $scope.deleteProduct = function(index){
+    $scope.products.splice(index, 1);
+  };
+
+
   
 }])
 
