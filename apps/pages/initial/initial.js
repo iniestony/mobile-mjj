@@ -6,16 +6,32 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
 
-.controller("initialCtrl", ["$scope", "$state", "$uibModal", function($scope, $state, $uibModal){
+.controller("initialCtrl", ["$scope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "sjdDialog",
+  function($scope, $state, $uibModal, $http, xhrRequestOrigin, sjdDialog){
+
+  $scope.regaddr = "";
+  $scope.turnovers = "";
+  $scope.mainBusiness = "";
+  $scope.stockaddr = "";
+  $scope.avgstockvalue = "";
+
+  $http.get(xhrRequestOrigin + "/project/qulificationcheck/form.do?key=quiz&customerprojectid=170").success(function(data){
+    var quiz = JSON.parse(JSON.parse(data.content).quiz);
+    $scope.regaddr = quiz.regaddr;
+    $scope.turnovers = quiz.turnovers;
+    $scope.mainBusiness = quiz.mainBusiness;
+    $scope.stockaddr = quiz.stockaddr;
+    $scope.avgstockvalue = quiz.avgstockvalue;
+  }).error(function(msg){
+    sjdDialog.open("Error", msg);
+  });
+
+
   $scope.submit = function(){
     $state.go("dashboard");
   };
 
-  $scope.agree = false;
 
-  $scope.durations = [{"value": 1, "name": "一个月"},{"value": 2, "name": "二个月"},{"value": 3, "name": "三个月"}];
-
-  $scope.selectedDuration = $scope.durations[1].value;
 
   $scope.showDetail = function(){
     $uibModal.open({
