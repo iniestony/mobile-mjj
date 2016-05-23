@@ -19,9 +19,9 @@
               ng-class="{'active': detail.idloandetail === $parent.current.idloandetail}">
             <td>{{detail.idloandetail}}</td>
             <td>{{detail.usedate}}</td>
-            <td>{{detail.amount}}</td>
-            <td>{{detail.repaid}}</td>
-            <td>{{detail.remain}}</td>
+            <td>{{detail.amount|currency:'':2}}</td>
+            <td>{{detail.repaid|currency:'':2}}</td>
+            <td>{{detail.remain|currency:'':2}}</td>
           </tr>
         </tbody>
       </table>
@@ -40,8 +40,8 @@
       <div class="col-xs-6 sjd-moneyin-content-3-title">已还金额</div>
     </div>
     <div class="row sjd-moneyin-content-3">
-      <div class="col-xs-6">{{current.remain}}</div>
-      <div class="col-xs-6">{{current.repaid}}</div>
+      <div class="col-xs-6">{{current.remain|currency:'':2}}</div>
+      <div class="col-xs-6">{{current.repaid|currency:'':2}}</div>
     </div>
     <div class="row sjd-moneyin-content-3">
       <div class="col-xs-6 sjd-moneyin-content-3-title">年化利息</div>
@@ -49,7 +49,7 @@
     </div>
     <div class="row sjd-moneyin-content-3">
       <div class="col-xs-6">{{(current.interest * 100).toFixed(0)}}%</div>
-      <div class="col-xs-6">{{current.repaying}}</div>
+      <div class="col-xs-6">{{current.repaying|currency:'':2}}</div>
     </div>
     <div class="sjd-moneyin-content-1">还款申请:</div>
     <div class="row sjd-moneyin-content-4">
@@ -81,7 +81,7 @@
       </div>
     </div>
     <div class="sjd-moneyin-content-1">预计本息:</div>
-    <div class="sjd-moneyin-content-2-sm">{{estimate}}</div>
+    <div class="sjd-moneyin-content-2-sm">{{estimate|currency:'':2}}</div>
   </div>
   <div class="sjd-moneyin-submit">
     <button class="btn btn-info" ng-click="submit()">提交还款申请</button>

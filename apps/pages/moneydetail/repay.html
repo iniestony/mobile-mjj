@@ -6,10 +6,10 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-xs-6">
-          <span class="info">用款额度: {{detail.amount}}</span>
+          <span class="info">用款额度: {{detail.amount|currency:'':2}}</span>
         </div>
         <div class="col-xs-6">
-          <span class="info">待还金额: {{detail.remain}}</span>
+          <span class="info">待还金额: {{detail.remain|currency:'':2}}</span>
         </div>
       </div>
       <div class="row">
@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="estimate-title">预计本息:</div>
-      <div class="estimate-amount">{{estimate}}</div>
+      <div class="estimate-amount">{{estimate|currency:'':2}}</div>
     </div>
   </div>
   <div class="result-actions">

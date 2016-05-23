@@ -8,7 +8,7 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-xs-6">
-            <span class="info">用款额度: {{detail.amount}}</span>
+            <span class="info">用款额度: {{detail.amount|currency:'':2}}</span>
           </div>
           <div class="col-xs-6">
             <span class="info">用款时间: {{detail.usedate}}</span>
@@ -24,15 +24,15 @@
         </div>
         <div class="row">
           <div class="col-xs-6">
-            <span class="info">已还金额: {{detail.repaid}}</span>
+            <span class="info">已还金额: {{detail.repaid|currency:'':2}}</span>
           </div>
           <div class="col-xs-6">
-            <span class="info">还款中: {{detail.repaying}}</span>
+            <span class="info">还款中: {{detail.repaying|currency:'':2}}</span>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-6">
-            <span class="info">待还金额: {{detail.remain}}</span>
+            <span class="info">待还金额: {{detail.remain|currency:'':2}}</span>
           </div>
           <div class="col-xs-6">
             <span class="action" ng-if="detail.repaying === 0" ng-click="repay(detail)">还款</span>
@@ -41,10 +41,10 @@
         </div>
         <div class="row">
           <div class="col-xs-6">
-            <span class="info">当前本息: {{detail.current}}</span>
+            <span class="info">当前本息: {{detail.current|currency:'':2}}</span>
           </div>
           <div class="col-xs-6">
-            <span class="info">到期本息: {{detail.expire}}</span>
+            <span class="info">到期本息: {{detail.expire|currency:'':2}}</span>
           </div>
         </div>
       </div>
