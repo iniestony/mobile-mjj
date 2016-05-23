@@ -1,9 +1,17 @@
 <sjd-top-nav-bar nav-title="当前贷款" ng-click="changeStatus()"></sjd-top-nav-bar>
 <div class="sjd-page-dashboard">
   <uib-alert class="sjd-dashboard-alert" type="info" ng-if="message">{{message}}</uib-alert>
+  <div class="sjd-dashboard-status" ng-if="status === 0">
+    <div class="sjd-dashboard-status-image">
+        <img class="status" src="imgs/pre-check.png">
+    </div>
+    <div class="sjd-dashboard-status-text">
+      <span>初步调查</span>
+    </div>
+  </div>
   <div class="sjd-dashboard-status" ng-if="status === 1">
     <div class="sjd-dashboard-status-image">
-
+        <img class="status" src="imgs/qulificationcheck.png">
     </div>
     <div class="sjd-dashboard-status-text">
       <span>初审已通过</span>
@@ -11,7 +19,7 @@
   </div>
   <div class="sjd-dashboard-status" ng-if="status === 2">
     <div class="sjd-dashboard-status-image">
-
+        <img class="status" src="imgs/write.png">
     </div>
     <div class="sjd-dashboard-status-text">
       <span>资料已提交,请等待审核</span>
@@ -52,8 +60,8 @@
         <h3 class="panel-title">当前操作</h3>
       </div>
       <div class="panel-body">
-        <button class="btn btn-primary" ng-if="status === 0" ng-click="navigate('initial')">提交意向</button>
-        <button class="btn btn-primary" ng-if="status === 1" ng-click="navigate('application')">发起贷款</button>
+        <button class="btn btn-primary" ng-if="status === 0" ng-click="navigate('initial')">初步调查</button>
+        <button class="btn btn-primary" ng-if="status === 1" ng-click="navigate('application')">贷款申请</button>
         <button class="btn btn-primary" ng-if="status === 3" ng-click="navigate('goodsout')">出库申请</button>
         <button class="btn btn-primary" ng-if="status === 3" ng-click="navigate('goodsin')">入库提交</button>
         <button class="btn btn-primary" ng-if="status === 3" ng-click="navigate('moneyout')">用款申请</button>
