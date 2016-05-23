@@ -6,8 +6,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
 
-.controller("dashboardCtrl", ["$scope", "$state", "$stateParams", "$uibModal", "xhrRequestOrigin", "$http",
-  function($scope, $state, $stateParams, $uibModal, xhrRequestOrigin, $http){
+.controller("dashboardCtrl", ["$scope", "$state", "$stateParams", "$uibModal", "xhrRequestOrigin", "$http", "Constants",
+  function($scope, $state, $stateParams, $uibModal, xhrRequestOrigin, $http, Constants){
 
   $scope.status = 0; //none created applied validated
   $scope.message = "当前没有进行中的贷款申请,您可以提交一份贷款意向进行申请.";
@@ -51,7 +51,13 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   
   
   $scope.navigate = function(state){
+    if(state === "goodsout"){
+      Constants.estimateTotal = $scope.out;
+    }
     $state.go(state);
   };
 
+}])
+.service("Constants", [function(){
+  this.estimateTotal = 0;
 }]);
