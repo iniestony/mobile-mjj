@@ -25,8 +25,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
           "interest": parseFloat(data.value[i].interest),
           "repaying": parseFloat(parseFloat(data.value[i].repaying).toFixed(2))
         };
-        obj.current = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date()) + 1) / 360)).toFixed(2));
-        obj.expire = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date(obj.repaymentdate)) + 1) / 360)).toFixed(2));
+        obj.current = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(data.value[i].usedate.substring(0, 10)), new Date()) + 1) / 360)).toFixed(2));
+        obj.expire = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(data.value[i].usedate.substring(0, 10)), new Date(data.value[i].repaymentdate.substring(0, 10))) + 1) / 360)).toFixed(2));
         $scope.details.push(obj);
       }
     });
@@ -56,7 +56,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   };
 
   function getDate(str){
-    var d = new Date(str);
+    var d = new Date(str.substring(0, 10));
     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
   }
 
@@ -71,15 +71,22 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
 
   $scope.detail = detail;
 
-  $scope.date = new Date($scope.detail.usedate);
+  function formatDate(str){
+    var list = str.split("-");
+    list[1] = (list[1].length === 1) ? "0" + list[1] : list[1];
+    list[2] = (list[2].length === 1) ? "0" + list[2] : list[2];
+    return list.join("-");
+  }
+
+  $scope.date = new Date(formatDate($scope.detail.usedate));
   $scope.opened = false;
   $scope.repayAmount = 0;
   $scope.estimate = 0;
 
   $scope.dateOptions = {
     formatYear: 'yy',
-    maxDate: new Date($scope.detail.repaymentdate),
-    minDate: new Date($scope.detail.usedate),
+    maxDate: new Date(formatDate($scope.detail.repaymentdate)),
+    minDate: new Date(formatDate($scope.detail.usedate)),
     startingDay: 1
   };
 
@@ -94,7 +101,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   $scope.updateEstimate = function(){
     $scope.estimate = 0;
     if(($scope.repayAmount > 0) && $scope.date){
-      $scope.estimate = parseFloat(($scope.repayAmount + ($scope.repayAmount * $scope.detail.interest * (daysInterval(new Date($scope.detail.usedate), $scope.date) + 1) / 360)).toFixed(2));
+      $scope.estimate = parseFloat(($scope.repayAmount + ($scope.repayAmount * $scope.detail.interest * (daysInterval(new Date(formatDate($scope.detail.usedate)), $scope.date) + 1) / 360)).toFixed(2));
     }
   };
 
