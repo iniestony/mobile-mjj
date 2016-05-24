@@ -205,7 +205,6 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
         };
 
         $scope.uploadImage = function() {
-            console.log("进来了么？？？");
             $("input.origin-input").click();
         };
 
@@ -223,31 +222,31 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
             $uibModalInstance.dismiss();
         };
 
-        $scope.uploadFile = function(files) {
-        console.log("上传图片");
-        var fd = new FormData();
-        //Take the first selected file
-        fd.append("files", files[0]);
-
-        // $http.post(uploadUrl, fd, {
-        //     withCredentials: true,
-        //     headers: { 'Content-Type': undefined },
-        //     transformRequest: angular.identity
-        // }).success(...all right!...).error(..damn!...);
-        $http.post(xhrRequestOrigin + "/loanapplicationdoc//app/applydoc/upload.do?customerprojectid=131&idchecklist=493", fd, {
-               
-                transformRequest: angular.identity,
-                headers: { 'Content-Type': undefined }
-            })
-            .success(function(res) {
-                console.log("kdfdfa");
-                alert("对搭！！");
-            })
-            .error(function(status, err) {
-                console.log(err);
-                alert("错啦！！");
-            });
-    };
+    //     $scope.uploadFile = function(files) {
+    //     console.log("上传图片");
+    //     var fd = new FormData();
+    //     //Take the first selected file
+    //     fd.append("files", files[0]);
+    //
+    //     // $http.post(uploadUrl, fd, {
+    //     //     withCredentials: true,
+    //     //     headers: { 'Content-Type': undefined },
+    //     //     transformRequest: angular.identity
+    //     // }).success(...all right!...).error(..damn!...);
+    //     $http.post(xhrRequestOrigin + "/loanapplicationdoc//app/applydoc/upload.do?customerprojectid=131&idchecklist=493", fd, {
+    //           
+    //             transformRequest: angular.identity,
+    //             headers: { 'Content-Type': undefined }
+    //         })
+    //         .success(function(res) {
+    //             console.log("kdfdfa");
+    //             alert("对搭！！");
+    //         })
+    //         .error(function(status, err) {
+    //             console.log(err);
+    //             alert("错啦！！");
+    //         });
+    // };
 
 
     }])
