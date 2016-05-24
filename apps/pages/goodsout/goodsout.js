@@ -6,13 +6,13 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
   
-.controller("goodsoutCtrl", ["$scope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "sjdDialog",
-  function($scope, $state, $uibModal, $http, xhrRequestOrigin, sjdDialog){
+.controller("goodsoutCtrl", ["$scope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "sjdDialog", "Constants",
+  function($scope, $state, $uibModal, $http, xhrRequestOrigin, sjdDialog, Constants){
 
   $scope.products = [];
 
   $scope.estimate = 0;
-  $scope.estimateTotal = 0;
+  $scope.estimateTotal = Constants.estimateTotal;
 
   $scope.stockname = "";
   $scope.contact = "";
@@ -44,13 +44,11 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
           });
         }
       }
-      getEstimateTotal();
     },function(){});
   };
 
   $scope.deleteProduct = function(index){
     $scope.products.splice(index, 1);
-    getEstimateTotal();
   };
 
   $scope.getEstimate = function(){
@@ -60,13 +58,6 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
       $scope.estimate = $scope.estimate + parseFloat(item.dealprice) * c;
     });
   };
-
-  function getEstimateTotal(){
-    $scope.estimateTotal = 0;
-    $scope.products.forEach(function(item){
-      $scope.estimateTotal = $scope.estimateTotal + parseFloat(item.dealprice) * parseInt(item.totalquantity);
-    });
-  }
 
   $scope.submit = function(){
     var hasMorgaged = 0;

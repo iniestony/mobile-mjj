@@ -17,13 +17,13 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   
   $scope.dateOptions = {
     formatYear: 'yy',
-    maxDate: new Date(2020, 5, 27),
+    maxDate: new Date("2020-05-27"),
     minDate: new Date(),
     startingDay: 1
   };
 
   function getDate(str){
-    var d = new Date(str);
+    var d = new Date(str.substring(0, 10));
     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
   }
 
@@ -43,13 +43,13 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
         "interest": parseFloat(data.value[i].interest),
         "repaying": parseFloat(parseFloat(data.value[i].repaying).toFixed(2))
       };
-      obj.current = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date()) + 1) / 360)).toFixed(2));
-      obj.expire = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(obj.usedate), new Date(obj.repaymentdate)) + 1) / 360)).toFixed(2));
+      obj.current = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(data.value[i].usedate.substring(0, 10)), new Date()) + 1) / 360)).toFixed(2));
+      obj.expire = parseFloat((obj.remain + (obj.remain * obj.interest * (daysInterval(new Date(data.value[i].usedate.substring(0, 10)), new Date(data.value[i].repaymentdate.substring(0, 10))) + 1) / 360)).toFixed(2));
       $scope.details.push(obj);
     }
-    $scope.date = new Date($scope.details[0].usedate);
-    $scope.dateOptions.minDate = new Date($scope.details[0].usedate);
-    $scope.dateOptions.maxDate = new Date($scope.details[0].repaymentdate);
+    $scope.date = new Date(formatDate($scope.details[0].usedate));
+    $scope.dateOptions.minDate = new Date(formatDate($scope.details[0].usedate));
+    $scope.dateOptions.maxDate = new Date(formatDate($scope.details[0].repaymentdate));
     $scope.current = angular.copy($scope.details[0]);
   });
 
@@ -58,16 +58,16 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   };
 
   $scope.selectDetail = function(detail){
-    $scope.date = new Date(detail.usedate);
-    $scope.dateOptions.minDate = new Date(detail.usedate);
-    $scope.dateOptions.maxDate = new Date(detail.repaymentdate);
+    $scope.date = new Date(formatDate(detail.usedate));
+    $scope.dateOptions.minDate = new Date(formatDate(detail.usedate));
+    $scope.dateOptions.maxDate = new Date(formatDate(detail.repaymentdate));
     $scope.current = angular.copy(detail);
   };
 
   $scope.updateEstimate = function(){
     $scope.estimate = 0;
     if(($scope.repayAmount > 0) && $scope.date){
-      $scope.estimate = parseFloat(($scope.repayAmount + ($scope.repayAmount * $scope.current.interest * (daysInterval(new Date($scope.current.usedate), $scope.date) + 1) / 360)).toFixed(2));
+      $scope.estimate = parseFloat(($scope.repayAmount + ($scope.repayAmount * $scope.current.interest * (daysInterval(new Date(formatDate($scope.current.usedate)), $scope.date) + 1) / 360)).toFixed(2));
     }
   };
   
@@ -88,5 +88,12 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
       sjdDialog.open("Info", "请为还款金额以及还款时间输入有效值");
     }
   };
+
+  function formatDate(str){
+    var list = str.split("-");
+    list[1] = (list[1].length === 1) ? "0" + list[1] : list[1];
+    list[2] = (list[2].length === 1) ? "0" + list[2] : list[2];
+    return list.join("-");
+  }
   
 }]);

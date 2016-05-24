@@ -46,15 +46,15 @@ gulp.task("release-fonts-publish", function() {
 // merge all lib js into vendor.js
 gulp.task("release-vendor-js-publish", function(){
   return gulp.src([
-      path.resolve(INCLUDE_BASE_PATH, "lib/angular/angular.js"),
-      path.resolve(INCLUDE_BASE_PATH, "lib/angular-bootstrap/ui-bootstrap-tpls.js"),
-      path.resolve(INCLUDE_BASE_PATH, "lib/angular-ui-router/release/angular-ui-router.js"),
-      path.resolve(INCLUDE_BASE_PATH, "lib/jquery/dist/jquery.js"),
-      path.resolve(INCLUDE_BASE_PATH, "lib/less/dist/less.js"),
-      path.resolve(INCLUDE_BASE_PATH, "lib/bootstrap/dist/js/bootstrap.js"),
-      path.resolve(INCLUDE_BASE_PATH, "lib/angular-ui-select/dist/select.js"),
-      path.resolve(INCLUDE_BASE_PATH, "lib/webcamjs/webcam.js"),
-      path.resolve(INCLUDE_BASE_PATH, "lib/ng-camera/dist/ng-camera.js"),
+      path.resolve(INCLUDE_BASE_PATH, "lib/angular/angular.min.js"),
+      path.resolve(INCLUDE_BASE_PATH, "lib/angular-bootstrap/ui-bootstrap-tpls.min.js"),
+      path.resolve(INCLUDE_BASE_PATH, "lib/angular-ui-router/release/angular-ui-router.min.js"),
+      // path.resolve(INCLUDE_BASE_PATH, "lib/jquery/dist/jquery.min.js"),
+      // path.resolve(INCLUDE_BASE_PATH, "lib/less/dist/less.js"),
+      // path.resolve(INCLUDE_BASE_PATH, "lib/bootstrap/dist/js/bootstrap.js"),
+      path.resolve(INCLUDE_BASE_PATH, "lib/angular-ui-select/dist/select.min.js"),
+      // path.resolve(INCLUDE_BASE_PATH, "lib/webcamjs/webcam.js"),
+      // path.resolve(INCLUDE_BASE_PATH, "lib/ng-camera/dist/ng-camera.js"),
       path.resolve(INCLUDE_BASE_PATH, "lib/logon/jquery.md5.js"),
       path.resolve(INCLUDE_BASE_PATH, "lib/logon/RSAUtils.js")
     ], { base: INCLUDE_BASE_PATH })
@@ -66,11 +66,14 @@ gulp.task("release-vendor-js-publish", function(){
 // merge all less/css file into vendor.css
 gulp.task("release-vendor-css-publish", function(){
   return gulp.src([
-      path.resolve(INCLUDE_BASE_PATH, "lib/bootstrap/less/bootstrap.less"),
+      path.resolve(INCLUDE_BASE_PATH, "lib/bootstrap/dist/css/bootstrap.min.css"),
+      path.resolve(INCLUDE_BASE_PATH, "lib/bootstrap/dist/css/bootstrap-theme.min.css"),
+      // path.resolve(INCLUDE_BASE_PATH, "lib/bootstrap/less/bootstrap.less"),
       path.resolve(INCLUDE_BASE_PATH, "lib/angular-ui-select/dist/select.css")
     ], { base: INCLUDE_BASE_PATH })
-    .pipe($.less())
+    // .pipe($.less())
     .pipe($.concat("vendor.css"))
+    .pipe(minifyCSS())
     .pipe(gulp.dest(path.resolve(RELEASE_BASE_PATH, "css")));
 });
 

@@ -6,16 +6,61 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
 
-.controller("initialCtrl", ["$scope", "$state", "$uibModal", function($scope, $state, $uibModal){
+.controller("initialCtrl", ["$scope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "sjdDialog",
+  function($scope, $state, $uibModal, $http, xhrRequestOrigin, sjdDialog){
+
+  $scope.regaddr = "";
+  $scope.turnovers = "";
+  $scope.mainBusiness = "";
+  $scope.stockaddr = "";
+  $scope.avgstockvalue = "";
+  var clicked = false;
+
+  $http.get(xhrRequestOrigin + "/project/qulificationcheck/form.do?key=quiz&customerprojectid=170").success(function(data){
+    var quiz = JSON.parse(JSON.parse(data.content).quiz);
+    $scope.regaddr = quiz.regaddr;
+    $scope.turnovers = quiz.turnovers;
+    $scope.mainBusiness = quiz.mainBusiness;
+    $scope.stockaddr = quiz.stockaddr;
+    $scope.avgstockvalue = quiz.avgstockvalue;
+  }).error(function(msg){
+    sjdDialog.open("Error", msg);
+  });
+
+
   $scope.submit = function(){
-    $state.go("dashboard");
+    if(clicked){
+      return;
+    }
+    clicked = true;
+    var url = xhrRequestOrigin + "/project/qulificationcheck/formsave.do?customerprojectid=170";
+    var valueStr = JSON.stringify({
+      "turnovers": $scope.turnovers,
+      "regaddr": $scope.regaddr,
+      "mainBusiness": $scope.mainBusiness,
+      "stockaddr": $scope.stockaddr,
+      "avgstockvalue": $scope.avgstockvalue
+    });
+    var questionaire = JSON.stringify({
+      "key": "quiz",
+      "value": valueStr
+    });
+    url = url + "&questionaire=" + questionaire;
+
+    $http.post(url, {}).success(function(){
+      $http.post(xhrRequestOrigin + "/project/qulificationcheck/formsave.do?customerprojectid=170&enterpriseid=240", {}).success(function(){
+        $state.go("dashboard");
+      }).error(function(msg2){
+        clicked = false;
+        sjdDialog.open("Error", msg2);
+      });
+    }).error(function(msg){
+      clicked = false;
+      sjdDialog.open("Error", msg);
+    });
   };
 
-  $scope.agree = false;
 
-  $scope.durations = [{"value": 1, "name": "一个月"},{"value": 2, "name": "二个月"},{"value": 3, "name": "三个月"}];
-
-  $scope.selectedDuration = $scope.durations[1].value;
 
   $scope.showDetail = function(){
     $uibModal.open({
