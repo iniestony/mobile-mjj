@@ -103,10 +103,13 @@
         </div>
         <div class="row">
             <div class="col-xs-10 col-xs-offset-1 row-buttons">
-                <button class="btn" ng-click="upload('id')" ng-class="{'btn-primary': pictures.idSrc.length === 0, 'btn-success': pictures.idSrc.length > 0}">身份证</button>
-                <button class="btn" ng-click="upload('license')" ng-class="{'btn-primary': pictures.licenseSrc.length === 0, 'btn-success': pictures.licenseSrc.length > 0}">营业执照</button>
-                <button class="btn btn-primary" ng-click="upload('marriage')" ng-class="{'btn-primary': pictures.marriageSrc.length === 0, 'btn-success': pictures.marriageSrc.length > 0}">结婚证</button>
-                <button class="btn btn-primary" ng-click="upload('org')" ng-class="{'btn-primary': pictures.orgSrc.length === 0, 'btn-success': pictures.orgSrc.length > 0}">组织结构证</button>
+                <button class="btn"
+                        ng-click="upload(key)"
+                        ng-class="{'btn-primary': pictures[key + 'Src'].images.length === 0, 'btn-success': pictures[key + 'Src'].images.length > 0}"
+                        ng-repeat="key in keys">{{pictures[key + 'Src'].name}}</button>
+                <!--<button class="btn" ng-click="upload('license')" ng-class="{'btn-primary': pictures.licenseSrc.length === 0, 'btn-success': pictures.licenseSrc.length > 0}">营业执照</button>-->
+                <!--<button class="btn" ng-click="upload('marriage')" ng-class="{'btn-primary': pictures.marriageSrc.length === 0, 'btn-success': pictures.marriageSrc.length > 0}">结婚证</button>-->
+                <!--<button class="btn" ng-click="upload('org')" ng-class="{'btn-primary': pictures.orgSrc.length === 0, 'btn-success': pictures.orgSrc.length > 0}">组织结构证</button>-->
             </div>
         </div>
         <div class="list">

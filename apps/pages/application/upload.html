@@ -5,9 +5,9 @@
         </div>
         <div class="panel-body">
             <div class="image-view">
-                <div class="single-image" ng-repeat="imageURI in imageURIs">
-                    <img ng-src="{{imageURI}}">
-                    <span class="glyphicon glyphicon-remove" ng-click="removeImage(imageURI)"></span>
+                <div class="single-image" ng-repeat="image in images">
+                    <img ng-src="{{image.uri}}">
+                    <span class="glyphicon glyphicon-remove" ng-click="removeImage(image)"></span>
                 </div>
             </div>
             <div class="image-actions">
@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="result-actions">
-        <button class="btn btn-info" ng-disabled="imageURIs.length === 0" ng-click="submit()">提交资料</button>
+        <button class="btn btn-info" ng-disabled="images.length === 0" ng-click="submit()">提交资料</button>
     </div>
     <div class="result-actions">
         <button class="btn btn-default" ng-click="cancel()">取消</button>

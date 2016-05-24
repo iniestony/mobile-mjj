@@ -127,11 +127,9 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
         });
 
         $scope.pictures = {
-            "idSrc": [],
-            "licenseSrc": [],
-            "marriageSrc": [],
-            "orgSrc": []
+
         };
+        $scope.keys = [];
 
         $scope.upload = function(item) {
             $uibModal.open({
@@ -145,11 +143,11 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                         return item;
                     },
                     images: function() {
-                        return angular.copy($scope.pictures[item + "Src"]);
+                        return angular.copy($scope.pictures[item + "Src"].images);
                     }
                 }
             }).result.then(function(dataURIs) {
-                $scope.pictures[item + "Src"] = dataURIs;
+                $scope.pictures[item + "Src"].images = dataURIs;
             }, function() {});
         };
         $scope.toStep2 = function() {
@@ -162,7 +160,27 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
         $scope.toStep3 = function() {
             saveForm();
             $scope.step = 3;
+            $scope.pictures = {};
+            $scope.keys = [];
+
         };
+
+      $http.get(xhrRequestOrigin + "/loanapplicationdoc/app/loandocs/show.do?customerprojectid=147").success(function(data) {
+        $scope.keys = Object.keys(data);
+        $scope.keys.forEach(function(k){
+          $scope.pictures[k + "Src"] = {
+            "name": data[k].name,
+            "images": []
+          };
+          for(var i in data[k].files){
+            $scope.pictures[k + "Src"].images.push({
+              "name": i,
+              "uri": xhrRequestOrigin + "/" + data[k].files[i]
+            });
+          }
+        });
+      });
+
         var saveForm = function() {
             for (var i = 0; i < beanKeys.length; i++) {
                 if (preservedBean[beanKeys[i]] && typeof preservedBean[beanKeys[i]] === "object") {
@@ -185,19 +203,13 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
         };
     }])
     .controller("uploadCtrl", ["$scope", "$uibModalInstance","$http","xhrRequestOrigin","item", "images", "imageReader", function($scope, $uibModalInstance,$http,xhrRequestOrigin, item, images, imageReader) {
-        var map = {
-            "id": "身份证",
-            "license": "营业执照",
-            "marriage": "结婚证",
-            "org": "组织结构证"
-        };
-        $scope.title = "上传资料:" + map[item];
+        $scope.title = "上传资料";
 
-        $scope.imageURIs = images;
+        $scope.images = images;
 
         $scope.removeImage = function(image) {
-            $scope.imageURIs = $scope.imageURIs.reduce(function(prev, next) {
-                if (image !== next) {
+            $scope.images = $scope.images.reduce(function(prev, next) {
+                if (image.name !== next.name) {
                     prev.push(next);
                 }
                 return prev;
@@ -210,12 +222,15 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
 
         $scope.getImage = function() {
             imageReader.readImage($scope.imageFile, this).then(function(result) {
-                $scope.imageURIs.push(result);
+                $scope.images.push({
+                  "name": "123",
+                  "uri": result
+                });
             });
         };
 
         $scope.submit = function() {
-            $uibModalInstance.close($scope.imageURIs);
+            $uibModalInstance.close($scope.images);
         };
 
         $scope.cancel = function() {
