@@ -1,236 +1,206 @@
 div.sjd-page-application {
-  margin-top: 10vh;
-
-  div.container-fluid {
-
-    div.row {
-      margin: 2vh -15px;
-
-      div.row-title {
-        height: 3vh;
-        line-height: 3vh;
-        text-align: right;
-        font-size: 3vw;
-      }
-
-      div.row-input {
-        height: 3vh;
-
-        input {
-          height: 3vh;
-          font-size: 3vw;
-        }
-      }
-
-      div.row-select {
-        height: 3vh;
-
-        div.ui-select-match {
-
-          span {
-            display: inline-block;
-            height: 3vh;
-            font-size: 3vw;
-            line-height: 3vh;
-            padding: 0 1vw;
-
-            &.ui-select-toggle i.caret {
-              border-top: 1vh dashed;
-              border-right: 1vh solid transparent;
-              border-left: 1vh solid transparent;
-            }
-
-          }
-        }
-
-        input.ui-select-search {
-          height: 3vh;
-          font-size: 3vw;
-          line-height: 3vh;
-          padding: 0 2vw;
-        }
-
-        ul.ui-select-choices {
-
-          div.ui-select-choices-row a.ui-select-choices-row-inner span {
-            display: inline-block;
-            height: 3vh;
-            line-height: 3vh;
-            font-size: 3vw;
-          }
-        }
-
-      }
-
-      div.row-unit {
-        height: 3vh;
-        line-height: 3vh;
-        text-align: left;
-        font-size: 3vw;
-      }
-
-      div.row-detail {
-        height: 3vh;
-
-        input {
-          display: inline-block;
-          width: 3vh;
-          height: 3vh;
-          margin: 0 5vw;
-        }
-
-        span {
-          display: inline-block;
-          height: 3vh;
-          line-height: 3vh;
-          vertical-align: top;
-          font-size: 3vw;
-          text-decoration: underline;
-        }
-      }
-
-      div.row-buttons {
-        height: 4vh;
-        line-height: 4vh;
-
-        button {
-          height: 4vh;
-          font-size: 2vh;
-          padding: 0 1vw;
-        }
-      }
-
-      div.section-title {
-        font-size: 3vh;
-        height: 3vh;
-        line-height: 3vh;
-        color: #29e;
-        text-align: center;
-        text-decoration: underline;
-      }
-
-      button.sjd-page-submit {
-        width: 80vw;
-        margin: 0 10vw;
-        height: 8vh;
-        font-size: 4vh;
-        border-radius: 3vh;
-      }
+    margin-top: 10vh;
+    .item-select-height30 {
+        height: 30px;
+        border: 0;
     }
-  }
+    select.select-right {
+        direction: ltr;
+        right: initial;
+        left: 20px;
+    }
+    div.container-fluid {
+        div.row-title {
+            height: 3vh;
+            line-height: 3vh;
+            text-align: right;
+            font-size: 3vw;
+        }
+        div.section-title {
+            font-size: 3vh;
+            height: 3vh;
+            line-height: 3vh;
+            color: #29e;
+            text-align: center;
+            text-decoration: underline;
+        }
+        div.row {
+            div.row-title {
+                height: 3vh;
+                line-height: 3vh;
+                text-align: right;
+                font-size: 3vw;
+            }
+            div.row-input {
+                height: 3vh;
+                input {
+                    height: 3vh;
+                    font-size: 3vw;
+                }
+            }
+            div.row-select {
+                height: 3vh;
+                div.ui-select-match {
+                    span {
+                        display: inline-block;
+                        height: 3vh;
+                        font-size: 3vw;
+                        line-height: 3vh;
+                        padding: 0 1vw;
+                        &.ui-select-toggle i.caret {
+                            border-top: 1vh dashed;
+                            border-right: 1vh solid transparent;
+                            border-left: 1vh solid transparent;
+                        }
+                    }
+                }
+                input.ui-select-search {
+                    height: 3vh;
+                    font-size: 3vw;
+                    line-height: 3vh;
+                    padding: 0 2vw;
+                }
+                ul.ui-select-choices {
+                    div.ui-select-choices-row a.ui-select-choices-row-inner span {
+                        display: inline-block;
+                        height: 3vh;
+                        line-height: 3vh;
+                        font-size: 3vw;
+                    }
+                }
+            }
+            div.row-unit {
+                height: 3vh;
+                line-height: 3vh;
+                text-align: left;
+                font-size: 3vw;
+            }
+            div.row-detail {
+                height: 3vh;
+                input {
+                    display: inline-block;
+                    width: 3vh;
+                    height: 3vh;
+                    margin: 0 5vw;
+                }
+                span {
+                    display: inline-block;
+                    height: 3vh;
+                    line-height: 3vh;
+                    vertical-align: top;
+                    font-size: 3vw;
+                    text-decoration: underline;
+                }
+            }
+            div.row-buttons {
+                height: 4vh;
+                line-height: 4vh;
+                button {
+                    height: 4vh;
+                    font-size: 2vh;
+                    padding: 0 1vw;
+                }
+            }
+            button.sjd-page-submit {
+                width: 80vw;
+                margin: 0 10vw;
+                height: 8vh;
+                font-size: 4vh;
+                border-radius: 3vh;
+            }
+        }
+    }
 }
 
 div.sjd-page-application-upload-window {
-
-  div.modal-dialog {
-    width: 90vw;
-    padding: 1vh 2vw;
-    background-color: #FFFFFF;
-    border-radius: 2vw;
-
-    div.sjd-page-application-upload {
-
-      div.panel {
-
-        div.panel-heading {
-          height: 7vh;
-          padding: 0;
-
-          h3.panel-title {
-            height: 7vh;
-            line-height: 7vh;
-            font-size: 3vh;
-            text-align: center;
-          }
+    div.modal-dialog {
+        width: 90vw;
+        padding: 1vh 2vw;
+        background-color: #FFFFFF;
+        border-radius: 2vw;
+        div.sjd-page-application-upload {
+            div.panel {
+                div.panel-heading {
+                    height: 7vh;
+                    padding: 0;
+                    h3.panel-title {
+                        height: 7vh;
+                        line-height: 7vh;
+                        font-size: 3vh;
+                        text-align: center;
+                    }
+                }
+                div.panel-body {
+                    div.image-create .ng-camera {
+                        #ng-camera-feed {
+                            width: 60vw!important;
+                            height: 25vh!important;
+                            margin: 0 auto;
+                            video {
+                                width: 60vw!important;
+                                height: 25vh!important;
+                                margin: 0 auto;
+                            }
+                        }
+                        button {
+                            width: 20vw;
+                            height: 4vh;
+                            font-size: 3vw;
+                            margin: 1vh auto;
+                            display: block;
+                        }
+                    }
+                    div.image-view {
+                        height: 50vh;
+                        width: 80vw;
+                        margin: 2vh auto;
+                        border: 5px solid #6d4d23;
+                        box-shadow: 0 0 5px 5px #6d4d23;
+                        box-sizing: content-box;
+                        overflow: auto;
+                        div.single-image {
+                            height: 20vh;
+                            width: 35vw;
+                            margin: 0 5vw 2vh 0;
+                            display: inline-block;
+                            position: relative;
+                            img {
+                                height: 20vh;
+                                width: 35vw;
+                            }
+                            span {
+                                position: absolute;
+                                top: 1vw;
+                                right: 1vw;
+                                font-size: 3vh;
+                                color: #999;
+                            }
+                        }
+                    }
+                    div.image-actions {
+                        width: 30vw;
+                        margin: 0 auto;
+                        button {
+                            width: 30vw;
+                            height: 6vh;
+                            font-size: 4vw;
+                        }
+                        input.origin-input {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            div.result-actions {
+                margin: 2vh auto;
+                width: 60vw;
+                button {
+                    width: 60vw;
+                    height: 8vh;
+                    font-size: 4vh;
+                    border-radius: 3vh;
+                }
+            }
         }
-
-        div.panel-body {
-
-          div.image-create .ng-camera {
-
-            #ng-camera-feed {
-              width: 60vw!important;
-              height: 25vh!important;
-              margin: 0 auto;
-
-              video {
-                width: 60vw!important;
-                height: 25vh!important;
-                margin: 0 auto;
-              }
-            }
-
-            button {
-              width: 20vw;
-              height: 4vh;
-              font-size: 3vw;
-              margin: 1vh auto;
-              display: block;
-            }
-          }
-
-          div.image-view {
-            height: 50vh;
-            width: 80vw;
-            margin: 2vh auto;
-            border: 5px solid #6d4d23;
-            box-shadow: 0 0 5px 5px #6d4d23;
-            box-sizing: content-box;
-            overflow: auto;
-
-            div.single-image {
-              height: 20vh;
-              width: 35vw;
-              margin: 0 5vw 2vh 0;
-              display: inline-block;
-              position: relative;
-
-              img {
-                height: 20vh;
-                width: 35vw;
-              }
-
-              span {
-                position: absolute;
-                top: 1vw;
-                right: 1vw;
-                font-size: 3vh;
-                color: #999;
-              }
-            }
-
-          }
-
-          div.image-actions {
-            width: 30vw;
-            margin: 0 auto;
-
-            button {
-              width: 30vw;
-              height: 6vh;
-              font-size: 4vw;
-            }
-
-            input.origin-input {
-              display: none;
-            }
-          }
-
-        }
-      }
-
-      div.result-actions {
-        margin: 2vh auto;
-        width: 60vw;
-
-        button {
-          width: 60vw;
-          height: 8vh;
-          font-size: 4vh;
-          border-radius: 3vh;
-        }
-      }
     }
-  }
-
 }

@@ -1,23 +1,19 @@
 <sjd-top-nav-bar nav-title="登录"></sjd-top-nav-bar>
 <div class="sjd-page-login">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-3 row-title">手机号:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control"/>
-      </div>
+    <div class="container-fluid">
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">用户名：</span>
+                <input type="text" ng-model="username">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">密码：</span>
+                <input type="password" ng-model="password">
+            </label>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="login()">登录</button>
+            <button class="button button-block" ng-click="toRegister()">注册</button>
+        </div>
     </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">密码:</div>
-      <div class="col-xs-8 row-input">
-        <input type="password" class="form-control"/>
-      </div>
-    </div>
-    <div class="row">
-      <button class="btn btn-info" ng-click="login()">登录</button>
-    </div>
-    <div class="row">
-      <button class="btn btn-success" ng-click="toRegister()">注册</button>
-    </div>
-  </div>
 </div>

@@ -1,72 +1,69 @@
 <sjd-top-nav-bar nav-title="当前贷款" ng-click="changeStatus()"></sjd-top-nav-bar>
 <div class="sjd-page-dashboard">
-  <uib-alert class="sjd-dashboard-alert" type="info" ng-if="message">{{message}}</uib-alert>
-  <div class="sjd-dashboard-status" ng-if="status === 0">
-    <div class="sjd-dashboard-status-image">
-        <img class="status" src="imgs/pre-check.png">
+    <div class="sjd-dashboard-status" ng-if="status === 0">
+        <div class="sjd-dashboard-status-text">
+            <span>初步调查</span>
+        </div>
+        <div class="sjd-dashboard-status-image">
+            <img class="status" src="imgs/pre-check.png">
+        </div>
     </div>
-    <div class="sjd-dashboard-status-text">
-      <span>初步调查</span>
+    <div class="sjd-dashboard-status" ng-if="status === 1">
+        <div class="sjd-dashboard-status-text">
+            <span>初审已通过</span>
+        </div>
+        <div class="sjd-dashboard-status-image">
+            <img class="status" src="imgs/qulificationcheck.png">
+        </div>
     </div>
-  </div>
-  <div class="sjd-dashboard-status" ng-if="status === 1">
-    <div class="sjd-dashboard-status-image">
-        <img class="status" src="imgs/qulificationcheck.png">
+    <div class="sjd-dashboard-status" ng-if="status === 2">
+        <div class="sjd-dashboard-status-text">
+            <span>资料已提交,请等待审核</span>
+        </div>
+        <div class="sjd-dashboard-status-image">
+            <img class="status" src="imgs/write.png">
+        </div>
     </div>
-    <div class="sjd-dashboard-status-text">
-      <span>初审已通过</span>
+    <uib-alert class="sjd-dashboard-alert" type="info" ng-if="message">{{message}}</uib-alert>
+    <div class="sjd-dashboard-status" ng-if="status === 3">
+        <div class="sjd-dashboard-status-content">
+            <div class="sjd-dashboard-status-content-1">当前用款:</div>
+            <div class="sjd-dashboard-status-content-2">
+                <span class="title">{{usedamount|currency:''}}
+                    <span class="detail" ng-click="navigate('moneydetail')">详情</span>
+                </span>
+            </div>
+            <div class="row sjd-dashboard-status-content-3">
+                <div class="col col-33 sjd-dashboard-status-content-3-title">最低值</div>
+                <div class="col col-33  sjd-dashboard-status-content-3-title">核价值</div>
+                <div class="col col-33  sjd-dashboard-status-content-3-title">可出值</div>
+            </div>
+            <div class="row sjd-dashboard-status-content-3">
+                <div class="col col-33 ">{{minimum|currency:'':2}}</div>
+                <div class="col col-33 ">{{core|currency:'':2}}</div>
+                <div class="col col-33 ">{{out|currency:'':2}}</div>
+            </div>
+            <div class="row sjd-dashboard-status-content-2">
+                <span class="unit">单位：元</span>
+            </div>
+            <div class="line"></div>
+            <div class="row sjd-dashboard-status-content-4">
+                <div class="col col-50">授信额度：{{amount|currency:'':2}}万元</div>
+                <div class="col col-50">结束时间：{{expireddate}}</div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="sjd-dashboard-status" ng-if="status === 2">
-    <div class="sjd-dashboard-status-image">
-        <img class="status" src="imgs/write.png">
+    <div class="sjd-dashboard-actions">
+        <div class="list panel">
+            <div class="item item-divider panel-heading">
+                <h3 class="panel-title">当前操作</h3>
+            </div>
+            <a class="item item-icon-right" ng-if="status === 0" ng-click="navigate('initial')">初步调查 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 1" ng-click="navigate('application')">贷款申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 3" ng-click="navigate('goodsout')">出库申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 3" ng-click="navigate('goodsin')">入库提交 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 3" ng-click="navigate('moneyout')">用款申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 3" ng-click="navigate('moneyin')">还款申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+        </div>
     </div>
-    <div class="sjd-dashboard-status-text">
-      <span>资料已提交,请等待审核</span>
-    </div>
-  </div>
-  <div class="sjd-dashboard-status" ng-if="status === 3">
-    <div class="sjd-dashboard-status-content">
-      <div class="sjd-dashboard-status-content-1">当前用款:</div>
-      <div class="sjd-dashboard-status-content-2">
-        <span class="title">{{usedamount|currency:''}}
-          <span class="detail" ng-click="navigate('moneydetail')">详情</span>
-        </span>
-      </div>
-      <div class="row sjd-dashboard-status-content-3">
-        <div class="col-xs-4 sjd-dashboard-status-content-3-title">最低值</div>
-        <div class="col-xs-4 sjd-dashboard-status-content-3-title">核价值</div>
-        <div class="col-xs-4 sjd-dashboard-status-content-3-title">可出值</div>
-      </div>
-      <div class="row sjd-dashboard-status-content-3">
-        <div class="col-xs-4">{{minimum|currency:'':2}}</div>
-        <div class="col-xs-4">{{core|currency:'':2}}</div>
-        <div class="col-xs-4">{{out|currency:'':2}}</div>
-      </div>
-      <div class="row sjd-dashboard-status-content-2">
-          <span class="unit">单位：元</span>
-      </div>
-      <div class="line"></div>
-      <div class="row sjd-dashboard-status-content-4">
-        <div class="col-xs-6">授信额度：{{amount|currency:'':2}}万元</div>
-        <div class="col-xs-6">结束时间：{{expireddate}}</div>
-      </div>
-
-    </div>
-  </div>
-  <div class="sjd-dashboard-actions">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">当前操作</h3>
-      </div>
-      <div class="panel-body">
-        <button class="btn btn-primary" ng-if="status === 0" ng-click="navigate('initial')">初步调查</button>
-        <button class="btn btn-primary" ng-if="status === 1" ng-click="navigate('application')">贷款申请</button>
-        <button class="btn btn-primary" ng-if="status === 3" ng-click="navigate('goodsout')">出库申请</button>
-        <button class="btn btn-primary" ng-if="status === 3" ng-click="navigate('goodsin')">入库提交</button>
-        <button class="btn btn-primary" ng-if="status === 3" ng-click="navigate('moneyout')">用款申请</button>
-        <button class="btn btn-primary" ng-if="status === 3" ng-click="navigate('moneyin')">还款申请</button>
-      </div>
-    </div>
-  </div>
 </div>

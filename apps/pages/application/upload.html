@@ -1,39 +1,30 @@
 <div class="sjd-page-application-upload">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{title}}</h3>
-    </div>
-    <div class="panel-body">
-      <!--<div class="image-create">-->
-        <!--<ng-camera-->
-          <!--viewer-height="320"-->
-          <!--viewer-width="450"-->
-          <!--image-format="jpeg"-->
-          <!--jpeg-quality="100"-->
-          <!--action-message="拍照获取"-->
-          <!--snapshot="imageURI"-->
-          <!--flash-fallback-url="/lib/webcamjs/webcam.swf"-->
-        <!--&gt;</ng-camera>-->
-      <!--</div>-->
-
-      <div class="image-view">
-        <div class="single-image" ng-repeat="imageURI in imageURIs">
-          <img ng-src="{{imageURI}}">
-          <span class="glyphicon glyphicon-remove" ng-click="removeImage(imageURI)"></span>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{title}}</h3>
         </div>
-
-      </div>
-
-      <div class="image-actions">
-        <button class="btn btn-primary" ng-click="uploadImage()">上传图片</button>
-        <input class="origin-input" type="file" custom-on-change/>
-      </div>
+        <div class="panel-body">
+            <div class="image-view">
+                <div class="single-image" ng-repeat="imageURI in imageURIs">
+                    <img ng-src="{{imageURI}}">
+                    <span class="glyphicon glyphicon-remove" ng-click="removeImage(imageURI)"></span>
+                </div>
+            </div>
+            <div class="image-actions">
+                <button class="btn btn-primary" ng-click="uploadImage()">上传图片</button>
+                <input class="origin-input" type="file" custom-on-change/>
+            </div>
+            <div class="upload-img">
+                <input type="file" class="comment-pic-upd" onchange="angular.element(this).scope().uploadFile(this.files)" />
+                <img src="image/upload-pic.jpg" alt="上传照片" title="">
+            </div>
+            <input class="pic" type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)" />
+        </div>
     </div>
-  </div>
-  <div class="result-actions">
-    <button class="btn btn-info" ng-disabled="imageURIs.length === 0" ng-click="submit()">提交资料</button>
-  </div>
-  <div class="result-actions">
-    <button class="btn btn-default" ng-click="cancel()">取消</button>
-  </div>
+    <div class="result-actions">
+        <button class="btn btn-info" ng-disabled="imageURIs.length === 0" ng-click="submit()">提交资料</button>
+    </div>
+    <div class="result-actions">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+    </div>
 </div>

@@ -1,44 +1,43 @@
 <sjd-top-nav-bar nav-title="基本调查" prev-state="dashboard" prev-text="返回"></sjd-top-nav-bar>
 <div class="sjd-page-initial">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-3 row-title">企业注册地址:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control" ng-model="regaddr"/>
-      </div>
+    <div class="container-fluid">
+        <div class="item item-input">
+            <div class="input-label row-title">企业注册地址:</div>
+            <input type="text" class="form-control" ng-model="regaddr" />
+        </div>
+        <div class="item item-input">
+            <div class="input-label row-title">平均营业额:</div>
+            <input type="text" class="form-control" ng-model="turnovers" />
+        </div>
+        <div class="item item-input">
+            <div class="input-label row-title">主要商品:</div>
+            <div class="col-xs-8 row-input">
+                <input type="text" class="form-control" ng-model="mainBusiness" />
+            </div>
+        </div>
+        <div class="item item-input">
+            <div class="input-label row-title">货品存放地址:</div>
+            <div class="col-xs-8 row-input">
+                <input type="text" class="form-control" ng-model="stockaddr" />
+            </div>
+        </div>
+        <div class="item item-input">
+            <div class="input-label row-title">平均库存价值:</div>
+            <div class="col-xs-8 row-input">
+                <input type="text" class="form-control" ng-model="avgstockvalue" />
+            </div>
+        </div>
+        <div class="row">
+            <label class="toggle">
+                <input type="checkbox" ng-model="agree">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+            <p>已阅读<a ng-click="showDetail()">《授权通知》</a>，同意提供贷款相关数据</p>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="submit()">提交申请</button>
+        </div>
     </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">平均营业额:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control" ng-model="turnovers"/>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">主要商品:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control" ng-model="mainBusiness"/>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">货品存放地址:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control" ng-model="stockaddr"/>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">平均库存价值:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control" ng-model="avgstockvalue"/>
-      </div>
-    </div>
-    <!--<div class="row">-->
-      <!--<div class="col-xs-12 row-detail">-->
-        <!--<input type="checkbox" ng-model="agree"/>-->
-        <!--<span ng-click="showDetail()">已阅读协议,同意数据授权</span>-->
-      <!--</div>-->
-    <!--</div>-->
-    <div class="row">
-      <button class="btn btn-info" ng-click="submit()">提交申请</button>
-    </div>
-  </div>
 </div>
