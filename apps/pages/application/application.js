@@ -223,7 +223,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
         $scope.getImage = function() {
             imageReader.readImage($scope.imageFile, this).then(function(result) {
                 $scope.images.push({
-                  "name": "123",
+                  "name": $scope.imageFile.name,
                   "uri": result
                 });
             });
