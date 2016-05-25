@@ -212,7 +212,7 @@ key为docid，即主键；<br>
 * return: 
 
 > *json对象*：当前项目 <br>
- 	重要字段：idcustomerprojectid - 主键<br>
+ 	重要字段：idcustomerproject - 主键<br>
  	status - 当前状态<br>
  	loanid - 贷款申请id<br>
 

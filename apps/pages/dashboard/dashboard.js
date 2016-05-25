@@ -6,11 +6,26 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
 
-.controller("dashboardCtrl", ["$scope", "$state", "$stateParams", "$uibModal", "xhrRequestOrigin", "$http", "Constants",
-  function($scope, $state, $stateParams, $uibModal, xhrRequestOrigin, $http, Constants){
+.controller("dashboardCtrl", ["$scope","$rootScope","$state", "$stateParams", "$uibModal", "xhrRequestOrigin", "$http", "Constants",
+  function($scope, $rootScope,$state, $stateParams, $uibModal, xhrRequestOrigin, $http, Constants){
+  if ($rootScope.enterpriseid==undefined||$rootScope.user==undefined) {
+    $state.go("login");
+  }
+
 
   $scope.status = 0; //none created applied validated
   $scope.message = "当前没有进行中的贷款申请,您可以提交一份贷款意向进行申请.";
+
+  var currentproject_url = xhrRequestOrigin + "/customerproject/isactive.do?enterpriseid=" + $rootScope.enterpriseid;
+  $http.get(currentproject_url,{},{
+  }).success(function(response){
+    $rootScope.project = {};
+    $rootScope.project.id = response.idcustomerproject;
+    $rootScope.project.status = response.status;
+    $rootScope.project.loanid = response.loanid;
+    $scope.status = response.status;
+  });
+
 
   var messageCollection = {
     0: "当前没有进行中的贷款申请,您可以提交一份贷款意向进行申请.",
