@@ -1,55 +1,57 @@
 <sjd-top-nav-bar nav-title="入库提交" prev-state="dashboard" prev-text="返回"></sjd-top-nav-bar>
 <div class="sjd-page-goodsin">
-  <div class="sjd-goodsin-content">
-    <div class="row sjd-goodsin-content-2">入库信息:</div>
-    <div class="row sjd-goodsin-content-3">
-      <div class="col-xs-3 row-title">联系人:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control" ng-model="contact"/>
-      </div>
+    <div class="sjd-goodsin-content">
+        <div class="row sjd-goodsin-content-2">入库信息:</div>
+        <div class="item item-input item-underline">
+            <div class="input-label">
+                联系人:
+            </div>
+            <input type="text" ng-model="contact" />
+        </div>
+        <div class="item item-input item-underline">
+            <div class="input-label">
+                联系方式:
+            </div>
+            <input type="text" ng-model="phone" />
+        </div>
+        <div class="item item-input item-underline">
+            <div class="input-label">
+                入库仓库:
+            </div>
+            <input type="text" ng-model="stockname" />
+        </div>
+        <div class="item item-input item-underline">
+            <div class="input-label">
+                备注:
+            </div>
+            <input type="text" ng-model="memo" />
+        </div>
+        <div class="row sjd-goodsin-content-5">
+            <span class="title-5">入库明细:</span>
+            <span class="ion-plus-circled arranged" ng-click="addGoods()"></span>
+        </div>
+        <div class="row sjd-goodsin-content-4">
+            <table class="table table-responsive table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>数量</th>
+                        <th ng-if="products.length > 0"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="product in products">
+                        <td>{{product.name}}</td>
+                        <td>
+                            <input type="number" ng-model="product.count" />
+                        </td>
+                        <td><span ng-click="deleteProduct($index)">删除</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="row sjd-goodsin-content-3">
-      <div class="col-xs-3 row-title">联系方式:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control" ng-model="phone"/>
-      </div>
+    <div class="sjd-goodsin-submit">
+        <button class="btn btn-info" ng-disabled="products.length === 0" ng-click="submit()">提交</button>
     </div>
-    <div class="row sjd-goodsin-content-3">
-      <div class="col-xs-3 row-title">入库仓库:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control" ng-model="stockname"/>
-      </div>
-    </div>
-    <div class="row sjd-goodsin-content-3">
-      <div class="col-xs-3 row-title">备注信息:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control" ng-model="memo"/>
-      </div>
-    </div>
-    <div class="row sjd-goodsin-content-5">
-      <span class="title-5">入库明细:</span>
-      <span class="sign-5 glyphicon glyphicon-plus" ng-click="addGoods()"></span>
-    </div>
-    <div class="row sjd-goodsin-content-4">
-      <table class="table table-responsive table-striped table-bordered table-condensed">
-        <thead>
-          <tr>
-            <th>名称</th>
-            <th>数量</th>
-            <th ng-if="products.length > 0"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="product in products">
-            <td>{{product.name}}</td>
-            <td><input type="number" ng-model="product.count"/></td>
-            <td><span ng-click="deleteProduct($index)">删除</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="sjd-goodsin-submit">
-    <button class="btn btn-info" ng-disabled="products.length === 0" ng-click="submit()">提交</button>
-  </div>
 </div>
