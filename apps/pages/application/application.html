@@ -101,22 +101,14 @@
         <div class="row">
             <div class="section-title">请提交申请资料：</div>
         </div>
-        <div class="row">
-            <div class="col-xs-10 col-xs-offset-1 row-buttons">
-                <button class="btn"
-                        ng-click="upload(key)"
-                        ng-class="{'btn-primary': pictures[key + 'Src'].images.length === 0, 'btn-success': pictures[key + 'Src'].images.length > 0}"
-                        ng-repeat="key in keys">{{pictures[key + 'Src'].name}}</button>
-                </div>
-        </div>
-       <!--  <div class="list">
-            <li class="item" ng-repeat="(k,v) in pictures" ng-click='upload(k)'>
+       <div class="list">
+            <li class="item" ng-repeat="key in keys" ng-click='upload(key)'>
                 <div class="row">
-                    <div class=" col col-90 ">{{v.name}}
+                    <div class=" col col-90 ">{{pictures[key + 'Src'].name}}
                     </div>
                     <div class="col col-10" ng-if="project.status!=22">
-                        <span ng-show="uploaded(v.files)">已上传</span>
-                        <span ng-show="!uploaded(v.files)">未上传</span>
+                        <span ng-show="pictures[key + 'Src'].images.length > 0">已上传</span>
+                        <span ng-show=" pictures[key + 'Src'].images.length === 0">未上传</span>
                     </div>
                     <div class="col col-10" ng-if="project.status==22">
                         <span ng-show="v.isPass">通过</span>
@@ -124,7 +116,7 @@
                     </div>
                 </div>
             </li>
-        </div> -->
+        </div> 
 
 
 

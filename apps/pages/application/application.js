@@ -153,6 +153,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
         $scope.keys = [];
         getPictures();
         $scope.upload = function(item) {
+            console.log(item);
             $uibModal.open({
                 templateUrl: "/pages/application/upload.html",
                 controller: "uploadCtrl",
@@ -161,7 +162,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                 keyboard: false,
                 resolve: {
                     item: function() {
-                        return item;
+                        return $scope.pictures[item + "Src"];
                     },
                     images: function() {
                         return angular.copy($scope.pictures[item + "Src"].images);
@@ -237,7 +238,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
         };
     }])
     .controller("uploadCtrl", ["$scope", "$uibModalInstance", "$http", "xhrRequestOrigin", "item", "images", "imageReader", function($scope, $uibModalInstance, $http, xhrRequestOrigin, item, images, imageReader) {
-        $scope.title = "上传资料:" + images.name;
+        $scope.title = "上传资料:" + item.name;
 
         $scope.images = images;
 
@@ -254,8 +255,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
             $http({　　
                 method: 'POST',
                 　　url: url,
-                params:deleteimage
-                
+                params: deleteimage
             });
             $scope.images = $scope.images.reduce(function(prev, next) {
                 if (image.name !== next.name) {
@@ -287,7 +287,6 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
         $scope.cancel = function() {
             $uibModalInstance.dismiss();
         };
-
 
     }])
     .directive("customOnChange", ["$http", function($http) {
