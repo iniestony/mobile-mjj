@@ -92,6 +92,27 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
             }
         };
 
+        var getPictures = function() {
+            $scope.pictures = {};
+            $scope.keys = [];
+            $http.get(xhrRequestOrigin + "/loanapplicationdoc/app/loandocs/show.do?customerprojectid=147").success(function(data) {
+                $scope.keys = Object.keys(data);
+                $scope.keys.forEach(function(k) {
+                    $scope.pictures[k + "Src"] = {
+                        "name": data[k].name,
+                        "images": []
+                    };
+                    for (var i in data[k].files) {
+                        $scope.pictures[k + "Src"].images.push({
+                            "name": data[k].name,
+                            "uri": xhrRequestOrigin + "/" + data[k].files[i],
+                            "url": data[k].files[i],
+                            "filename": i
+                        });
+                    }
+                });
+            });
+        }
 
         $http.get(xhrRequestOrigin + "/loanapplication/app/form/getform.do?customerprojectid=147").success(function(data) {
             preservedBean = angular.copy(data.bean);
@@ -127,12 +148,10 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
         });
 
         $scope.pictures = {
-            "idSrc": [],
-            "licenseSrc": [],
-            "marriageSrc": [],
-            "orgSrc": []
-        };
 
+        };
+        $scope.keys = [];
+        getPictures();
         $scope.upload = function(item) {
             $uibModal.open({
                 templateUrl: "/pages/application/upload.html",
@@ -145,11 +164,11 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                         return item;
                     },
                     images: function() {
-                        return angular.copy($scope.pictures[item + "Src"]);
+                        return angular.copy($scope.pictures[item + "Src"].images);
                     }
                 }
             }).result.then(function(dataURIs) {
-                $scope.pictures[item + "Src"] = dataURIs;
+                $scope.pictures[item + "Src"].images = dataURIs;
             }, function() {});
         };
         $scope.toStep2 = function() {
@@ -159,10 +178,15 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
             saveForm();
             $scope.step = 1;
         };
+
         $scope.toStep3 = function() {
             saveForm();
             $scope.step = 3;
+            getPictures();
         };
+
+
+
         var saveForm = function() {
             for (var i = 0; i < beanKeys.length; i++) {
                 if (preservedBean[beanKeys[i]] && typeof preservedBean[beanKeys[i]] === "object") {
@@ -175,29 +199,66 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                 "method": "POST",
                 "url": xhrRequestOrigin + "/loanapplication/loanmobile/saveform.do?customerprojectid=147",
                 "data": preservedBean
-            })
+            });
             // .success(function() {
             //     $state.go("dashboard");
             // });
         }
         $scope.submit = function() {
-            saveForm();
+            // saveForm();
+            var locks = {};
+            for (var i = 0; i < $scope.keys.length; i++) {
+                (function(index) {
+                    locks[$scope.keys[index]] = false;
+                    var files = {};
+                    for (var j = 0; j < $scope.pictures[$scope.keys[index] + "Src"].images.length; j++) {
+                        files[$scope.pictures[$scope.keys[index] + "Src"].images[j].name] = $scope.pictures[$scope.keys[index] + "Src"].images[j].uri;
+                    }
+                    var url = xhrRequestOrigin + "/loanapplicationdoc/app/applydoc/upload.do?customerprojectid=147&idchecklist=" +
+                        $scope.keys[index] + "&files=" + JSON.stringify(files);
+
+                    $http({
+                        "method": "POST",
+                        "url": url,
+                        transformRequest: angular.identity,
+                        headers: { 'Content-Type': undefined }
+                    }).success(function() {
+                        locks[$scope.keys[index]] = true;
+                        var checked = true;
+                        for (var l in locks) {
+                            checked = checked && locks[l];
+                        }
+                        if (checked) {
+                            $state.go("dashboard");
+                        }
+                    });
+                })(i);
+            }
         };
     }])
-    .controller("uploadCtrl", ["$scope", "$uibModalInstance","$http","xhrRequestOrigin","item", "images", "imageReader", function($scope, $uibModalInstance,$http,xhrRequestOrigin, item, images, imageReader) {
-        var map = {
-            "id": "身份证",
-            "license": "营业执照",
-            "marriage": "结婚证",
-            "org": "组织结构证"
-        };
-        $scope.title = "上传资料:" + map[item];
+    .controller("uploadCtrl", ["$scope", "$uibModalInstance", "$http", "xhrRequestOrigin", "item", "images", "imageReader", function($scope, $uibModalInstance, $http, xhrRequestOrigin, item, images, imageReader) {
+        $scope.title = "上传资料:" + images.name;
 
-        $scope.imageURIs = images;
+        $scope.images = images;
+
 
         $scope.removeImage = function(image) {
-            $scope.imageURIs = $scope.imageURIs.reduce(function(prev, next) {
-                if (image !== next) {
+            console.log(image);
+            var enterpriseid = 265;
+            var url = "http://localhost:8080/sjdTest" + "/loanapplicationdoc/applydoc/delete.do?enterpriseid=" + enterpriseid;
+            var deleteimage = {};
+            deleteimage.files = {};
+            deleteimage.imagetype = image.name;
+            deleteimage.files[image.filename] = image.url;
+            console.log(deleteimage);
+            $http({　　
+                method: 'POST',
+                　　url: url,
+                params:deleteimage
+                
+            });
+            $scope.images = $scope.images.reduce(function(prev, next) {
+                if (image.name !== next.name) {
                     prev.push(next);
                 }
                 return prev;
@@ -205,59 +266,52 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
         };
 
         $scope.uploadImage = function() {
-            console.log("进来了么？？？");
             $("input.origin-input").click();
         };
 
         $scope.getImage = function() {
             imageReader.readImage($scope.imageFile, this).then(function(result) {
-                $scope.imageURIs.push(result);
+                console.log($scope.imageFile);
+                $scope.images.push({
+                    "name": $scope.imageFile.name,
+                    "uri": result
+                });
             });
         };
 
         $scope.submit = function() {
-            $uibModalInstance.close($scope.imageURIs);
+            $uibModalInstance.close($scope.images);
+            console.log($scope.images);
         };
 
         $scope.cancel = function() {
             $uibModalInstance.dismiss();
         };
 
-        $scope.uploadFile = function(files) {
-        console.log("上传图片");
-        var fd = new FormData();
-        //Take the first selected file
-        fd.append("files", files[0]);
-
-        // $http.post(uploadUrl, fd, {
-        //     withCredentials: true,
-        //     headers: { 'Content-Type': undefined },
-        //     transformRequest: angular.identity
-        // }).success(...all right!...).error(..damn!...);
-        $http.post(xhrRequestOrigin + "/loanapplicationdoc//app/applydoc/upload.do?customerprojectid=131&idchecklist=493", fd, {
-               
-                transformRequest: angular.identity,
-                headers: { 'Content-Type': undefined }
-            })
-            .success(function(res) {
-                console.log("kdfdfa");
-                alert("对搭！！");
-            })
-            .error(function(status, err) {
-                console.log(err);
-                alert("错啦！！");
-            });
-    };
-
 
     }])
-    .directive("customOnChange", [function() {
+    .directive("customOnChange", ["$http", function($http) {
         return {
             restrict: "A",
             link: function(scope, element, attrs) {
                 element.bind("change", function(e) {
                     scope.imageFile = (event.srcElement || event.target).files[0];
-                    scope.getImage();
+                    console.log(scope.imageFile);
+                    var fd = new FormData();
+                    //Take the first selected file
+                    fd.append("files", scope.imageFile);
+                    $http.post("http://test.sjdbank.com:8787/loanapplicationdoc//app/applydoc/upload.do?customerprojectid=147&idchecklist=610", fd, {
+                            transformRequest: angular.identity,
+                            headers: { 'Content-Type': undefined }
+                        }).success(function(res) {
+                            console.log("kdfdfa");
+                            alert("对搭！！");
+                        })
+                        .error(function(status, err) {
+                            console.log(err);
+                            alert("错啦！！");
+                        });
+
                 });
             }
         };
