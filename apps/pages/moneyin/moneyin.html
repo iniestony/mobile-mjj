@@ -1,74 +1,65 @@
 <sjd-top-nav-bar nav-title="还款申请" prev-state="dashboard" prev-text="返回"></sjd-top-nav-bar>
 <div class="sjd-page-moneyin">
-  <div class="sjd-moneyin-content">
-    <div class="sjd-moneyin-content-1">请选择一条用款进行还款:</div>
-    <div class="row sjd-moneyin-content-5">
-      <table class="table table-responsive table-striped table-bordered table-condensed">
-        <thead>
-          <tr>
-            <th>编号</th>
-            <th>时间</th>
-            <th>金额</th>
-            <th>已还款</th>
-            <th>待还款</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="detail in details"
-              ng-click="selectDetail(detail)"
-              ng-class="{'active': detail.idloandetail === $parent.current.idloandetail}">
-            <td>{{detail.idloandetail}}</td>
-            <td>{{detail.usedate}}</td>
-            <td>{{detail.amount|currency:'':2}}</td>
-            <td>{{detail.repaid|currency:'':2}}</td>
-            <td>{{detail.remain|currency:'':2}}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="sjd-moneyin-content">
+        <div class="sjd-moneyin-content-1">请选择一条用款进行还款:</div>
+        <div class="list sjd-moneyin-content-5">
+            <ul class="list" style="width:100%">
+                <li class="item row">
+                    <div class="col col-25">编号</div>
+                    <div class="col col-33">用款金额（元）</div>
+                    <div class="col col-33">待还本金（元）</div>
+                </li>
+                <li class="item row" ng-repeat="detail in details" ng-click="selectDetail(detail)" ng-class="{'active': detail.idloandetail === $parent.current.idloandetail}">
+                    <div class="col col-25">{{detail.idloandetail}}</div>
+                    <div class="col col-33">{{detail.amount|currency:'':2}}</div>
+                    <div class="col col-33">{{detail.remain|currency:'':2}}</div>
+                </li>
+            </ul>
+        </div>
+        <div class="sjd-moneyin-content-1">用款详情(编号{{current.idloandetail}}):</div>
+        <div class="row sjd-moneyin-content-3">
+            <div class="col col-50 sjd-moneyin-content-3-title">用款时间</div>
+            <div class="col col-50 sjd-moneyin-content-3-title">还款截止</div>
+        </div>
+        <div class="row sjd-moneyin-content-3">
+            <div class="col col-50">{{current.usedate}}</div>
+            <div class="col col-50">{{current.repaymentdate}}</div>
+        </div>
+        <div class="row sjd-moneyin-content-3">
+            <div class="col col-50 sjd-moneyin-content-3-title">待还金额</div>
+            <div class="col col-50 sjd-moneyin-content-3-title">已还金额</div>
+        </div>
+        <div class="row sjd-moneyin-content-3">
+            <div class="col col-50">{{current.remain|currency:'':2}}</div>
+            <div class="col col-50">{{current.repaid|currency:'':2}}</div>
+        </div>
+        <div class="row sjd-moneyin-content-3">
+            <div class="col col-50 sjd-moneyin-content-3-title">年化利息</div>
+            <div class="col col-50 sjd-moneyin-content-3-title">还款中</div>
+        </div>
+        <div class="row sjd-moneyin-content-3">
+            <div class="col col-50">{{(current.interest * 100).toFixed(0)}}%</div>
+            <div class="col col-50">{{current.repaying|currency:'':2}}</div>
+        </div>
+        <div class="sjd-moneyin-content-1">还款申请:</div>
+        <div class="list">
+            <div class="item item-input">
+                <div class="input-label">
+                    还款金额:
+                </div>
+                <input type="number" ng-model="repayAmount" ng-change="updateEstimate()" /> 元
+            </div>
+            <div class="item item-input item-select">
+                <div class="input-label">
+                    还款时间:
+                </div>
+                <input type="datetime-local" ng-change="updateEstimate()" ng-model="date">
+            </div>
+        </div>
+        <div class="sjd-moneyin-content-1">预计本息:</div>
+        <div class="sjd-moneyin-content-2-sm">{{estimate|currency:'':2}}<span style="font-size: 12px"> 元</span></div>
     </div>
-    <div class="sjd-moneyin-content-1">用款详情(编号{{current.idloandetail}}):</div>
-    <div class="row sjd-moneyin-content-3">
-      <div class="col-xs-6 sjd-moneyin-content-3-title">用款时间</div>
-      <div class="col-xs-6 sjd-moneyin-content-3-title">还款截止</div>
+    <div class="padding">
+        <button class="button button-block button-positive" ng-click="submit()">提交还款申请</button>
     </div>
-    <div class="row sjd-moneyin-content-3">
-      <div class="col-xs-6">{{current.usedate}}</div>
-      <div class="col-xs-6">{{current.repaymentdate}}</div>
-    </div>
-    <div class="row sjd-moneyin-content-3">
-      <div class="col-xs-6 sjd-moneyin-content-3-title">待还金额</div>
-      <div class="col-xs-6 sjd-moneyin-content-3-title">已还金额</div>
-    </div>
-    <div class="row sjd-moneyin-content-3">
-      <div class="col-xs-6">{{current.remain|currency:'':2}}</div>
-      <div class="col-xs-6">{{current.repaid|currency:'':2}}</div>
-    </div>
-    <div class="row sjd-moneyin-content-3">
-      <div class="col-xs-6 sjd-moneyin-content-3-title">年化利息</div>
-      <div class="col-xs-6 sjd-moneyin-content-3-title">还款中</div>
-    </div>
-    <div class="row sjd-moneyin-content-3">
-      <div class="col-xs-6">{{(current.interest * 100).toFixed(0)}}%</div>
-      <div class="col-xs-6">{{current.repaying|currency:'':2}}</div>
-    </div>
-    <div class="sjd-moneyin-content-1">还款申请:</div>
-    <div class="row sjd-moneyin-content-4">
-      <div class="col-xs-3 row-title">还款金额:</div>
-      <div class="col-xs-8 row-input">
-        <input type="number" class="form-control" ng-model="repayAmount" ng-change="updateEstimate()"/>
-      </div>
-    </div>
-    <div class="row sjd-moneyin-content-4">
-      <div class="col-xs-3 row-title">还款时间:</div>
-      <div class="col-xs-8 row-form">
-         <input type="datetime-local" ng-change="updateEstimate()" ng-model="date">
-        
-      </div>
-    </div>
-    <div class="sjd-moneyin-content-1">预计本息:</div>
-    <div class="sjd-moneyin-content-2-sm">{{estimate|currency:'':2}}</div>
-  </div>
-  <div class="sjd-moneyin-submit">
-    <button class="btn btn-info" ng-click="submit()">提交还款申请</button>
-  </div>
 </div>

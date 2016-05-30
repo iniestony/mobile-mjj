@@ -9,7 +9,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
 .controller("loginCtrl", ["$scope", "$state", "$http", "$rootScope", "xhrRequestOrigin", "sjdDialog",
     function($scope, $state, $http, $rootScope, xhrRequestOrigin, sjdDialog) {
         $scope.login = function() {
-            var url = "http://localhost:8080/sjdTest" + "/default/mobilelogin.do";
+            var url = xhrRequestOrigin + "/default/mobilelogin.do";
             $http({　　
                 method: 'POST',
                 　　url: url,
@@ -23,7 +23,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                     console.log(data);
                     $rootScope.user = data;
                     if (data.typeid == 9) { //借款用户
-                        $rootScope.enterpriseid = 250;
+                        $rootScope.enterpriseid = data.typeref;
                     }
                     $state.go("dashboard");
                 };

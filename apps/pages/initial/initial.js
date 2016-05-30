@@ -6,8 +6,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   });
 }])
 
-.controller("initialCtrl", ["$scope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "sjdDialog",
-  function($scope, $state, $uibModal, $http, xhrRequestOrigin, sjdDialog){
+.controller("initialCtrl", ["$scope","$rootScope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "sjdDialog",
+  function($scope,$rootScope, $state, $uibModal, $http, xhrRequestOrigin, sjdDialog){
 
   $scope.regaddr = "";
   $scope.turnovers = "";
@@ -33,7 +33,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
       return;
     }
     clicked = true;
-    var url = xhrRequestOrigin + "/project/qulificationcheck/formsave.do?customerprojectid=170";
+    var url = xhrRequestOrigin + "/project/qulificationcheck/formsave.do?customerprojectid="+$rootScope.customerprojectid;
     var valueStr = JSON.stringify({
       "turnovers": $scope.turnovers,
       "regaddr": $scope.regaddr,

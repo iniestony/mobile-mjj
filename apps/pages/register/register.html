@@ -1,32 +1,37 @@
 <sjd-top-nav-bar nav-title="注册" prev-state="login" prev-text="返回"></sjd-top-nav-bar>
 <div class="sjd-page-register">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-3 row-title">手机号:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control"/>
-      </div>
+    <div class="list">
+        <div class="item item-input item-select">
+            <div class="input-label">
+                称呼：
+            </div>
+            <input type="text" ng-model="name">
+            <select ng-model="title" ng-init="title='先生'">
+                <option>女士</option>
+                <option selected="">先生</option>
+            </select>
+        </div>
+        <label class="item item-input">
+            <span class="input-label">手机号：</span>
+            <input type="number" required ng-model="mobile" ng-blur="mobilevalid_check()">
+        </label>
+        <label class="item item-input">
+            <div class="row">
+                <span class="input-label">请输入验证码：</span>
+                <input type="text" ng-model="mobile_checknum">
+                <button class="button code_check" ng-click="sendMobileCode()" type="submit" ng-disabled="!code_send">发送</button>
+            </div>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">密码：</span>
+            <input type="password" required ng-model="pwd">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">密码确认：</span>
+            <input required ng-model="pwd2" type="password">
+        </label>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="register()" ng-disabled="code==''||code!=mobile_checknum||pwd===''||pwd!=pwd2">注册</button>
+        </div>
     </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">验证码:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" class="form-control"/>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">密码:</div>
-      <div class="col-xs-8 row-input">
-        <input type="password" class="form-control"/>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3 row-title">密码确认:</div>
-      <div class="col-xs-8 row-input">
-        <input type="password" class="form-control"/>
-      </div>
-    </div>
-    <div class="row">
-      <button class="btn btn-info" ng-click="register()">确认</button>
-    </div>
-  </div>
 </div>

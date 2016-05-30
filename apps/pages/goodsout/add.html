@@ -1,40 +1,36 @@
 <div class="sjd-page-goodsout-add">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">出库商品</h3>
-    </div>
-    <div class="panel-body">
-      <form class="search-form">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="输入出库商品名" ng-model="productName"/>
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary" ng-click="search()">
-                <span class="glyphicon glyphicon-search"></span>
-              </button>
-            </span>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">出库商品</h3>
         </div>
-      </form>
-
-      <div class="goods-list">
-        <table class="table table-responsive table-striped table-bordered table-condensed">
-          <tbody>
-            <tr ng-repeat="product in products">
-              <td>
-                <input type="checkbox" ng-model="product.selected"/>
-              </td>
-              <td>{{product.name}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="panel-body">
+            <div class="bar bar-header item-input-inset">
+                <label class="item-input-wrapper">
+                    <i class="icon ion-ios-search placeholder-icon"></i>
+                    <input type="search" placeholder="输入出库商品名" ng-model="productName">
+                </label>
+                <button type="submit" class="button button-small" ng-click="search()">
+                    搜索
+                </button>
+            </div>
+            <div class="content" style="overflow: auto; height:310px;">
+                <ul class="list">
+                    <li class="item item-checkbox word-break" ng-repeat="product in products">
+                        <label class="checkbox smaller" style="left:2px;">
+                            <input type="checkbox" class="smaller" ng-model="product.selected">
+                        </label>
+                        {{product.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="row actions">
-    <div class="col-xs-3 col-xs-offset-2">
-      <button class="btn btn-info" ng-click="submit()">确定</button>
+    <div class="row" style="text-align: center">
+        <div class="col" >
+            <button class="button button-positive" ng-click="submit()">确定</button>
+        </div>
+        <div class="col">
+            <button class="button" ng-click="cancel()">取消</button>
+        </div>
     </div>
-    <div class="col-xs-3 col-xs-offset-2">
-      <button class="btn btn-default" ng-click="cancel()">取消</button>
-    </div>
-  </div>
 </div>

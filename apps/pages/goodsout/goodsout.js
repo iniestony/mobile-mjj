@@ -98,14 +98,14 @@ mobileSJD.config(["$stateProvider", function($stateProvider){
   
 }])
 
-.controller("goodsoutAddCtrl", ["$scope", "$uibModalInstance", "$http", "xhrRequestOrigin", "sjdDialog",
-  function($scope, $uibModalInstance, $http, xhrRequestOrigin, sjdDialog){
+.controller("goodsoutAddCtrl", ["$scope", "$rootScope","$uibModalInstance", "$http", "xhrRequestOrigin", "sjdDialog",
+  function($scope,$rootScope, $uibModalInstance, $http, xhrRequestOrigin, sjdDialog){
 
   $scope.productName = "";
   $scope.products = [];
   
   $scope.search = function(){
-    var url = xhrRequestOrigin + "/stockproducts/customerproducts/list.do?enterpriseid=240";
+    var url = xhrRequestOrigin + "/stockproducts/customerproducts/list.do?enterpriseid="+$rootScope.enterpriseid;
     if($scope.productName !== ""){
       url = url + "&productname=" + $scope.productName;
     }

@@ -1,54 +1,57 @@
 <sjd-top-nav-bar nav-title="用款申请" prev-state="dashboard" prev-text="返回"></sjd-top-nav-bar>
 <div class="sjd-page-moneyout">
-  <div class="sjd-moneyout-content">
-    <div class="sjd-moneyout-content-1">剩余额度:</div>
-    <div class="sjd-moneyout-content-2">{{remain|currency:'':2}}</div>
-    <div class="sjd-moneyout-content-1">当前用款:</div>
-    <div class="sjd-moneyout-content-2-sm">{{usedamount|currency:'':2}}</div>
-    <div class="row sjd-moneyout-content-3">
-      <div class="col-xs-6 sjd-moneyout-content-3-title">授信额度</div>
-      <div class="col-xs-6 sjd-moneyout-content-3-title">结束时间</div>
+    <div class="sjd-moneyout-content">
+        <div class="sjd-moneyout-content-1">剩余额度:</div>
+        <div class="sjd-moneyout-content-2">{{remain|currency:'':2}}<span style="font-size:10px"> 元</span></div>
+        <div class="sjd-moneyout-content-1">当前用款:</div>
+        <div class="sjd-moneyout-content-2-sm">{{usedamount|currency:'':2}}<span style="font-size:10px"> 元</span></div>
+        <div class="row sjd-moneyout-content-3">
+            <div class="col col-50 sjd-moneyout-content-3-title">授信额度</div>
+            <div class="col col-50 sjd-moneyout-content-3-title">结束时间</div>
+        </div>
+        <div class="row sjd-moneyout-content-3">
+            <div class="col col-50 ">{{(amount/10000).toFixed(0)}}万元</div>
+            <div class="col col-50 ">{{expireddate}}</div>
+        </div>
+        <div class="row sjd-moneyout-content-3">
+            <div class="col col-50  sjd-moneyout-content-3-title">质押率</div>
+            <div class="col col-50  sjd-moneyout-content-3-title">年利率</div>
+        </div>
+        <div class="row sjd-moneyout-content-3">
+            <div class="col col-50 ">{{ratio|number:2}}</div>
+            <div class="col col-50 ">{{(interest*100).toFixed(0)}}%</div>
+        </div>
+        <div class="sjd-moneyout-content-1">用款申请:</div>
+        <div class="item item-input">
+            <div class="input-label">
+                * 新增额度:
+            </div>
+            <input type="number" ng-model="applyAmount" /> 元
+        </div>
+        <div class="item item-input item-select">
+            <div class="input-label">
+                * 借款期限:
+            </div>
+            <select ng-model="selectedDuration">
+                <option ng-repeat="duration in durations">{{duration.value}}</option>
+            </select>
+        </div>
+        <div class="item item-input">
+            <div class="input-label">
+                *借款用途:
+            </div>
+            <input type="number" ng-model="remark" /> 元
+        </div>
+        <!-- <ui-select ng-model="selectedDuration">
+    <ui-select-match placeholder="选择借款期限">
+        <span>{{$select.selected.name}}</span>
+    </ui-select-match>
+    <ui-select-choices repeat="duration.value as duration in durations track by $index">
+        <span>{{duration.name}}</span>
+    </ui-select-choices>
+</ui-select> -->
     </div>
-    <div class="row sjd-moneyout-content-3">
-      <div class="col-xs-6">{{(amount/10000).toFixed(0)}}万元</div>
-      <div class="col-xs-6">{{expireddate}}</div>
-    </div>
-    <div class="row sjd-moneyout-content-3">
-      <div class="col-xs-6 sjd-moneyout-content-3-title">质押率</div>
-      <div class="col-xs-6 sjd-moneyout-content-3-title">年利率</div>
-    </div>
-    <div class="row sjd-moneyout-content-3">
-      <div class="col-xs-6">{{ratio|number:2}}</div>
-      <div class="col-xs-6">{{(interest*100).toFixed(0)}}%</div>
-    </div>
-    <div class="sjd-moneyout-content-1">用款申请:</div>
-    <div class="row sjd-moneyout-content-4">
-      <div class="col-xs-3 row-title">使用额度:</div>
-      <div class="col-xs-8 row-input">
-        <input type="number" class="form-control" ng-model="applyAmount"/>
-      </div>
-    </div>
-    <div class="row sjd-moneyout-content-4">
-      <div class="col-xs-3 row-title">借款期限:</div>
-      <div class="col-xs-8 row-select">
-        <ui-select ng-model="selectedDuration">
-          <ui-select-match placeholder="选择借款期限">
-            <span>{{$select.selected.name}}</span>
-          </ui-select-match>
-          <ui-select-choices repeat="duration.value as duration in durations track by $index">
-            <span>{{duration.name}}</span>
-          </ui-select-choices>
-        </ui-select>
-      </div>
-    </div>
-    <div class="row sjd-moneyout-content-4">
-      <div class="col-xs-3 row-title">借款用途:</div>
-      <div class="col-xs-8 row-input">
-        <input type="text" maxlength="20" class="form-control" ng-model="remark"/>
-      </div>
-    </div>
-  </div>
-  <div class="sjd-moneyout-submit">
-    <button class="btn btn-info" ng-click="submit()">提交</button>
-  </div>
+</div>
+<div class="padding">
+    <button class="button button-block button-positive" ng-click="submit()">提交</button>
 </div>

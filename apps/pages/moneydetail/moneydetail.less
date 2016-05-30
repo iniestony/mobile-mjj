@@ -1,222 +1,156 @@
 div.sjd-page-moneydetail {
-  margin-top: 10vh;
-
-  div.detail-list {
-    max-height: 75vh;
-    overflow: auto;
-
-    div.panel {
-
-      div.panel-heading {
-        height: 4vh;
-        padding: 0;
-
-        h3.panel-title {
-          height: 4vh;
-          line-height: 4vh;
-          font-size: 2vh;
-          text-align: center;
-        }
-      }
-
-      div.panel-body {
-
-        div.row {
-          margin: 1vh 0;
-
-          span.info {
-            height: 3vh;
-            line-height: 3vh;
-            font-size: 3vw;
-          }
-
-          span.action {
-            height: 3vh;
-            line-height: 3vh;
-            font-size: 3vw;
-            color: #29e;
-            text-decoration: underline;
-
-            &.active {
-              text-decoration: none;
-              color: #3e8f3e;
+    margin-top: 10vh;
+    div.detail-list {
+        max-height: 75vh;
+        overflow: auto;
+        div.panel {
+            border: solid 1px #29e;
+            margin-bottom: 10px;
+            div.panel-heading {
+                height: 4vh;
+                padding: 0;
+                h3.panel-title {
+                    height: 4vh;
+                    line-height: 4vh;
+                    font-size: 2vh;
+                    text-align: center;
+                }
             }
-          }
         }
-
-
-      }
     }
-
-
-  }
-
-  div.result-actions {
-    margin: 2vh auto;
-    width: 60vw;
-
-    button {
-      width: 60vw;
-      height: 8vh;
-      font-size: 4vh;
-      border-radius: 3vh;
+    div.result-actions {
+        margin: 2vh auto;
+        width: 60vw;
+        button {
+            width: 60vw;
+            height: 8vh;
+            font-size: 4vh;
+            border-radius: 3vh;
+        }
     }
-  }
 }
 
 div.sjd-page-moneydetail-repay-window {
-
-  div.modal-dialog {
-    width: 90vw;
-    padding: 1vh 2vw;
-    background-color: #FFFFFF;
-    border-radius: 2vw;
-
-    div.sjd-page-moneydetail-repay {
-
-      div.panel {
-
-        div.panel-heading {
-          height: 7vh;
-          padding: 0;
-
-          h3.panel-title {
-            height: 7vh;
-            line-height: 7vh;
-            font-size: 3vh;
-            text-align: center;
-          }
-        }
-
-        div.panel-body {
-
-          div.row {
-            margin: 2vh 0;
-
-            span.info {
-              height: 3vh;
-              line-height: 3vh;
-              font-size: 3vw;
-            }
-
-            div.row-title {
-              height: 4vh;
-              line-height: 4vh;
-              text-align: right;
-              font-size: 2vh;
-            }
-
-            div.row-input {
-              height: 4vh;
-
-              input {
-                height: 4vh;
-                font-size: 2vh;
-              }
-            }
-
-            div.row-form {
-              height: 4vh;
-
-              div.input-group {
-
-                input {
-                  height: 4vh;
-                  line-height: 4vh;
-                  font-size: 2vh;
-                }
-
-                span.input-group-btn {
-
-                  button {
-                    height: 4vh;
-                    width: 10vw;
-
-                    span {
-                      font-size: 2vh;
+    div.modal-dialog {
+        width: 90vw;
+        padding: 1vh 2vw;
+        background-color: #FFFFFF;
+        border-radius: 2vw;
+        div.sjd-page-moneydetail-repay {
+            div.panel {
+                div.panel-heading {
+                    height: 7vh;
+                    padding: 0;
+                    h3.panel-title {
+                        height: 7vh;
+                        line-height: 7vh;
+                        font-size: 3vh;
+                        text-align: center;
                     }
-                  }
                 }
-
-                ul.uib-datepicker-popup.dropdown-menu {
-
-                  table.uib-daypicker {
-
-                    thead tr {
-                      th {
-                        height: 3vh;
-                        font-size: 3vw;
-
-                        button {
-                          height: 3vh;
-                          font-size: 3vw;
-                        }
-                      }
-                    }
-
-                    tbody tr {
-                      td {
-                        width: 4vh;
-                        height: 3vh;
-                        font-size: 3vw;
-
-                        button {
-                          width: 3vh;
-                          height: 3vh;
-
-                          span {
+                div.panel-body {
+                    div.row {
+                        margin: 2vh 0;
+                        span.info {
+                            height: 3vh;
+                            line-height: 3vh;
                             font-size: 3vw;
-                          }
-
                         }
-                      }
+                        div.row-title {
+                            height: 4vh;
+                            line-height: 4vh;
+                            text-align: right;
+                            font-size: 2vh;
+                        }
+                        div.row-input {
+                            height: 4vh;
+                            input {
+                                height: 4vh;
+                                font-size: 2vh;
+                            }
+                        }
+                        div.row-form {
+                            height: 4vh;
+                            div.input-group {
+                                input {
+                                    height: 4vh;
+                                    line-height: 4vh;
+                                    font-size: 2vh;
+                                }
+                                span.input-group-btn {
+                                    button {
+                                        height: 4vh;
+                                        width: 10vw;
+                                        span {
+                                            font-size: 2vh;
+                                        }
+                                    }
+                                }
+                                ul.uib-datepicker-popup.dropdown-menu {
+                                    table.uib-daypicker {
+                                        thead tr {
+                                            th {
+                                                height: 3vh;
+                                                font-size: 3vw;
+                                                button {
+                                                    height: 3vh;
+                                                    font-size: 3vw;
+                                                }
+                                            }
+                                        }
+                                        tbody tr {
+                                            td {
+                                                width: 4vh;
+                                                height: 3vh;
+                                                font-size: 3vw;
+                                                button {
+                                                    width: 3vh;
+                                                    height: 3vh;
+                                                    span {
+                                                        font-size: 3vw;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    li.uib-button-bar {
+                                        button {
+                                            height: 4vh;
+                                            width: 10vw;
+                                            font-size: 3vw;
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
-                  }
-
-                  li.uib-button-bar {
-
-                    button {
-                      height: 4vh;
-                      width: 10vw;
-                      font-size: 3vw;
-                      padding: 0;
+                    div.estimate-title {
+                        font-size: 3vh;
+                        height: 3vh;
+                        line-height: 3vh;
+                        color: #29e;
                     }
-                  }
+                    div.estimate-amount {
+                        margin: 0 auto 3vh;
+                        font-size: 7vh;
+                        height: 9vh;
+                        line-height: 9vh;
+                        text-align: center;
+                        width: 80vw;
+                    }
                 }
-              }
             }
-          }
-
-          div.estimate-title {
-            font-size: 3vh;
-            height: 3vh;
-            line-height: 3vh;
-            color: #29e;
-          }
-
-          div.estimate-amount {
-            margin: 0 auto 3vh;
-            font-size: 7vh;
-            height: 9vh;
-            line-height: 9vh;
-            text-align: center;
-            width: 80vw;
-          }
+            div.result-actions {
+                margin: 2vh auto;
+                width: 60vw;
+                button {
+                    width: 60vw;
+                    height: 6vh;
+                    font-size: 3vh;
+                    border-radius: 3vh;
+                }
+            }
         }
-      }
-
-      div.result-actions {
-        margin: 2vh auto;
-        width: 60vw;
-
-        button {
-          width: 60vw;
-          height: 6vh;
-          font-size: 3vh;
-          border-radius: 3vh;
-        }
-      }
     }
-  }
-
 }
