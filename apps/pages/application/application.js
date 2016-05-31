@@ -102,7 +102,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                         $scope.keys.forEach(function(k) {
                             $scope.pictures[k + "Src"] = {
                                 "name": data[k].name,
-                                "images": []
+                                "images": [],
+                                "id": k
                             };
                             for (var i in data[k].files) {
                                 $scope.pictures[k + "Src"].images.push({
@@ -110,6 +111,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                                     "uri": xhrRequestOrigin + "/" + data[k].files[i],
                                     "url": data[k].files[i],
                                     "filename": i
+
                                 });
                             }
                         });
@@ -192,61 +194,62 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
 
 
             var saveForm = function() {
-                for (var i = 0; i < beanKeys.length; i++) {
-                    if (preservedBean[beanKeys[i]] && typeof preservedBean[beanKeys[i]] === "object") {
-                        $scope[scopeKeys[i]].forEach(function(item) {
-                            preservedBean[beanKeys[i]][item.key] = item.value;
-                        });
-                    }
-                }
-                $http({
-                    "method": "POST",
-                    "url": xhrRequestOrigin + "/loanapplication/loanmobile/saveform.do?customerprojectid=" + $rootScope.project.id,
-                    "data": preservedBean
-                });
-                // .success(function() {
-                //     $state.go("dashboard");
-                // });
-            }
-            $scope.submit = function() {
-                // saveForm();
-                var locks = {};
-                for (var i = 0; i < $scope.keys.length; i++) {
-                    (function(index) {
-                        locks[$scope.keys[index]] = false;
-                        var files = {};
-                        for (var j = 0; j < $scope.pictures[$scope.keys[index] + "Src"].images.length; j++) {
-                            files[$scope.pictures[$scope.keys[index] + "Src"].images[j].name] = $scope.pictures[$scope.keys[index] + "Src"].images[j].uri;
+                    for (var i = 0; i < beanKeys.length; i++) {
+                        if (preservedBean[beanKeys[i]] && typeof preservedBean[beanKeys[i]] === "object") {
+                            $scope[scopeKeys[i]].forEach(function(item) {
+                                preservedBean[beanKeys[i]][item.key] = item.value;
+                            });
                         }
-                        var url = xhrRequestOrigin + "/loanapplicationdoc/app/applydoc/upload.do?customerprojectid=" + $rootScope.project.id + "&idchecklist=" + $scope.pictures[$scope.keys[index] + "Src"] +
-                            $scope.keys[index] + "&files=" + JSON.stringify(files);
-
-                        $http({
-                            "method": "POST",
-                            "url": url,
-                            transformRequest: angular.identity,
-                            headers: { 'Content-Type': undefined }
-                        }).success(function() {
-                            locks[$scope.keys[index]] = true;
-                            var checked = true;
-                            for (var l in locks) {
-                                checked = checked && locks[l];
-                            }
-                            if (checked) {
-                                $state.go("dashboard");
-                            }
-                        });
-                    })(i);
+                    }
+                    $http({
+                        "method": "POST",
+                        "url": xhrRequestOrigin + "/loanapplication/loanmobile/saveform.do?customerprojectid=" + $rootScope.project.id,
+                        "data": preservedBean
+                    });
+                    // .success(function() {
+                    //     $state.go("dashboard");
+                    // });
                 }
-            };
+                // $scope.submit = function() {
+                //     // saveForm();
+                //     var locks = {};
+                //     for (var i = 0; i < $scope.keys.length; i++) {
+                //         (function(index) {
+                //             locks[$scope.keys[index]] = false;
+                //             var files = {};
+                //             for (var j = 0; j < $scope.pictures[$scope.keys[index] + "Src"].images.length; j++) {
+                //                 files[$scope.pictures[$scope.keys[index] + "Src"].images[j].name] = $scope.pictures[$scope.keys[index] + "Src"].images[j].uri;
+                //             }
+                //             var url = xhrRequestOrigin + "/loanapplicationdoc/app/applydoc/upload.do?customerprojectid=" + $rootScope.project.id + "&idchecklist=" + $scope.pictures[$scope.keys[index] + "Src"] +
+                //                 $scope.keys[index] + "&files=" + JSON.stringify(files);
+
+            //             $http({
+            //                 "method": "POST",
+            //                 "url": url,
+            //                 transformRequest: angular.identity,
+            //                 headers: { 'Content-Type': undefined }
+            //             }).success(function() {
+            //                 locks[$scope.keys[index]] = true;
+            //                 var checked = true;
+            //                 for (var l in locks) {
+            //                     checked = checked && locks[l];
+            //                 }
+            //                 if (checked) {
+            //                     $state.go("dashboard");
+            //                 }
+            //             });
+            //         })(i);
+            //     }
+            // };
         }
     ])
     .controller("uploadCtrl", ["$scope", "$rootScope", "$uibModalInstance", "$http", "xhrRequestOrigin", "item", "images", "imageReader",
         function($scope, $rootScope, $uibModalInstance, $http, xhrRequestOrigin, item, images, imageReader) {
             $scope.title = "上传资料:" + item.name;
-
+            console.log("-------");
+            console.log(item);
             $scope.images = images;
-
+            $scope.docid = item.id;
             $scope.removeImage = function(image) {
                 console.log(image);
                 var enterpriseid = $rootScope.enterpriseid;
@@ -285,7 +288,6 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
 
             $scope.submit = function() {
                 $uibModalInstance.close($scope.images);
-                console.log($scope.images);
             };
 
             $scope.cancel = function() {
@@ -294,8 +296,9 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
 
         }
     ])
-    .directive("customOnChange", ["$http", "$rootScope", "xhrRequestOrigin",
-        function($http, $rootScope, xhrRequestOrigin) {
+    .directive("customOnChange", ["$scope", "$http", "$rootScope", "xhrRequestOrigin",
+        function($scope, $http, $rootScope, xhrRequestOrigin) {
+            console.log("进来了");
             return {
                 restrict: "A",
                 link: function(scope, element, attrs) {
@@ -305,7 +308,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                         var fd = new FormData();
                         //Take the first selected file
                         fd.append("files", scope.imageFile);
-                        $http.post(xhrRequestOrigin + "/loanapplicationdoc//app/applydoc/upload.do?customerprojectid=" + $rootScope.project.id + "&idchecklist=", fd, {
+                        $http.post(xhrRequestOrigin + "/loanapplicationdoc//app/applydoc/upload.do?customerprojectid=" + $rootScope.project.id + "&idchecklist=" + $scope.docid, fd, {
                                 transformRequest: angular.identity,
                                 headers: { 'Content-Type': undefined }
                             }).success(function(res) {
