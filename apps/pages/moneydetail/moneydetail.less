@@ -3,6 +3,7 @@ div.sjd-page-moneydetail {
     div.detail-list {
         max-height: 75vh;
         overflow: auto;
+        font-size: 10px;
         div.panel {
             border: solid 1px #29e;
             margin-bottom: 10px;
@@ -32,9 +33,9 @@ div.sjd-page-moneydetail {
 
 div.sjd-page-moneydetail-repay-window {
     div.modal-dialog {
-        width: 90vw;
+        width: 100vw;
         padding: 1vh 2vw;
-        background-color: #FFFFFF;
+        background-color: rgba(243, 244, 245, 0.52);
         border-radius: 2vw;
         div.sjd-page-moneydetail-repay {
             div.panel {
@@ -46,6 +47,7 @@ div.sjd-page-moneydetail-repay-window {
                         line-height: 7vh;
                         font-size: 3vh;
                         text-align: center;
+                        border-bottom: solid #3E91E2;
                     }
                 }
                 div.panel-body {
@@ -86,42 +88,7 @@ div.sjd-page-moneydetail-repay-window {
                                         }
                                     }
                                 }
-                                ul.uib-datepicker-popup.dropdown-menu {
-                                    table.uib-daypicker {
-                                        thead tr {
-                                            th {
-                                                height: 3vh;
-                                                font-size: 3vw;
-                                                button {
-                                                    height: 3vh;
-                                                    font-size: 3vw;
-                                                }
-                                            }
-                                        }
-                                        tbody tr {
-                                            td {
-                                                width: 4vh;
-                                                height: 3vh;
-                                                font-size: 3vw;
-                                                button {
-                                                    width: 3vh;
-                                                    height: 3vh;
-                                                    span {
-                                                        font-size: 3vw;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                    li.uib-button-bar {
-                                        button {
-                                            height: 4vh;
-                                            width: 10vw;
-                                            font-size: 3vw;
-                                            padding: 0;
-                                        }
-                                    }
-                                }
+                                ul.uib-datepicker-popup.dropdown-menu {}
                             }
                         }
                     }
@@ -148,7 +115,7 @@ div.sjd-page-moneydetail-repay-window {
                     width: 60vw;
                     height: 6vh;
                     font-size: 3vh;
-                    border-radius: 3vh;
+                    border: solid 1px gray;
                 }
             }
         }

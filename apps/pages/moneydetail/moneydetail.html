@@ -1,56 +1,56 @@
 <sjd-top-nav-bar nav-title="用款详情" prev-state="dashboard" prev-text="返回"></sjd-top-nav-bar>
 <div class="sjd-page-moneydetail">
-  <div class="detail-list">
-    <div class="panel panel-primary" ng-repeat="detail in details">
-      <div class="panel-heading">
-        <h3 class="panel-title">编号: {{detail.idloandetail}}</h3>
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col col-50">
-            <span class="info">用款额度: {{detail.amount|currency:'':2}} 元</span>
-          </div>
-          <div class="col col-50">
-            <span class="info">用款时间: {{detail.usedate}}</span>
-          </div>
+    <div class="detail-list">
+        <div class="panel panel-primary" ng-repeat="detail in details">
+            <div class="panel-heading">
+                <h3 class="panel-title">编号: {{detail.idloandetail}}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col col-50">
+                        <span class="info">用款额度: {{detail.amount|currency:'':2}} 元</span>
+                    </div>
+                    <div class="col col-50">
+                        <span class="info">用款时间: {{detail.usedate}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-50">
+                        <span class="info">还款截止: {{detail.repaymentdate}}</span>
+                    </div>
+                    <div class="col col-50">
+                        <span class="info">年化利息: {{(detail.interest * 100).toFixed(0)}}%</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-50">
+                        <span class="info">已还金额: {{detail.repaid|currency:'':2}} 元</span>
+                    </div>
+                    <div class="col col-50">
+                        <span class="info">还款中: {{detail.repaying|currency:'':2}} 元</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-50">
+                        <span class="info">待还金额: {{detail.remain|currency:'':2}} 元</span>
+                    </div>
+                    <div class="col col-50">
+                        <span class="action" ng-if="detail.repaying === 0" ng-click="repay(detail)" style="color: blue;text-decoration: underline">还款</span>
+                        <span class="action active" ng-if="detail.repaying > 0" style="color: #FF4100;">还款进行中</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-50">
+                        <span class="info">当前本息: {{detail.current|currency:'':2}} 元</span>
+                    </div>
+                    <div class="col col-50">
+                        <span class="info">到期本息: {{detail.expire|currency:'':2}} 元</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-          <div class="col col-50">
-            <span class="info">还款截止: {{detail.repaymentdate}}</span>
-          </div>
-          <div class="col col-50">
-            <span class="info">年化利息: {{(detail.interest * 100).toFixed(0)}}%</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-50">
-            <span class="info">已还金额: {{detail.repaid|currency:'':2}} 元</span>
-          </div>
-          <div class="col col-50">
-            <span class="info">还款中: {{detail.repaying|currency:'':2}} 元</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-50">
-            <span class="info">待还金额: {{detail.remain|currency:'':2}} 元</span>
-          </div>
-          <div class="col col-50">
-            <span class="action" ng-if="detail.repaying === 0" ng-click="repay(detail)">还款</span>
-            <span class="action active" ng-if="detail.repaying > 0">还款进行中</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-50">
-            <span class="info">当前本息: {{detail.current|currency:'':2}} 元</span>
-          </div>
-          <div class="col col-50">
-            <span class="info">到期本息: {{detail.expire|currency:'':2}} 元</span>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="padding">
-    <button class="button button-block button-positive" ng-click="apply()">用款申请</button>
-  </div>
+    <div class="padding">
+        <button class="button button-block button-positive" ng-click="apply()">用款申请</button>
+    </div>
 </div>

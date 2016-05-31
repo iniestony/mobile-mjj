@@ -1,69 +1,53 @@
 <div class="sjd-page-moneydetail-repay">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">还款申请(编号{{detail.idloandetail}})</h3>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">还款申请(编号{{detail.idloandetail}})</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col col-50">
+                    <span class="info">用款额度: {{detail.amount|currency:'':2}} 元</span>
+                </div>
+                <div class="col col-50">
+                    <span class="info">待还金额: {{detail.remain|currency:'':2}} 元</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-50">
+                    <span class="info">用款时间: {{detail.usedate}}</span>
+                </div>
+                <div class="col col-50">
+                    <span class="info">还款截止: {{detail.repaymentdate}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-50">
+                    <span class="info">年化利息: {{(detail.interest * 100).toFixed(0)}}%</span>
+                </div>
+                <div class="col col-50">
+                    <span class="info">还款中: {{detail.repaying|currency:'':2}} 元</span>
+                </div>
+            </div>
+            <div class="list">
+                <div class="item item-input">
+                    <div class="input-label">
+                        还款金额:
+                    </div>
+                    <input type="number" ng-model="repayAmount" ng-change="updateEstimate()" style="max-width: 130px;" /> 元
+                </div>
+                <div class="item item-input item-select">
+                    <div class="input-label">
+                        还款时间:
+                    </div>
+                    <input type="datetime-local" ng-change="updateEstimate()" ng-model="date">
+                </div>
+            </div>
+            <div class="estimate-title">预计本息:</div>
+            <div class="estimate-amount">{{estimate|currency:'':2}}</div>
+        </div>
     </div>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-xs-6">
-          <span class="info">用款额度: {{detail.amount|currency:'':2}}</span>
-        </div>
-        <div class="col-xs-6">
-          <span class="info">待还金额: {{detail.remain|currency:'':2}}</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-6">
-          <span class="info">用款时间: {{detail.usedate}}</span>
-        </div>
-        <div class="col-xs-6">
-          <span class="info">还款截止: {{detail.repaymentdate}}</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-6">
-          <span class="info">年化利息: {{(detail.interest * 100).toFixed(0)}}%</span>
-        </div>
-        <div class="col-xs-6">
-          <span class="info">还款中: {{detail.repaying}}</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-3 row-title">还款金额:</div>
-        <div class="col-xs-8 row-input">
-          <input type="number" class="form-control" ng-model="repayAmount" ng-change="updateEstimate()"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-3 row-title">还款时间:</div>
-        <div class="col-xs-8 row-form">
-          <div class="input-group">
-            <input type="text" class="form-control"
-                   uib-datepicker-popup
-                   ng-model="date"
-                   is-open="opened"
-                   datepicker-options="dateOptions"
-                   ng-required="true"
-                   close-text="关闭"
-                   clear-text="重置"
-                   current-text="今天"
-                   ng-change="updateEstimate()"/>
-          <span class="input-group-btn">
-            <button class="btn btn-primary" ng-click="toggleDatePicker()">
-              <span class="glyphicon glyphicon-calendar"></span>
-            </button>
-          </span>
-          </div>
-        </div>
-      </div>
-      <div class="estimate-title">预计本息:</div>
-      <div class="estimate-amount">{{estimate|currency:'':2}}</div>
+    <div class="row result-actions">
+        <button class="col col-50 button button-block button-positive" ng-disabled="detail.repaying > 0" ng-click="submit()">提交</button>
+        <button class="col col-50 button button-block" ng-click="cancel()">返回</button>
     </div>
-  </div>
-  <div class="result-actions">
-    <button class="btn btn-info" ng-disabled="detail.repaying > 0" ng-click="submit()">提交</button>
-  </div>
-  <div class="result-actions">
-    <button class="btn btn-default" ng-click="cancel()">取消</button>
-  </div>
 </div>

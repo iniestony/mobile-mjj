@@ -12,7 +12,7 @@
             </label>
         </div>
         <div class="padding">
-            <button class="button button-block button-positive" ng-click="login()">登录</button>
+            <button class="button button-block button-positive" ng-click="login()" ng-disabled="username==undefined||username==''||password==undefined||password==''">登录</button>
             <button class="button button-block" ng-click="toRegister()">注册</button>
         </div>
     </div>
