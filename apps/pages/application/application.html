@@ -1,4 +1,4 @@
-<sjd-top-nav-bar nav-title="贷款申请" prev-state="dashboard" prev-text="返回" ng-init="step=3">
+<sjd-top-nav-bar nav-title="贷款申请" prev-state="dashboard" prev-text="返回" ng-init="step=1">
 </sjd-top-nav-bar>
 <div class="sjd-page-application" ng-if="step==1">
     <div class="container-fluid">
@@ -12,7 +12,7 @@
             <div class="input-label row-title">
                 *贷款期限:
             </div>
-            <select>
+            <select ng-model="duration">
                 <option>小于一个月</option>
                 <option selected>一个月</option>
                 <option>三个月</option>
@@ -25,7 +25,7 @@
             <input type="text" ng-model="usage" />
         </div>
         <div class="padding">
-            <button class="button button-block button-positive" ng-click="toStep2()">下一步</button>
+            <button class="button button-block button-positive" ng-click="step1to2()">下一步</button>
         </div>
     </div>
 </div>
@@ -122,6 +122,8 @@
 
          <div class="padding">
             <button class="button button-block button-positive"  ng-click="submit()">提交申请</button>
+            <button class="button button-block" ng-click="toStep2()">上一步</button>
+        </div>
         </div>
     </div>
 </div>

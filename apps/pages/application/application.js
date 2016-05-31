@@ -158,7 +158,6 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
             $scope.keys = [];
             getPictures();
             $scope.upload = function(item) {
-                console.log(item);
                 $uibModal.open({
                     templateUrl: "/pages/application/upload.html",
                     controller: "uploadCtrl",
@@ -177,6 +176,29 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                     $scope.pictures[item + "Src"].images = dataURIs;
                 }, function() {});
             };
+
+            var saveLoanIntention = function() {
+                var url = xhrRequestOrigin + "/loanapplication/loan/createloan.do?";
+                console.log($scope.amount);
+                $http({
+                    method: "post",
+                    url: url,
+                    params: {
+                        customerprojectid: $rootScope.project.id,
+                        enterpriseid: $rootScope.enterpriseid,
+                        amount: $scope.amount,
+                        duration: $scope.duration,
+                        usage: $scope.usage
+                    },
+                    transformResponse: function(d) {
+                        return d;
+                    }
+                });
+            };
+            $scope.step1to2 = function() {
+                saveLoanIntention();
+                $scope.step = 2;
+            }
             $scope.toStep2 = function() {
                 $scope.step = 2;
             };
@@ -255,24 +277,22 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                 deleteimage.files = {};
                 deleteimage.imagetype = image.name;
                 deleteimage.files[image.filename] = image.url;
-                // $http({　　
-                //     method: 'POST',
-                //     　　url: url,
-                //     params: deleteimage,
-                //     transformResponse: function(d) {
-                //         return d;
-                //     }
-                // }).success(function(response) {
-                //     console.log("chengg");
-
-                // });
-                $scope.images = $scope.images.reduce(function(prev, next) {
-                    if (image.name !== next.name) {
-                        prev.push(next);
+                $http({　　
+                    method: 'POST',
+                    　　url: url,
+                    params: deleteimage,
+                    transformResponse: function(d) {
+                        return d;
                     }
-                    return prev;
-                }, []);
-
+                }).success(function(response) {
+                    //删除不对
+                    $scope.images = $scope.images.reduce(function(prev, next) {
+                        if (image.name !== next.name) {
+                            prev.push(next);
+                        }
+                        return prev;
+                    }, []);
+                });
             };
 
             $scope.uploadImage = function() {
