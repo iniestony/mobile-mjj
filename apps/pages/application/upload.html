@@ -11,15 +11,12 @@
                 </div>
             </div>
             <div class="image-actions">
-                <button class="btn btn-primary" ng-click="uploadImage()">上传图片</button>
+                <button class="button button-positive" ng-click="uploadImage()">上传图片</button>
                 <input id="image-commit" class="origin-input" type="file" custom-on-change/>
             </div>
         </div>
     </div>
-    <div class="result-actions">
-        <button class="btn btn-info" ng-disabled="images.length === 0" ng-click="submit()">提交资料</button>
-    </div>
-    <div class="result-actions">
-        <button class="btn btn-default" ng-click="cancel()">取消</button>
+    <div class="padding">
+        <button class="button button-block" ng-click="cancel()">返回</button>
     </div>
 </div>

@@ -296,8 +296,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
 
         }
     ])
-    .directive("customOnChange", ["$scope", "$http", "$rootScope", "xhrRequestOrigin",
-        function($scope, $http, $rootScope, xhrRequestOrigin) {
+    .directive("customOnChange", [ "$http", "$rootScope", "xhrRequestOrigin",
+        function($http, $rootScope, xhrRequestOrigin) {
             console.log("进来了");
             return {
                 restrict: "A",
@@ -308,16 +308,15 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                         var fd = new FormData();
                         //Take the first selected file
                         fd.append("files", scope.imageFile);
-                        $http.post(xhrRequestOrigin + "/loanapplicationdoc//app/applydoc/upload.do?customerprojectid=" + $rootScope.project.id + "&idchecklist=" + $scope.docid, fd, {
+                        $http.post(xhrRequestOrigin + "/loanapplicationdoc//app/applydoc/upload.do?customerprojectid=" + $rootScope.project.id + "&idchecklist=" + scope.docid, fd, {
                                 transformRequest: angular.identity,
-                                headers: { 'Content-Type': undefined }
+                                headers: { 'Content-Type': undefined },
+                                transformResponse: function(d){return d;}
                             }).success(function(res) {
-                                console.log("kdfdfa");
-                                alert("对搭！！");
+                                //刷新列表
                             })
                             .error(function(status, err) {
-                                console.log(err);
-                                alert("错啦！！");
+                                alert("上传失败");
                             });
 
                     });
