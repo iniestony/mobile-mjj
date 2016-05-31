@@ -23,7 +23,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                     "phone": $scope.phone,
                     "stockname": $scope.stockname,
                     "memo": $scope.memo,
-                    "creator": "15267015541"
+                    "creator": $rootScope.user.name
                 },
                 "details": []
             };

@@ -29,7 +29,7 @@
         </div>
     </div>
 </div>
-<div class="sjd-page-application" ng-if="step==2">
+<div class="sjd-page-application" ng-show="step==2">
     <div class="container-fluid list">
         <div class="row" ng-if="showTitle(personItems)">
             <div class="section-title">个人信息</div>
@@ -111,8 +111,8 @@
                         <span ng-show=" pictures[key + 'Src'].images.length === 0">未上传</span>
                     </div>
                     <div class="col col-10" ng-if="project.status==22">
-                        <span ng-show="v.isPass">通过</span>
-                        <span ng-show="!v.isPass">未通过</span>
+                        <span ng-show="pictures[key + 'Src'].pass">通过</span>
+                        <span ng-show="!pictures[key + 'Src'].pass">未通过</span>
                     </div>
                 </div>
             </li>
