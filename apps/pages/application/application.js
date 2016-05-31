@@ -246,30 +246,33 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
     .controller("uploadCtrl", ["$scope", "$rootScope", "$uibModalInstance", "$http", "xhrRequestOrigin", "item", "images", "imageReader",
         function($scope, $rootScope, $uibModalInstance, $http, xhrRequestOrigin, item, images, imageReader) {
             $scope.title = "上传资料:" + item.name;
-            console.log("-------");
-            console.log(item);
             $scope.images = images;
             $scope.docid = item.id;
             $scope.removeImage = function(image) {
-                console.log(image);
                 var enterpriseid = $rootScope.enterpriseid;
                 var url = xhrRequestOrigin + "/loanapplicationdoc/applydoc/delete.do?enterpriseid=" + $rootScope.enterpriseid;
                 var deleteimage = {};
                 deleteimage.files = {};
                 deleteimage.imagetype = image.name;
                 deleteimage.files[image.filename] = image.url;
-                console.log(deleteimage);
-                $http({　　
-                    method: 'POST',
-                    　　url: url,
-                    params: deleteimage
-                });
+                // $http({　　
+                //     method: 'POST',
+                //     　　url: url,
+                //     params: deleteimage,
+                //     transformResponse: function(d) {
+                //         return d;
+                //     }
+                // }).success(function(response) {
+                //     console.log("chengg");
+
+                // });
                 $scope.images = $scope.images.reduce(function(prev, next) {
                     if (image.name !== next.name) {
                         prev.push(next);
                     }
                     return prev;
                 }, []);
+
             };
 
             $scope.uploadImage = function() {
@@ -296,7 +299,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
 
         }
     ])
-    .directive("customOnChange", [ "$http", "$rootScope", "xhrRequestOrigin",
+    .directive("customOnChange", ["$http", "$rootScope", "xhrRequestOrigin",
         function($http, $rootScope, xhrRequestOrigin) {
             console.log("进来了");
             return {
@@ -311,7 +314,9 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                         $http.post(xhrRequestOrigin + "/loanapplicationdoc//app/applydoc/upload.do?customerprojectid=" + $rootScope.project.id + "&idchecklist=" + scope.docid, fd, {
                                 transformRequest: angular.identity,
                                 headers: { 'Content-Type': undefined },
-                                transformResponse: function(d){return d;}
+                                transformResponse: function(d) {
+                                    return d;
+                                }
                             }).success(function(res) {
                                 //刷新列表
                             })
