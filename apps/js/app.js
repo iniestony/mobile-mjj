@@ -11,4 +11,4 @@ mobileSJD.config(["$urlRouterProvider", function($urlRouterProvider){
   $urlRouterProvider.otherwise("/welcome");
 }])
 
-.constant("xhrRequestOrigin", "http://test.sjdbank.com:8787");
+.constant("xhrRequestOrigin", "http://test.sjdbank.com:8787/");

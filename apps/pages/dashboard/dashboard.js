@@ -24,6 +24,12 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                 $rootScope.project.loanid = response.loanid;
                 $scope.status = response.status;
                 $scope.message = messageCollection[$scope.status];
+                $rootScope.project.intention = {};
+                if (response.othersObject!=undefined&&response.othersObject.amount!=undefined) {
+                    $rootScope.project.intention.amount = response.othersObject.amount;
+                    $rootScope.project.intention.duration = response.othersObject.duration;
+                    $rootScope.project.intention.usage = response.othersObject.usereason;
+                }
                 callbackCollection[$scope.status]();
             });
 

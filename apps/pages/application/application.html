@@ -1,6 +1,6 @@
 <sjd-top-nav-bar nav-title="贷款申请" prev-state="dashboard" prev-text="返回" ng-init="step=1">
 </sjd-top-nav-bar>
-<div class="sjd-page-application" ng-if="step==1">
+<div class="sjd-page-application" ng-show="step==1">
     <div class="container-fluid">
         <div class="item item-input">
             <div class="input-label row-title">
@@ -96,12 +96,12 @@
         </div>
     </div>
 </div>
-<div class="sjd-page-application" ng-if="step==3">
+<div class="sjd-page-application" ng-show="step==3">
     <div class="container-fluid">
         <div class="row">
             <div class="section-title">请提交申请资料：</div>
         </div>
-       <div class="list">
+        <div class="list">
             <li class="item" ng-repeat="key in keys" ng-click='upload(key)'>
                 <div class="row">
                     <div class=" col col-90 ">{{pictures[key + 'Src'].name}}
@@ -116,14 +116,10 @@
                     </div>
                 </div>
             </li>
-        </div> 
-
-
-
-         <div class="padding">
-            <button class="button button-block button-positive"  ng-click="submit()">提交申请</button>
-            <button class="button button-block" ng-click="toStep2()">上一步</button>
         </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="submit()">提交申请</button>
+            <button class="button button-block" ng-click="toStep2()">上一步</button>
         </div>
     </div>
 </div>
