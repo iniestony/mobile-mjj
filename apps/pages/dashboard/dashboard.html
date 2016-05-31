@@ -1,6 +1,6 @@
 <sjd-top-nav-bar nav-title="当前贷款" ng-click="changeStatus()"></sjd-top-nav-bar>
 <div class="sjd-page-dashboard">
-    <div class="sjd-dashboard-status" ng-if="status === 0">
+    <div class="sjd-dashboard-status" ng-if="status === 1">
         <div class="sjd-dashboard-status-text">
             <span>初步调查</span>
         </div>
@@ -8,24 +8,69 @@
             <img class="status" src="imgs/pre-check.png">
         </div>
     </div>
-    <div class="sjd-dashboard-status" ng-if="status === 1">
+    <div class="sjd-dashboard-status" ng-if="status === 2||status === 18||status === 12||status === 19||status === 16">
         <div class="sjd-dashboard-status-text">
-            <span>初审已通过</span>
+            <span>资质审核</span>
         </div>
         <div class="sjd-dashboard-status-image">
             <img class="status" src="imgs/qulificationcheck.png">
         </div>
     </div>
-    <div class="sjd-dashboard-status" ng-if="status === 2">
+    <div class="sjd-dashboard-status" ng-if="status === 181">
         <div class="sjd-dashboard-status-text">
-            <span>资料已提交,请等待审核</span>
+            <span>资质审核未通过</span>
+        </div>
+        <div class="sjd-dashboard-status-image">
+            <img class="status" src="imgs/fail.png">
+        </div>
+    </div>
+    <div class="sjd-dashboard-status" ng-if="status === 20">
+        <div class="sjd-dashboard-status-text">
+            <span>初审已通过</span>
         </div>
         <div class="sjd-dashboard-status-image">
             <img class="status" src="imgs/write.png">
         </div>
     </div>
+    <div class="sjd-dashboard-status" ng-if="status === 21">
+        <div class="sjd-dashboard-status-text">
+            <span>贷款填写中</span>
+        </div>
+        <div class="sjd-dashboard-status-image">
+            <img class="status" src="imgs/write.png">
+        </div>
+    </div>
+    <div class="sjd-dashboard-status" ng-if="status === 22">
+        <div class="sjd-dashboard-status-text">
+            <span>资料补充</span>
+        </div>
+        <div class="sjd-dashboard-status-image">
+            <img class="status" src="imgs/write.png">
+        </div>
+    </div>
+    <div class="sjd-dashboard-status" ng-if="status === 23||status === 260||status===26">
+        <div class="sjd-dashboard-status-text">
+            <span>贷款审核</span>
+        </div>
+        <div class="sjd-dashboard-status-image">
+            <img class="status" src="imgs/check.png">
+        </div>
+    </div>
+    <div class="sjd-dashboard-status" ng-if="status === 8||status === 262">
+        <div class="sjd-dashboard-status-text">
+            <span>申请失败</span>
+        </div>
+        <div class="sjd-dashboard-status-image">
+            <img class="status" src="imgs/fail.png">
+        </div>
+    </div>
+    <div class="sjd-dashboard-status" ng-if="status === 35||status === 79">
+        <div class="sjd-dashboard-status-text">
+            <span>项目结束</span>
+        </div>
+    </div>
     <uib-alert class="sjd-dashboard-alert" type="info" ng-if="message">{{message}}</uib-alert>
-    <div class="sjd-dashboard-status" ng-if="status === 3">
+    <div class="sjd-dashboard-status" ng-if="status === 5">
         <div class="sjd-dashboard-status-content">
             <div class="sjd-dashboard-status-content-1">当前用款:</div>
             <div class="sjd-dashboard-status-content-2">
@@ -59,11 +104,13 @@
                 <h3 class="panel-title">当前操作</h3>
             </div>
             <a class="item item-icon-right" ng-if="status === 1" ng-click="navigate('initial')">初步调查 <i class="icon ion-edit" style="font-size:20px;"></i></a>
-            <a class="item item-icon-right" ng-if="status === 2" ng-click="navigate('application')">贷款申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
-            <a class="item item-icon-right" ng-if="status === 3" ng-click="navigate('goodsout')">出库申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
-            <a class="item item-icon-right" ng-if="status === 3" ng-click="navigate('goodsin')">入库提交 <i class="icon ion-edit" style="font-size:20px;"></i></a>
-            <a class="item item-icon-right" ng-if="status === 3" ng-click="navigate('moneyout')">用款申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
-            <a class="item item-icon-right" ng-if="status === 3" ng-click="navigate('moneyin')">还款申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 20" ng-click="navigate('application')">贷款申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 21" ng-click="navigate('application')">贷款填写 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 22" ng-click="navigate('application')">资料修改 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 5" ng-click="navigate('goodsout')">出库申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 5" ng-click="navigate('goodsin')">入库提交 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 5" ng-click="navigate('moneyout')">用款申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
+            <a class="item item-icon-right" ng-if="status === 5" ng-click="navigate('moneyin')">还款申请 <i class="icon ion-edit" style="font-size:20px;"></i></a>
         </div>
     </div>
 </div>
