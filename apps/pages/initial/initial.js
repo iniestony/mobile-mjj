@@ -8,7 +8,12 @@ mobileSJD.config(["$stateProvider", "base", function($stateProvider, base) {
 
 .controller("initialCtrl", ["$scope", "$rootScope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "base", "sjdDialog",
         function($scope, $rootScope, $state, $uibModal, $http, xhrRequestOrigin, base, sjdDialog) {
-
+            if ($rootScope.enterpriseid == undefined) {
+                $state.go("login");
+            }
+            if ($rootScope.project.status != 1) {
+                $state.go("dashboard");
+            }
             $scope.regaddr = "";
             $scope.turnovers = "";
             $scope.mainBusiness = "";

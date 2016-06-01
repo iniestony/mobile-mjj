@@ -12,4 +12,4 @@ mobileSJD.config(["$urlRouterProvider", function($urlRouterProvider) {
 }])
 
 .constant("xhrRequestOrigin", "http://test.sjdbank.com:8787/")
-.constant("base", "/sjdTest/apps/");
+.constant("base", "/apps");
