@@ -275,9 +275,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                         return d;
                     }
                 }).success(function(response) {
-                    //删除不对
                     $scope.images = $scope.images.reduce(function(prev, next) {
-                        if (image.name !== next.name) {
+                        if (image.filename !== next.filename) {
                             prev.push(next);
                         }
                         return prev;
@@ -316,6 +315,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                 link: function(scope, element, attrs) {
                     element.bind("change", function(e) {
                         scope.imageFile = (event.srcElement || event.target).files[0];
+                        scope.getImage();
+                        console.log(scope.imageFile);
                         var fd = new FormData();
                         //Take the first selected file
                         fd.append("files", scope.imageFile);

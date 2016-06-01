@@ -5,8 +5,8 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
             controller: "registerCtrl"
         });
     }])
-    .controller("registerCtrl", ["$scope", "$rootScope", "$state", "$http", "xhrRequestOrigin", "sjdDialog",
-        function($scope, $rootScope, $state, $http, xhrRequestOrigin, sjdDialog) {
+    .controller("registerCtrl", ["$scope", "$rootScope", "$interval", "$state", "$http", "xhrRequestOrigin", "sjdDialog",
+        function($scope, $rootScope, $interval, $state, $http, xhrRequestOrigin, sjdDialog) {
 
             var isMobile = function(mobile) {
                 if (mobile == undefined) return false;
@@ -30,8 +30,17 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                 var mobilecode_url = xhrRequestOrigin + "/default/mobileverify.do?"; //TODO 手机验证码发送url
                 $http.get(mobilecode_url + 'mobile=' + $scope.mobile)
                     .success(function(response) {
-                        console.log(response);
                         $scope.code = response;
+                        $scope.code_send = false;
+                        var count = 10;
+                        $interval(function() {
+                            count--;
+                            $scope.count_down = "(" + count + ")";
+                            if (count == 0) {
+                                $scope.code_send = true;
+                                $scope.count_down = "";
+                            }
+                        }, 1000, count);
                     })
                     .error(function(response, status) {
                         console.log(response);

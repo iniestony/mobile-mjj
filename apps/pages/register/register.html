@@ -19,7 +19,7 @@
             <div class="row">
                 <span class="input-label">请输入验证码：</span>
                 <input type="text" ng-model="mobile_checknum">
-                <button class="button code_check" ng-click="sendMobileCode()" type="submit" ng-disabled="!code_send">发送</button>
+                <button class="button code_check" ng-click="sendMobileCode()" type="submit" ng-disabled="!code_send">发送{{count_down}}</button>
             </div>
         </label>
         <label class="item item-input">
@@ -31,7 +31,7 @@
             <input required ng-model="pwd2" type="password">
         </label>
         <div class="padding">
-            <button class="button button-block button-positive" ng-click="register()" ng-disabled="code==''||code!=mobile_checknum||pwd===''||pwd!=pwd2">注册</button>
+            <button class="button button-block button-positive" ng-click="register()" ng-disabled="code==undifined||code!=mobile_checknum||pwd===undifined||pwd!=pwd2">注册</button>
         </div>
     </div>
 </div>

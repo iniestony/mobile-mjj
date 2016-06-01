@@ -52,12 +52,17 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                 $http({
                     method: "post",
                     url: url,
-
                     transformResponse: function(d) {
                         return d;
                     }
                 }).success(function() {
-                    $http.post(xhrRequestOrigin + "/project/completeAuthorization.do?customerprojectid=" + $rootScope.project.id + "&enterpriseid=" + $rootScope.enterpriseid, {}).success(function() {
+                    $http({
+                        method: "post",
+                        url: xhrRequestOrigin + "/project/completeAuthorization.do?customerprojectid=" + $rootScope.project.id + "&enterpriseid=" + $rootScope.enterpriseid,
+                        transformResponse: function(d) {
+                            return d;
+                        }
+                    }).success(function() {
                         $state.go("dashboard");
                     }).error(function(msg2) {
                         clicked = false;
