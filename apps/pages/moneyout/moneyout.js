@@ -1,7 +1,7 @@
-mobileSJD.config(["$stateProvider", function($stateProvider) {
+mobileSJD.config(["$stateProvider", "base", function($stateProvider, base) {
     $stateProvider.state("moneyout", {
         url: "/moneyout",
-        templateUrl: "/pages/moneyout/moneyout.html",
+        templateUrl: base + "/pages/moneyout/moneyout.html",
         controller: "moneyoutCtrl"
     });
 }])

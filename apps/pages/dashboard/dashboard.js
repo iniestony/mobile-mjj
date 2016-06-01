@@ -1,7 +1,7 @@
-mobileSJD.config(["$stateProvider", function($stateProvider) {
+mobileSJD.config(["$stateProvider", "base", function($stateProvider, base) {
     $stateProvider.state("dashboard", {
         url: "/dashboard",
-        templateUrl: "/pages/dashboard/dashboard.html",
+        templateUrl: base + "/pages/dashboard/dashboard.html",
         controller: "dashboardCtrl"
     });
 }])
@@ -25,7 +25,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
                 $scope.status = response.status;
                 $scope.message = messageCollection[$scope.status];
                 $rootScope.project.intention = {};
-                if (response.othersObject!=undefined&&response.othersObject.amount!=undefined) {
+                if (response.othersObject != undefined && response.othersObject.amount != undefined) {
                     $rootScope.project.intention.amount = response.othersObject.amount;
                     $rootScope.project.intention.duration = response.othersObject.duration;
                     $rootScope.project.intention.usage = response.othersObject.usereason;

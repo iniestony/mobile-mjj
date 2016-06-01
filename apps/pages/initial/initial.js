@@ -1,13 +1,13 @@
-mobileSJD.config(["$stateProvider", function($stateProvider) {
+mobileSJD.config(["$stateProvider", "base", function($stateProvider, base) {
     $stateProvider.state("initial", {
         url: "/initial",
-        templateUrl: "/pages/initial/initial.html",
+        templateUrl: base + "/pages/initial/initial.html",
         controller: "initialCtrl"
     });
 }])
 
-.controller("initialCtrl", ["$scope", "$rootScope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "sjdDialog",
-        function($scope, $rootScope, $state, $uibModal, $http, xhrRequestOrigin, sjdDialog) {
+.controller("initialCtrl", ["$scope", "$rootScope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "base", "sjdDialog",
+        function($scope, $rootScope, $state, $uibModal, $http, xhrRequestOrigin, base, sjdDialog) {
 
             $scope.regaddr = "";
             $scope.turnovers = "";
@@ -78,7 +78,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
 
             $scope.showDetail = function() {
                 $uibModal.open({
-                    templateUrl: "/pages/initial/agreement.html",
+                    templateUrl: base + "/pages/initial/agreement.html",
                     controller: "agreementCtrl",
                     windowClass: "sjd-page-initial-agreement-window"
                 });

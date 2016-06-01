@@ -1,13 +1,13 @@
-mobileSJD.config(["$stateProvider", function($stateProvider) {
+mobileSJD.config(["$stateProvider", "base", function($stateProvider, base) {
     $stateProvider.state("moneydetail", {
         url: "/moneydetail",
-        templateUrl: "/pages/moneydetail/moneydetail.html",
+        templateUrl: base + "/pages/moneydetail/moneydetail.html",
         controller: "moneydetailCtrl"
     });
 }])
 
-.controller("moneydetailCtrl", ["$scope", "$rootScope", "$http", "$state", "xhrRequestOrigin", "$uibModal",
-    function($scope, $rootScope, $http, $state, xhrRequestOrigin, $uibModal) {
+.controller("moneydetailCtrl", ["$scope", "$rootScope", "$http", "$state", "xhrRequestOrigin", "base", "$uibModal",
+    function($scope, $rootScope, $http, $state, xhrRequestOrigin, base, $uibModal) {
 
         $scope.details = [];
 
@@ -36,7 +36,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
 
         $scope.repay = function(detail) {
             $uibModal.open({
-                templateUrl: "/pages/moneydetail/repay.html",
+                templateUrl: base + "/pages/moneydetail/repay.html",
                 controller: "repayCtrl",
                 windowClass: "sjd-page-moneydetail-repay-window",
                 backdrop: "static",

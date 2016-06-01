@@ -1,13 +1,13 @@
-mobileSJD.config(["$stateProvider", function($stateProvider) {
+mobileSJD.config(["$stateProvider", "base", function($stateProvider, base) {
     $stateProvider.state("goodsin", {
         url: "/goodsin",
-        templateUrl: "/pages/goodsin/goodsin.html",
+        templateUrl: base + "/pages/goodsin/goodsin.html",
         controller: "goodsinCtrl"
     });
 }])
 
-.controller("goodsinCtrl", ["$scope", "$rootScope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "sjdDialog",
-    function($scope, $rootScope, $state, $uibModal, $http, xhrRequestOrigin, sjdDialog) {
+.controller("goodsinCtrl", ["$scope", "$rootScope", "$state", "$uibModal", "$http", "xhrRequestOrigin", "base", "sjdDialog",
+    function($scope, $rootScope, $state, $uibModal, $http, xhrRequestOrigin, base, sjdDialog) {
 
         $scope.products = [];
 
@@ -46,7 +46,7 @@ mobileSJD.config(["$stateProvider", function($stateProvider) {
 
         $scope.addGoods = function() {
             $uibModal.open({
-                templateUrl: "/pages/goodsin/add.html",
+                templateUrl: base + "/pages/goodsin/add.html",
                 controller: "goodsinAddCtrl",
                 windowClass: "sjd-page-goodsin-add-window",
                 backdrop: "static",
